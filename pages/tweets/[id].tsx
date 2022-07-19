@@ -1,29 +1,13 @@
 import { useCallback } from "react";
 import useSWR from "swr";
-import { Tweet } from "@prisma/client";
 import { useRouter } from "next/router";
-import { TweetsResponse } from "./index";
 import TweetBox from "@components/TweetBox";
-import TweetForm from "@components/TweetForm";
+import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
-
+import { TweetDetail } from "@libs/interfaces";
 import MobileNav from "@components/MobileNav";
 import Header from "@components/Header";
 
-interface TweetWith extends Tweet {
-  _count: {
-    like: number;
-  };
-  user: {
-    id: number;
-    name: string;
-  };
-}
-interface TweetDetail {
-  ok: boolean;
-  tweet: TweetWith;
-  isLiked: boolean;
-}
 function TweetDetail() {
   const router = useRouter();
   const { data, mutate } = useSWR<TweetDetail>(
@@ -36,7 +20,7 @@ function TweetDetail() {
     toggleLike({});
   }, [data]);
   return (
-    <div className="min-h-screen max-w-xl mx-auto bg-black">
+    <MobileLayout>
       <Header />
       {data && (
         <TweetBox
@@ -53,7 +37,7 @@ function TweetDetail() {
         />
       )}
       <MobileNav />
-    </div>
+    </MobileLayout>
   );
 }
 

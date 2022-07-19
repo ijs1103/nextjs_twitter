@@ -1,9 +1,11 @@
 import { memo } from "react";
+import { FunctionalUpdateFn } from "@libs/types";
+
 interface Iprops {
   id: "month" | "date" | "year";
   label: "월" | "일" | "년";
   optionData: JSX.Element[];
-  onSetBirth: (Fn: Function) => void;
+  onSetBirth: (Fn: FunctionalUpdateFn) => void;
   value: number | undefined;
 }
 function SelectOption({ id, label, optionData, onSetBirth, value }: Iprops) {
@@ -43,7 +45,7 @@ function SelectOption({ id, label, optionData, onSetBirth, value }: Iprops) {
         {optionData}
       </select>
       <svg
-        className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8"
+        className="absolute top-1/2 -translate-y-1/2 right-1 md:right-2 w-4 md:w-8 h-4 md:h-8"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
