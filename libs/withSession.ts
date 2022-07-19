@@ -10,7 +10,7 @@ declare module "iron-session" {
 
 const cookieOptions = {
   cookieName: "tweetersession",
-  password: 'kpn7hXYwAqiiPARpdTVsnxkkiVUVTLbz',
+  password: "kpn7hXYwAqiiPARpdTVsnxkkiVUVTLbz",
 };
 
 export function withApiSession(fn: any) {

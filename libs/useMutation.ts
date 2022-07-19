@@ -16,7 +16,7 @@ export default function useMutation<T = any>(
     error: undefined,
   });
   function mutation(data: any) {
-    setState(prev => ({ ...prev, loading: true }));
+    setState((prev) => ({ ...prev, loading: true }));
     fetch(url, {
       method: "POST",
       headers: {
@@ -24,10 +24,10 @@ export default function useMutation<T = any>(
       },
       body: JSON.stringify(data),
     })
-      .then(res => res.json().catch(() => {}))
-      .then(data => setState((prev) => ({ ...prev, data, loading: false })))
-      .catch(error =>
-        setState(prev => ({ ...prev, error, loading: false }))
+      .then((res) => res.json().catch(() => {}))
+      .then((data) => setState((prev) => ({ ...prev, data, loading: false })))
+      .catch((error) =>
+        setState((prev) => ({ ...prev, error, loading: false }))
       );
   }
   return [mutation, { ...state }];
