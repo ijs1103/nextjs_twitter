@@ -5,6 +5,7 @@ import Input from "@components/Input";
 import SelectOption from "@components/SelectOption";
 import TermsOfService from "@components/TermsOfService";
 import useMutation from "@libs/useMutation";
+import { FunctionalUpdateFn } from "@libs/types";
 
 interface SignupForm {
   name: string;
@@ -18,7 +19,6 @@ interface IBirth {
   date: number;
   year: number;
 }
-export type FunctionalUpdateFn = (prevs: any) => any;
 export default function SignupForm() {
   const router = Router;
   const [signup, { data, loading }] = useMutation("/api/create-account");
@@ -78,7 +78,7 @@ export default function SignupForm() {
     setStage(1);
   };
   return (
-    <div className="h-[100vh] w-full max-w-xl mx-auto text-white bg-black px-12 py-2">
+    <div className="min-h-screen md:h-screen w-full max-w-xl mx-auto text-white bg-black px-12 py-2">
       <div className="flex items-center gap-5">
         <button
           onClick={onGoback}
@@ -258,7 +258,7 @@ export default function SignupForm() {
         {stage === 3 && (
           <p className="mt-5 text-lg text-red-600 text-center">{data?.error}</p>
         )}
-        <div className="absolute mb-10 bottom-0 w-full space-y-6">
+        <div className="md:absolute mt-3 mb-10 bottom-0 w-full space-y-6">
           {stage === 3 && (
             <p className="text-xs">
               가입하면 <span className="text-blue-400">쿠키 사용</span>을 포함해

@@ -2,7 +2,7 @@ import React from "react";
 
 function MobileNav() {
   return (
-    <div className="sm:hidden fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black text-white border-t border-gray-600">
+    <div className="sm:hidden h-[55px] fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black text-white border-t border-gray-600">
       <a
         href="#"
         className="transition-all duration-500 px-2 py-2 rounded-full hover:bg-blue-800 hover:text-blue-300"

@@ -63,7 +63,7 @@ export default function TweetBox({
           </svg>
         </div>
         <div className="pl-16">
-          <p className="text-base width-auto font-medium text-white flex-shrink">
+          <p className="pr-4 text-base font-medium text-white flex-shrink">
             {payload}
           </p>
           <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">
@@ -72,13 +72,12 @@ export default function TweetBox({
         </div>
         <div
           className={cls(
-            "flex w-full ",
+            "flex ",
             !isDetail ? "pl-16" : "pl-0 border-t border-gray-700"
           )}
         >
-          <div className="w-full">
-            <div className="flex items-center">
-              <div className="flex-1 text-center">
+            <div className="w-full flex justify-around lg:justify-start items-center">
+              <div className="lg:flex-1 text-center">
                 <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
                   <svg
                     className="text-center h-6 w-6"
@@ -94,7 +93,7 @@ export default function TweetBox({
                 </div>
               </div>
 
-              <div className="flex-1 text-center py-2 m-2">
+              <div className="lg:flex-1 text-center">
                 <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
                   <svg
                     className="text-center h-7 w-6"
@@ -112,7 +111,7 @@ export default function TweetBox({
 
               <div
                 onClick={onLikeClick}
-                className="flex-1 flex items-center text-center py-2 m-2"
+                className="lg:flex-1 flex items-center text-center"
               >
                 <div className="w-12 mt-1 flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
                   <svg
@@ -133,7 +132,7 @@ export default function TweetBox({
                 {!isDetail && <span className="text-xs mt-1">{likes}</span>}
               </div>
 
-              <div className="flex-1 text-center py-2 m-2">
+              <div className="lg:flex-1 text-center">
                 <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
                   <svg
                     className="text-center h-7 w-6"
@@ -151,7 +150,6 @@ export default function TweetBox({
             </div>
           </div>
         </div>
-      </div>
     </Link>
   );
 }
