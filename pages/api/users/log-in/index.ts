@@ -12,10 +12,14 @@ async function handler(
   const existingUser = await client.user.findFirst({
     where: {
       ...method,
-      password
+      password,
     },
   });
-  if (!existingUser) return res.json({ok: false, error: '올바르지 않은 휴대폰 번호, 이메일 혹은 비밀번호입니다.'})
+  if (!existingUser)
+    return res.json({
+      ok: false,
+      error: "올바르지 않은 휴대폰 번호, 이메일 혹은 비밀번호입니다.",
+    });
   req.session.user = {
     id: existingUser.id,
   };

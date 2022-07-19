@@ -8,15 +8,17 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "GET") {
-    const { query: { limit, offset} } = req;
+    const {
+      query: { limit, offset },
+    } = req;
     const allTweets = await client.tweet.findMany({
       select: {
-        id: true
-      }
+        id: true,
+      },
     });
     const tweets = await client.tweet.findMany({
       orderBy: {
-        updatedAt: 'desc'
+        updatedAt: "desc",
       },
       take: +limit,
       skip: +offset,
@@ -25,7 +27,7 @@ async function handler(
           select: {
             id: true,
             name: true,
-          }
+          },
         },
         _count: {
           select: {
@@ -37,7 +39,7 @@ async function handler(
     return res.json({
       ok: true,
       tweets,
-      total: allTweets.length
+      total: allTweets.length,
     });
   }
   if (req.method === "POST") {

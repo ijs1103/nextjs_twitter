@@ -16,18 +16,18 @@ async function handler(
       id: +id.toString(),
     },
     include: {
-			user: {
-				select: {
-					id: true,
-					name: true,
-				}
-			},
-			_count: {
-				select: {
-					like: true,
-				},
-			},
-		},
+      user: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+      _count: {
+        select: {
+          like: true,
+        },
+      },
+    },
   });
   const isLiked = Boolean(
     await client.like.findFirst({
