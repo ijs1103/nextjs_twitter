@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from "react";
 import { cls } from "@libs/utils";
 
 interface textareaForm {
@@ -9,7 +9,7 @@ interface TweetFormProps {
   isCreatePage?: boolean;
   onCreateTweet: (data: any) => void;
 }
-function TweetForm({ isCreatePage=false, onCreateTweet }: TweetFormProps) {
+function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
   const {
     register,
     handleSubmit,
@@ -18,22 +18,23 @@ function TweetForm({ isCreatePage=false, onCreateTweet }: TweetFormProps) {
   } = useForm<textareaForm>({ mode: "onChange" });
   const onValid = (form: textareaForm) => {
     onCreateTweet(form);
-    reset({ payload: ''});
+    reset({ payload: "" });
   };
-  useEffect(() => {
+  useEffect(() => {}, [isCreatePage]);
 
-  }, [isCreatePage])
-  
   const handleResizeHeight = useCallback((event: any) => {
-    if (!isCreatePage) return
+    if (!isCreatePage) return;
     if (event === null || event.target === null) {
-      return
+      return;
     }
-    event.target.style.height = '38px'
-    event.target.style.height = event.target.scrollHeight + 'px'
-  }, [])
+    event.target.style.height = "38px";
+    event.target.style.height = event.target.scrollHeight + "px";
+  }, []);
   return (
-    <form className={cls("sm:block ", isCreatePage ? 'block' : 'hidden' )} onSubmit={handleSubmit(onValid)}>
+    <form
+      className={cls("sm:block ", isCreatePage ? "block" : "hidden")}
+      onSubmit={handleSubmit(onValid)}
+    >
       <div className="flex">
         <div className="flex-shrink-0 m-2 w-10 py-1">
           <img
@@ -43,14 +44,15 @@ function TweetForm({ isCreatePage=false, onCreateTweet }: TweetFormProps) {
           />
         </div>
         <div className="flex-1 px-2 pt-2 mt-2">
-
           <textarea
-            {...register("payload", { required: true, onChange: e => handleResizeHeight(e) })}
+            {...register("payload", {
+              required: true,
+              onChange: (e) => handleResizeHeight(e),
+            })}
             rows={2}
             className="p-2.5 whitespace-pre-wrap break-words w-full text-sm text-white bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
             placeholder="What's happening?"
           ></textarea>
-
         </div>
       </div>
       <div className="flex justify-between border-b border-gray-700">

@@ -4,13 +4,13 @@ import React from "react";
 
 function Header() {
   const router = useRouter();
-  const isGobackBtn = router.query.id || router.pathname === '/tweets/new';
+  const isGobackBtn = router.query.id || router.pathname === "/tweets/new";
   return (
     <div className="z-10 sticky top-0 left-0 bg-black opacity-70 backdrop-blur-md w-full flex justify-between">
       <Link href="/tweets">
         <a>
           <div className="m-2">
-            { !isGobackBtn ? (
+            {!isGobackBtn ? (
               <h2 className="px-4 py-2 text-base lg:text-xl font-semibold text-white">
                 Home
               </h2>

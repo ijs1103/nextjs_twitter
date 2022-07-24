@@ -40,7 +40,8 @@ async function handler(
       },
     })
   );
-  res.json({ ok: true, tweet, isLiked });
+  const isMyTweet = req.session.user?.id === tweet?.userId;
+  res.json({ ok: true, tweet, isLiked, isMyTweet });
 }
 
 export default withApiSession(
