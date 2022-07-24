@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "db-sync": "npx prisma migrate dev",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "main": "pages/index.tsx",
   "dependencies": {

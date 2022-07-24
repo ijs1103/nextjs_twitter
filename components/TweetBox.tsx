@@ -1,5 +1,6 @@
-import React from "react";
+import { useState, useCallback, memo } from "react";
 import Link from "next/link";
+import Popup from "@components/Popup";
 import { cls, parsedUpdatedAt } from "@libs/utils";
 
 interface Iprops {
@@ -12,9 +13,11 @@ interface Iprops {
   isDetail?: boolean;
   isLiked?: boolean;
   onLikeClick?: () => void;
+  onDeleteClick?: () => void;
+  isMyTweet: boolean;
 }
 
-export default function TweetBox({
+function TweetBox({
   userId,
   userName,
   id,
@@ -24,58 +27,92 @@ export default function TweetBox({
   isDetail = false,
   isLiked,
   onLikeClick,
+  onDeleteClick,
+  isMyTweet,
 }: Iprops) {
+  const [popupOn, setPopupOn] = useState(false);
+  const popupOpen = () => setPopupOn(true);
+  const popupClose = useCallback(() => setPopupOn(false), []);
+  const tweetPopup = [
+    {
+      title: "삭제하기",
+      onClickFn: () => onDeleteClick && onDeleteClick(),
+      disabled: !isMyTweet,
+    },
+    { title: "수정하기", onClickFn: () => {}, disabled: !isMyTweet },
+  ];
   return (
     <Link href={`/tweets/${id}`}>
-      <div className={cls("border-b border-gray-700 text-white ", isDetail ? "": "hover:bg-slate-900")}>
-        <div className="relative flex flex-shrink-0 p-4 pb-0">
-          <a href="#" className="flex-shrink-0 group block">
-            <div className="flex items-center">
-              <div>
-                <img
-                  className="inline-block h-10 w-10 rounded-full"
-                  src="http://placeimg.com/640/480/any"
-                  alt="profile"
-                />
-              </div>
-              <div className="ml-3">
-                <p className="text-sm sm:text-base leading-6 font-medium text-white">
-                  {userName}
-                  <span className="text-xs sm:text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                    @nickname{" "}
-                    {!isDetail && `· ${parsedUpdatedAt(isDetail, updatedAt)}`}
-                  </span>
-                </p>
-              </div>
-            </div>
-          </a>
-          <svg
-            className="rounded-full hover:bg-slate-500 cursor-pointer top-1/2  right-4 absolute w-5"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="#fff"
-          >
-            <g>
-              <circle cx="5" cy="12" r="2"></circle>
-              <circle cx="12" cy="12" r="2"></circle>
-              <circle cx="19" cy="12" r="2"></circle>
-            </g>
-          </svg>
-        </div>
-        <div className="pl-16">
-          <p className="pr-4 text-base font-medium text-white flex-shrink">
-            {payload}
-          </p>
-          <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">
-            {isDetail && parsedUpdatedAt(isDetail, updatedAt)}
-          </p>
-        </div>
+      <a>
         <div
           className={cls(
-            "flex ",
-            !isDetail ? "pl-16" : "pl-0 border-t border-gray-700"
+            "border-b border-gray-700 text-white ",
+            isDetail ? "" : "hover:bg-slate-900"
           )}
         >
+          <div className="relative flex flex-shrink-0 p-4 pb-0">
+            <a href="#" className="flex-shrink-0 group block">
+              <div className="flex items-center">
+                <div>
+                  <img
+                    className="inline-block h-10 w-10 rounded-full"
+                    src="http://placeimg.com/640/480/any"
+                    alt="profile"
+                  />
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm sm:text-base leading-6 font-medium text-white">
+                    {userName}
+                    <span className="text-xs sm:text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                      @nickname{" "}
+                      {!isDetail && `· ${parsedUpdatedAt(isDetail, updatedAt)}`}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+            {isDetail && (
+              <>
+                <div onClick={popupOpen}>
+                  <svg
+                    className="rounded-full hover:bg-slate-500 cursor-pointer top-1/2  right-4 absolute w-5"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    fill="#fff"
+                  >
+                    <g>
+                      <circle cx="5" cy="12" r="2"></circle>
+                      <circle cx="12" cy="12" r="2"></circle>
+                      <circle cx="19" cy="12" r="2"></circle>
+                    </g>
+                  </svg>
+                </div>
+                <div className="absolute right-0 top-0">
+                  <Popup
+                    onPopupClose={popupClose}
+                    isVisible={popupOn}
+                    contents={tweetPopup}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="pl-16">
+            <p className="pr-4 text-base font-medium text-white flex-shrink">
+              {payload}
+            </p>
+            <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">
+              {isDetail && parsedUpdatedAt(isDetail, updatedAt)}
+            </p>
+          </div>
+
+          <div
+            className={cls(
+              "flex ",
+              !isDetail ? "pl-16" : "pl-0 border-t border-gray-700"
+            )}
+          >
             <div className="w-full flex justify-around lg:justify-start items-center">
               <div className="lg:flex-1 text-center">
                 <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
@@ -150,6 +187,8 @@ export default function TweetBox({
             </div>
           </div>
         </div>
+      </a>
     </Link>
   );
 }
+export default memo(TweetBox);

@@ -22,4 +22,5 @@ export interface TweetDetail {
   ok: boolean;
   tweet: TweetWith;
   isLiked: boolean;
+  isMyTweet: boolean;
 }

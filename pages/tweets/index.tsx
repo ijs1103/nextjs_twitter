@@ -21,16 +21,18 @@ const Home: NextPage = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const [popupOn, setPopupOn] = useState(false);
+  const popupClose = () => setPopupOn(false);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
     if (previousPageData && previousPageData?.results?.length === 0)
       return null;
     if (pageIndex === 0) return "/api/tweets?offset=0&limit=5";
     return `/api/tweets?offset=${pageIndex * 5}&limit=5`;
   };
-  const { data, error, isValidating, setSize, mutate } = useSWRInfinite<TweetsResponse>(
-    getKey,
-    { revalidateFirstPage: false, revalidateOnFocus: false }
-  );
+  const { data, error, isValidating, setSize, mutate } =
+    useSWRInfinite<TweetsResponse>(getKey, {
+      revalidateFirstPage: false,
+      revalidateOnFocus: false,
+    });
   const [createTweet, { loading, data: mutateData, error: mutateError }] =
     useMutation<MutationResult>("/api/tweets");
   const [logout, { data: logoutData, error: logoutError }] = useMutation<{
@@ -59,12 +61,16 @@ const Home: NextPage = () => {
     setPopupOn((prev) => !prev);
   };
   const profilePopup = [
-    { title: "프로필 보기", onClickFn: () => router.push("/profile") },
-    { title: "로그아웃", onClickFn: () => logout({}) },
+    {
+      title: "프로필 보기",
+      onClickFn: () => router.push("/profile"),
+      disabled: false,
+    },
+    { title: "로그아웃", onClickFn: () => logout({}), disabled: false },
   ];
   const onMobileCreate = () => {
-    router.push('/tweets/new');
-  }
+    router.push("/tweets/new");
+  };
   return (
     <div className="min-h-screen bg-black">
       <div className="flex">
@@ -275,11 +281,10 @@ const Home: NextPage = () => {
             </div>
             <div
               className={cls(
-                " absolute -top-[120px] lg:-top-[135px] left-[175px] lg:left-1/2 -translate-x-1/2 ",
-                popupOn ? "block" : "hidden"
+                " absolute -top-[120px] lg:-top-[135px] left-[175px] lg:left-1/2 -translate-x-1/2 "
               )}
             >
-              <Popup contents={profilePopup} />
+              <Popup isVisible={popupOn} contents={profilePopup} />
             </div>
           </div>
         </section>
@@ -297,6 +302,7 @@ const Home: NextPage = () => {
                 payload={tweet.payload}
                 updatedAt={tweet.updatedAt}
                 likes={tweet._count.like}
+                isMyTweet={tweet.isMyTweet}
               />
             );
           })}
@@ -323,18 +329,21 @@ const Home: NextPage = () => {
               </div>
             ) : null}
           </div>
-          <button onClick={onMobileCreate} className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400 text-white font-bold py-4 px-4 rounded-full">
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  fill="#fff"
-                  className="w-5 h-5"
-                >
-                  <g>
-                    <path d="M8.8 7.2H5.6V3.9c0-.4-.3-.8-.8-.8s-.7.4-.7.8v3.3H.8c-.4 0-.8.3-.8.8s.3.8.8.8h3.3v3.3c0 .4.3.8.8.8s.8-.3.8-.8V8.7H9c.4 0 .8-.3.8-.8s-.5-.7-1-.7zm15-4.9v-.1h-.1c-.1 0-9.2 1.2-14.4 11.7-3.8 7.6-3.6 9.9-3.3 9.9.3.1 3.4-6.5 6.7-9.2 5.2-1.1 6.6-3.6 6.6-3.6s-1.5.2-2.1.2c-.8 0-1.4-.2-1.7-.3 1.3-1.2 2.4-1.5 3.5-1.7.9-.2 1.8-.4 3-1.2 2.2-1.6 1.9-5.5 1.8-5.7z"></path>
-                  </g>
-                </svg>
-              </button>
+          <button
+            onClick={onMobileCreate}
+            className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400 text-white font-bold py-4 px-4 rounded-full"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="#fff"
+              className="w-5 h-5"
+            >
+              <g>
+                <path d="M8.8 7.2H5.6V3.9c0-.4-.3-.8-.8-.8s-.7.4-.7.8v3.3H.8c-.4 0-.8.3-.8.8s.3.8.8.8h3.3v3.3c0 .4.3.8.8.8s.8-.3.8-.8V8.7H9c.4 0 .8-.3.8-.8s-.5-.7-1-.7zm15-4.9v-.1h-.1c-.1 0-9.2 1.2-14.4 11.7-3.8 7.6-3.6 9.9-3.3 9.9.3.1 3.4-6.5 6.7-9.2 5.2-1.1 6.6-3.6 6.6-3.6s-1.5.2-2.1.2c-.8 0-1.4-.2-1.7-.3 1.3-1.2 2.4-1.5 3.5-1.7.9-.2 1.8-.4 3-1.2 2.2-1.6 1.9-5.5 1.8-5.7z"></path>
+              </g>
+            </svg>
+          </button>
         </section>
         {/* right */}
         <section className="w-2/5 hidden lg:block">
