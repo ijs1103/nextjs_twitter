@@ -27,7 +27,7 @@ export default function TweetBox({
 }: Iprops) {
   return (
     <Link href={`/tweets/${id}`}>
-      <div className="border-b border-gray-700 text-white">
+      <div className={cls("border-b border-gray-700 text-white ", isDetail ? "": "hover:bg-slate-900")}>
         <div className="relative flex flex-shrink-0 p-4 pb-0">
           <a href="#" className="flex-shrink-0 group block">
             <div className="flex items-center">
