@@ -9,13 +9,17 @@ async function handler(
 ) {
   const {
     query: { id },
+    body: { payload }
   } = req;
-  const deletedTweet = await client.tweet.delete({
+  const updatedTweet = await client.tweet.update({
     where: {
       id: +id.toString(),
     },
+		data: {
+			payload
+		}
   });
-  if (!deletedTweet) {
+  if (!updatedTweet) {
     return res.json({ ok: false, error: "해당 트윗은 삭제되었습니다!" });
   }
   res.json({ ok: true });

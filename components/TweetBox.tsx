@@ -1,6 +1,7 @@
 import { useState, useCallback, memo } from "react";
 import Link from "next/link";
 import Popup from "@components/Popup";
+import { useRouter } from "next/router";
 import { cls, parsedUpdatedAt } from "@libs/utils";
 
 interface Iprops {
@@ -13,7 +14,6 @@ interface Iprops {
   isDetail?: boolean;
   isLiked?: boolean;
   onLikeClick?: () => void;
-  onDeleteClick?: () => void;
   isMyTweet: boolean;
 }
 
@@ -27,19 +27,19 @@ function TweetBox({
   isDetail = false,
   isLiked,
   onLikeClick,
-  onDeleteClick,
   isMyTweet,
 }: Iprops) {
+  const router = useRouter();
   const [popupOn, setPopupOn] = useState(false);
   const popupOpen = () => setPopupOn(true);
   const popupClose = useCallback(() => setPopupOn(false), []);
   const tweetPopup = [
     {
       title: "삭제하기",
-      onClickFn: () => onDeleteClick && onDeleteClick(),
+      onClickFn: () => router.push(`/tweets/${id}/delete`),
       disabled: !isMyTweet,
     },
-    { title: "수정하기", onClickFn: () => {}, disabled: !isMyTweet },
+    { title: "수정하기", onClickFn: () => router.push(`/tweets/${id}/update`), disabled: !isMyTweet },
   ];
   return (
     <Link href={`/tweets/${id}`}>
@@ -73,19 +73,8 @@ function TweetBox({
             </a>
             {isDetail && (
               <>
-                <div onClick={popupOpen}>
-                  <svg
-                    className="rounded-full hover:bg-slate-500 cursor-pointer top-1/2  right-4 absolute w-5"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    fill="#fff"
-                  >
-                    <g>
-                      <circle cx="5" cy="12" r="2"></circle>
-                      <circle cx="12" cy="12" r="2"></circle>
-                      <circle cx="19" cy="12" r="2"></circle>
-                    </g>
-                  </svg>
+                <div className="p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 absolute" onClick={popupOpen}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
                 </div>
                 <div className="absolute right-0 top-0">
                   <Popup

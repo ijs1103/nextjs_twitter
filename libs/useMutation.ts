@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Method } from "@libs/withHandler";
 interface UseMutationState<T> {
   loading: boolean;
   data?: T;
@@ -8,7 +8,8 @@ interface UseMutationState<T> {
 type UseMutationResult<T> = [(data: any) => void, UseMutationState<T>];
 
 export default function useMutation<T = any>(
-  url: string
+  url: string,
+  method: Method = "POST"
 ): UseMutationResult<T> {
   const [state, setState] = useState<UseMutationState<T>>({
     loading: false,
@@ -18,7 +19,7 @@ export default function useMutation<T = any>(
   function mutation(data: any) {
     setState((prev) => ({ ...prev, loading: true }));
     fetch(url, {
-      method: "POST",
+      method,
       headers: {
         "Content-Type": "application/json",
       },
