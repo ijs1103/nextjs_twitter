@@ -1,8 +1,10 @@
-import { useState, useCallback, memo } from "react";
+import { useEffect, useState, useCallback, memo } from "react";
+import { useForm } from 'react-hook-form';
 import Link from "next/link";
 import Popup from "@components/Popup";
 import { useRouter } from "next/router";
 import { cls, parsedUpdatedAt } from "@libs/utils";
+import Button from "./Button";
 
 interface Iprops {
   userId: number;
@@ -14,6 +16,7 @@ interface Iprops {
   isDetail?: boolean;
   isLiked?: boolean;
   onLikeClick?: () => void;
+  onEdit?: (payload: string) => void;
   isMyTweet: boolean;
 }
 
@@ -27,19 +30,36 @@ function TweetBox({
   isDetail = false,
   isLiked,
   onLikeClick,
+  onEdit,
   isMyTweet,
 }: Iprops) {
   const router = useRouter();
+  const [editMode, setEditMode] = useState(false);
   const [popupOn, setPopupOn] = useState(false);
   const popupOpen = () => setPopupOn(true);
   const popupClose = useCallback(() => setPopupOn(false), []);
+  const {
+    register,
+    handleSubmit,
+    setValue
+  } = useForm<{payload: string}>({ mode: "onChange" });
+  const handleEdit = useCallback(() => {
+    setEditMode(true);
+    popupClose();
+    setValue('payload', payload);
+  }, []);
+ 
+  const onValid = (form: { payload: string }) => {
+    onEdit && onEdit(form.payload);
+    setEditMode(false);
+  }
   const tweetPopup = [
     {
       title: "삭제하기",
       onClickFn: () => router.push(`/tweets/${id}/delete`),
       disabled: !isMyTweet,
     },
-    { title: "수정하기", onClickFn: () => router.push(`/tweets/${id}/update`), disabled: !isMyTweet },
+    { title: "수정하기", onClickFn: handleEdit, disabled: !isMyTweet },
   ];
   return (
     <Link href={`/tweets/${id}`}>
@@ -73,7 +93,7 @@ function TweetBox({
             </a>
             {isDetail && (
               <>
-                <div className="p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 absolute" onClick={popupOpen}>
+                <div className={cls("p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 ", editMode ? "hidden": "absolute")} onClick={popupOpen}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
                 </div>
                 <div className="absolute right-0 top-0">
@@ -88,12 +108,16 @@ function TweetBox({
           </div>
 
           <div className="pl-16">
-            <p className="pr-4 text-base font-medium text-white flex-shrink">
+            { !editMode ? <p className="pr-4 text-base font-medium text-white flex-shrink">
               {payload}
-            </p>
-            <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">
-              {isDetail && parsedUpdatedAt(isDetail, updatedAt)}
-            </p>
+            </p> : <><textarea
+            {...register("payload")}
+            rows={2}
+            className="p-2.5 whitespace-pre-wrap break-words w-full text-sm text-white bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
+          ></textarea><div className="flex justify-between"><Button name="취소" onClick={()=>setEditMode(false)} isCancel /><Button name="수정" onClick={handleSubmit(onValid)} /></div> </> }
+            
+            {isDetail && <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">{parsedUpdatedAt(isDetail, updatedAt)}</p>}
+            
           </div>
 
           <div
