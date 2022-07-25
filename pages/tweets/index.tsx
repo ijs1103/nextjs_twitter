@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import useUser from "@libs/useUser";
 import { useRouter } from "next/router";
-import { useRef, useState, useEffect } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 import TweetBox from "@components/TweetBox";
 import TweetForm from "@components/TweetForm";
 import MobileNav from "@components/MobileNav";
@@ -21,7 +21,7 @@ const Home: NextPage = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const [popupOn, setPopupOn] = useState(false);
-  const popupClose = () => setPopupOn(false);
+  const popupToggle = useCallback(() => setPopupOn(prev => !prev), []);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
     if (previousPageData && previousPageData?.results?.length === 0)
       return null;
@@ -57,9 +57,6 @@ const Home: NextPage = () => {
   useEffect(() => {
     logoutData?.ok && router.replace("/");
   }, [logoutData]);
-  const togglePopup = () => {
-    setPopupOn((prev) => !prev);
-  };
   const profilePopup = [
     {
       title: "프로필 보기",
@@ -245,7 +242,7 @@ const Home: NextPage = () => {
           </nav>
 
           <div
-            onClick={togglePopup}
+            onClick={popupToggle}
             className="absolute bottom-0 right-0 left-0  mx-2  mb-5 "
           >
             <div className="p-2 rounded-full hover:bg-blue-400 group block">
@@ -279,14 +276,14 @@ const Home: NextPage = () => {
                 </svg>
               </div>
             </div>
+          </div>
             <div
               className={cls(
-                " absolute -top-[120px] lg:-top-[135px] left-[175px] lg:left-1/2 -translate-x-1/2 "
+                "absolute bottom-[110px] left-0 lg:left-1/2  lg:-translate-x-1/2 z-[1000]"
               )}
             >
-              <Popup isVisible={popupOn} contents={profilePopup} />
+              <Popup onPopupClose={popupToggle} isVisible={popupOn} contents={profilePopup} />
             </div>
-          </div>
         </section>
         {/* center */}
         <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
