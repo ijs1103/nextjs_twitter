@@ -14,12 +14,25 @@ function TweetDetail() {
     router.query.id ? `/api/tweets/${router.query.id}` : null
     );
   const [toggleLike] = useMutation(`/api/tweets/${router.query.id}/like`);
+  const [editTweet, { data: editedData }] = useMutation(`/api/tweets/${router.query.id || data?.tweet.id}/update`);
   const onLikeClick = useCallback(() => {
     if (!data) return;
     mutate((prev) => prev && { ...prev, isLiked: !prev.isLiked }, false);
     toggleLike({});
   }, [data]);
-
+  const onEdit = useCallback((payload: string) => {
+    editTweet({payload});
+  }, []);
+  useEffect(() => {
+    if (!editedData) return;
+    if (editedData.ok) {
+      alert('트윗이 정상적으로 수정되었습니다!');
+      document.location.href = `/tweets/${router.query.id || data?.tweet.id}`;
+    } else {
+      alert(editedData.error);
+    }
+  }, [editedData]);
+  
   return (
     <MobileLayout>
       <Header />
@@ -35,6 +48,7 @@ function TweetDetail() {
           isLiked={data.isLiked}
           isDetail={true}
           onLikeClick={onLikeClick}
+          onEdit={onEdit}
           isMyTweet={data.isMyTweet}
         />
       )}

@@ -22,12 +22,12 @@ async function handler(
   if (!updatedTweet) {
     return res.json({ ok: false, error: "해당 트윗은 삭제되었습니다!" });
   }
-  res.json({ ok: true });
+  res.json({ ok: true, newPayload: payload });
 }
 
 export default withApiSession(
   withHandler({
-    methods: ["DELETE"],
+    methods: ["POST"],
     handler,
   })
 );
