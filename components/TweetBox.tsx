@@ -71,7 +71,7 @@ function TweetBox({
           )}
         >
           <div className="relative flex flex-shrink-0 p-4 pb-0">
-            <a href="#" className="flex-shrink-0 group block">
+            <div className="flex-shrink-0 group block">
               <div className="flex items-center">
                 <div>
                   <img
@@ -90,7 +90,7 @@ function TweetBox({
                   </p>
                 </div>
               </div>
-            </a>
+            </div>
             {isDetail && (
               <>
                 <div className={cls("p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 ", editMode ? "hidden": "absolute")} onClick={popupOpen}>
@@ -110,11 +110,11 @@ function TweetBox({
           <div className="pl-16">
             { !editMode ? <p className="pr-4 text-base font-medium text-white flex-shrink">
               {payload}
-            </p> : <><textarea
+            </p> : <div className="pr-8 sm:pr-4"><textarea
             {...register("payload")}
             rows={2}
             className="p-2.5 whitespace-pre-wrap break-words w-full text-sm text-white bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
-          ></textarea><div className="flex justify-between"><Button name="취소" onClick={()=>setEditMode(false)} isCancel /><Button name="수정" onClick={handleSubmit(onValid)} /></div> </> }
+          ></textarea><div className="flex justify-between"><Button name="취소" onClick={()=>setEditMode(false)} isCancel /><Button name="수정" onClick={handleSubmit(onValid)} /></div> </div> }
             
             {isDetail && <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">{parsedUpdatedAt(isDetail, updatedAt)}</p>}
             
