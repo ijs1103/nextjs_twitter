@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, memo } from "react";
+import { useState, useCallback, memo } from "react";
 import { useForm } from 'react-hook-form';
 import Link from "next/link";
 import Popup from "@components/Popup";
@@ -42,13 +42,13 @@ function TweetBox({
     register,
     handleSubmit,
     setValue
-  } = useForm<{payload: string}>({ mode: "onChange" });
+  } = useForm<{ payload: string }>({ mode: "onChange" });
   const handleEdit = useCallback(() => {
     setEditMode(true);
     popupClose();
     setValue('payload', payload);
   }, []);
- 
+
   const onValid = (form: { payload: string }) => {
     onEdit && onEdit(form.payload);
     setEditMode(false);
@@ -62,11 +62,11 @@ function TweetBox({
     { title: "수정하기", onClickFn: handleEdit, disabled: !isMyTweet },
   ];
   return (
-    <Link href={`/tweets/${id}`}>
+    <Link href={!isDetail ? `/tweets/${id}` : "javascript:void(0);"}>
       <a>
         <div
           className={cls(
-            "border-b border-gray-700 text-white ",
+            "border-b border-gray-700 '' ",
             isDetail ? "" : "hover:bg-slate-900"
           )}
         >
@@ -81,7 +81,7 @@ function TweetBox({
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm sm:text-base leading-6 font-medium text-white">
+                  <p className="text-sm sm:text-base leading-6 font-medium ''">
                     {userName}
                     <span className="text-xs sm:text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
                       @nickname{" "}
@@ -93,7 +93,7 @@ function TweetBox({
             </div>
             {isDetail && (
               <>
-                <div className={cls("p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 ", editMode ? "hidden": "absolute")} onClick={popupOpen}>
+                <div className={cls("p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 ", editMode ? "hidden" : "absolute")} onClick={popupOpen}>
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" /></svg>
                 </div>
                 <div className="absolute right-0 top-0">
@@ -108,16 +108,16 @@ function TweetBox({
           </div>
 
           <div className="pl-16">
-            { !editMode ? <p className="pr-4 text-base font-medium text-white flex-shrink">
+            {!editMode ? <p className="pr-4 text-base font-medium '' flex-shrink">
               {payload}
             </p> : <div className="pr-8 sm:pr-4"><textarea
-            {...register("payload")}
-            rows={2}
-            className="p-2.5 whitespace-pre-wrap break-words w-full text-sm text-white bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
-          ></textarea><div className="flex justify-between"><Button name="취소" onClick={()=>setEditMode(false)} isCancel /><Button name="수정" onClick={handleSubmit(onValid)} /></div> </div> }
-            
+              {...register("payload")}
+              rows={2}
+              className="p-2.5 whitespace-pre-wrap break-words w-full text-sm '' bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
+            ></textarea><div className="flex justify-between"><Button name="취소" onClick={() => setEditMode(false)} isCancel /><Button name="수정" onClick={handleSubmit(onValid)} /></div> </div>}
+
             {isDetail && <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">{parsedUpdatedAt(isDetail, updatedAt)}</p>}
-            
+
           </div>
 
           <div
@@ -167,7 +167,7 @@ function TweetBox({
                   <svg
                     className={cls(
                       "text-center h-7 w-6 ",
-                      isLiked ? "text-red-600" : "text-white"
+                      isLiked ? "text-red-600" : "''"
                     )}
                     fill={isLiked ? "red" : "none"}
                     strokeLinecap="round"

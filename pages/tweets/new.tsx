@@ -1,6 +1,5 @@
 import React from "react";
 import TweetForm from "@components/TweetForm";
-import Header from "@components/Header";
 import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
 import { MutationResult } from "@libs/interfaces";
@@ -19,7 +18,6 @@ function createTweet() {
 
   return (
     <MobileLayout>
-      <Header />
       <TweetForm isCreatePage={true} onCreateTweet={createTweet} />
     </MobileLayout>
   );

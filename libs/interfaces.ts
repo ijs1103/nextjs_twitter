@@ -1,4 +1,4 @@
-import { Tweet } from "@prisma/client";
+import { Tweet, User } from "@prisma/client";
 
 interface TweetWith extends Tweet {
   _count: {
@@ -23,4 +23,8 @@ export interface TweetDetail {
   tweet: TweetWith;
   isLiked: boolean;
   isMyTweet: boolean;
+}
+export interface ProfileResponse {
+  ok: boolean;
+  profile: User;
 }

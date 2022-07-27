@@ -11,12 +11,13 @@ function Header() {
         <a>
           <div className="m-2">
             {!isGobackBtn ? (
-              <h2 className="px-4 py-2 text-base lg:text-xl font-semibold text-white">
+              <h2 className="px-4 py-2 text-base lg:text-xl font-semibold ''">
                 Home
               </h2>
             ) : (
               <svg
-                className="text-white w-6 h-6"
+                onClick={() => router.push("/tweets")}
+                className="'' w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
