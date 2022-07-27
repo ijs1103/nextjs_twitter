@@ -78,7 +78,7 @@ export default function SignupForm() {
     setStage(1);
   };
   return (
-    <div className="min-h-screen md:h-screen w-full max-w-xl mx-auto text-white bg-black px-12 py-2">
+    <div className="min-h-screen md:h-screen w-full max-w-xl mx-auto '' bg-black px-12 py-2">
       <div className="flex items-center gap-5">
         <button
           onClick={onGoback}
@@ -275,7 +275,7 @@ export default function SignupForm() {
           <button
             disabled={!isValid || (birth && Object.keys(birth).length !== 3)}
             onClick={onGoNext}
-            className="disabled:opacity-30 w-full bg-blue-500 text-white font-bold px-2 py-3 rounded-3xl"
+            className="disabled:opacity-30 w-full bg-blue-500 '' font-bold px-2 py-3 rounded-3xl"
           >
             {stage !== 3 ? "다음" : "가입"}
           </button>

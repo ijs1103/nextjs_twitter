@@ -35,7 +35,6 @@ function TweetDetail() {
   
   return (
     <MobileLayout>
-      <Header />
       {data && (
         <TweetBox
           key={data.tweet.id}

@@ -20,7 +20,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
     onCreateTweet(form);
     reset({ payload: "" });
   };
-  useEffect(() => {}, [isCreatePage]);
+  useEffect(() => { }, [isCreatePage]);
 
   const handleResizeHeight = useCallback((event: any) => {
     if (!isCreatePage) return;
@@ -50,7 +50,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
               onChange: (e) => handleResizeHeight(e),
             })}
             rows={2}
-            className="p-2.5 whitespace-pre-wrap break-words w-full text-sm text-white bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
+            className="p-2.5 whitespace-pre-wrap break-words w-full text-sm '' bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
             placeholder="What's happening?"
           ></textarea>
         </div>
@@ -141,7 +141,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
           <button
             disabled={!isValid}
             type="submit"
-            className="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-2 sm:px-8 rounded-full mr-4"
+            className="bg-blue-400 mt-5 hover:bg-blue-600 '' font-bold py-2 px-2 sm:px-8 rounded-full mr-4"
           >
             Tweet
           </button>

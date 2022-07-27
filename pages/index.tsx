@@ -1,15 +1,8 @@
-import { useState } from "react";
-import useSWR from "swr";
+
 import Router from "next/router";
 
 export default () => {
   const router = Router;
-  const [isModalon, setIsModalon] = useState(false);
-  const onSetIsModalon = (active: boolean) => {
-    setIsModalon(active);
-  };
-  //const { data } = useUser();
-  //const { data, error  } = useSWR('/api/tweet');
   const handleSignUp = () => {
     router.push("/create-account");
   };
@@ -30,7 +23,7 @@ export default () => {
           </g>
         </svg>
       </div>
-      <div className="flex flex-col justify-center items-center bg-black w-full lg:min-w-[800px] h-[100vh] order-1 px-3 py-3 lg:px-4 lg:py-4 text-white">
+      <div className="flex flex-col justify-center items-center bg-black w-full lg:min-w-[800px] h-[100vh] order-1 px-3 py-3 lg:px-4 lg:py-4 ''">
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -62,7 +55,7 @@ export default () => {
           </div>
           <button
             onClick={handleSignUp}
-            className="bg-blue-500 text-white text-sm rounded-[20px] w-full px-1 py-1"
+            className="bg-blue-500 '' text-sm rounded-[20px] w-full px-1 py-1"
           >
             이메일로 가입하기
           </button>
