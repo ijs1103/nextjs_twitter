@@ -323,11 +323,16 @@ const Home: NextPage = () => {
         </section>
         {/* right */}
         <section className="w-2/5 hidden lg:block">
-          <div className="relative text-gray-300 w-80 p-3 pb-0 mr-16">
-            <div className="absolute ml-4 mt-3 lg:mr-4">
+          <div className="w-80 p-3 pb-0 mr-16">
+            <div className="relative w-full">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search Twitter"
+                className="bg-gray-800 h-10 px-10 w-full rounded-full text-sm peer focus:border-2 border-blue-500 outline-none"
+              />
               <svg
-                className="w-6 h-6"
-                fill="currentColor"
+                className="cursor-pointer absolute left-2 top-0 bottom-0 my-auto fill-current peer-focus:fill-blue-500 w-6 h-6"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -337,13 +342,8 @@ const Home: NextPage = () => {
                   clipRule="evenodd"
                 />
               </svg>
+              <svg viewBox="0 0 15 15" aria-hidden="true" className="hidden peer-focus:block cursor-pointer absolute fill-blue-500 rounded-full right-3 top-0 bottom-0 my-auto w-4 h-4"><g><path d="M8.914 7.5l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L7.5 6.086 1.707.293c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L6.086 7.5.293 13.293c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L7.5 8.914l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L8.914 7.5z"></path></g></svg>
             </div>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search Twitter"
-              className="bg-gray-800 h-10 px-10 pr-5 w-full rounded-full text-sm focus:outline-none bg-purple-white shadow border-0"
-            />
           </div>
 
           <div className="max-w-sm rounded-lg bg-gray-800 overflow-hidden shadow-lg m-4 mr-20">
