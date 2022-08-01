@@ -9,6 +9,7 @@ import Replies from '@components/profile/Replies';
 import useSWR from 'swr';
 import Link from 'next/link';
 import MyTweets from '@components/profile/MyTweets';
+import TabMenu from '@components/profile/TabMenu';
 
 interface WithRouterProps {
 	router: NextRouter
@@ -50,21 +51,9 @@ function profile({ router }: WithRouterProps) {
 				</div>
 				<div className='border-b border-gray-700 text-sm'>
 								<ul className='flex text-gray-500'>
-									<Link href={`/${router.query?.id}`}>
-										<a className='transition duration-300 py-3 text-center flex-1 hover:bg-gray-800'>
-											<li><span className={cls('py-3 border-b-4 ', !tab ? 'border-blue-500' : 'border-transparent')}>Tweets</span></li>
-										</a>
-									</Link>
-									<Link href={{ pathname: `/${router.query?.id}`, query: { tab: "replies" } }}>
-										<a className='transition duration-300 py-3 text-center flex-1 hover:bg-gray-800'>
-											<li><span className={cls('py-3 border-b-4 ', isTabReplies ? 'border-blue-500' : 'border-transparent')}>Replies</span></li>
-										</a>
-									</Link>
-									<Link href={{ pathname: `/${router.query?.id}`, query: { tab: "likes" } }}>
-										<a className='transition duration-300 py-3 text-center flex-1 hover:bg-gray-800'>
-											<li><span className={cls('py-3 border-b-4 ', isTabLikes ? 'border-blue-500' : 'border-transparent' )}>Likes</span></li>
-										</a>
-									</Link>
+									<TabMenu url={`/${router.query?.id}`} isCurrent={isTabTweets}>Tweets</TabMenu>
+									<TabMenu url={`/${router.query?.id}?tab=replies`} isCurrent={isTabReplies}>Replies</TabMenu>
+									<TabMenu url={`/${router.query?.id}?tab=likes`} isCurrent={isTabLikes}>Likes</TabMenu>
 								</ul>
 				</div>
 				<div>

@@ -16,7 +16,7 @@ function Header() {
               </h2>
             ) : (
               <svg
-                onClick={() => router.push("/tweets")}
+                onClick={() => router.back()}
                 className="'' w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"

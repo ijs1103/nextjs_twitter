@@ -6,7 +6,6 @@ import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
 import { TweetDetail } from "@libs/interfaces";
 import MobileNav from "@components/MobileNav";
-import Header from "@components/Header";
 
 function TweetDetail() {
   const router = useRouter();
