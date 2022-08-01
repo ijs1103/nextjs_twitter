@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { TweetsResponse } from "@libs/interfaces";
+import { LikesResponse } from "@libs/interfaces";
 import useSWRInfinite from "swr/infinite";
 import { SWRInfiniteKeyLoader } from "swr/infinite";
 import useIntersectionObserver from "@libs/useIntersectionObserver";
@@ -11,27 +11,28 @@ interface Props {
   isCurrent: boolean;
 }
 
-function MyTweets({ isCurrent }: Props) {
+function MyLikes({ isCurrent }: Props) {
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
     if (!isCurrent || previousPageData && previousPageData?.results?.length === 0)
       return null;
-    return `/api/profile/${router.query.id}/myTweets?offset=${
+    return `/api/profile/${router.query.id}/likes?offset=${
       pageIndex * 5
     }&limit=5`;
   };
   const { data, error, isValidating, setSize, mutate } =
-    useSWRInfinite<TweetsResponse>(getKey, {
+    useSWRInfinite<LikesResponse>(getKey, {
       revalidateFirstPage: false,
       revalidateOnFocus: false,
     });
-  const tweets = data?.map((item) => item.tweets).flat() ?? [];
-  const isEnd = tweets.length === data?.[0]?.total;
-  const isEmpty = data?.[0]?.tweets?.length === 0;
+  console.log(data);  
+  const likes = data?.map((item) => item.likes).flat() ?? [];
+  const isEnd = likes.length === data?.[0]?.total;
+  const isEmpty = data?.[0]?.likes?.length === 0;
   const isLoading = (!data && !error) || isValidating;
-
+  
   useEffect(() => {
     if (isIntersecting && !isEnd && !isLoading) {
       setSize((oldSize) => oldSize + 1);
@@ -40,17 +41,17 @@ function MyTweets({ isCurrent }: Props) {
   return (
     <>
       {!isEmpty
-        ? tweets.map((tweet: any) => {
+        ? likes.map((like: any) => {
             return (
               <TweetBox
-                key={tweet.id}
-                id={tweet.id}
-                userId={tweet.user.id}
-                userName={tweet.user.name}
-                payload={tweet.payload}
-                updatedAt={tweet.updatedAt}
-                likes={tweet._count.like}
-                isMyTweet={tweet.isMyTweet}
+                key={like.tweet.id}
+                id={like.tweet.id}
+                userId={like.tweet.user.id}
+                userName={like.tweet.user.name}
+                payload={like.tweet.payload}
+                updatedAt={like.tweet.updatedAt}
+                likes={like.tweet._count.like}
+                isMyTweet={like.tweet.isMyTweet}
               />
             );
           })
@@ -60,4 +61,4 @@ function MyTweets({ isCurrent }: Props) {
   );
 }
 
-export default MyTweets;
+export default MyLikes;

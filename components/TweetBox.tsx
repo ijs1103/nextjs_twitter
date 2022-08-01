@@ -162,7 +162,7 @@ function TweetBox({
           >
             <div className="w-full flex justify-around lg:justify-start items-center">
               <div className="lg:flex-1 text-center">
-                <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
                     className="text-center h-6 w-6"
                     fill="none"
@@ -178,7 +178,7 @@ function TweetBox({
               </div>
 
               <div className="lg:flex-1 text-center">
-                <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
                     className="text-center h-7 w-6"
                     fill="none"
@@ -197,13 +197,13 @@ function TweetBox({
                 onClick={onLikeClick}
                 className="lg:flex-1 flex items-center text-center"
               >
-                <div className="w-12 mt-1 flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
                     className={cls(
                       "text-center h-7 w-6 ",
-                      isLiked ? "text-red-600" : "''"
+                      isLiked || !isDetail && likes > 0 ? "text-red-600" : "''"
                     )}
-                    fill={isLiked ? "red" : "none"}
+                    fill="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
@@ -217,7 +217,7 @@ function TweetBox({
               </div>
 
               <div className="lg:flex-1 text-center">
-                <div className="w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
                     className="text-center h-7 w-6"
                     fill="none"

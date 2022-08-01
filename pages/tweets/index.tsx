@@ -53,7 +53,6 @@ const Home: NextPage = () => {
     mutateData?.ok && mutate();
   }, [mutateData]);
   useEffect(() => {
-    console.log(tweets);
   }, [data]);
   useEffect(() => {
     logoutData?.ok && router.replace("/");

@@ -4,8 +4,8 @@ import MobileLayout from "@components/MobileLayout";
 import { ProfileResponse } from "@libs/interfaces";
 import { withRouter, NextRouter } from "next/router";
 import Button from "@components/Button";
-import Likes from "@components/profile/Likes";
-import Replies from "@components/profile/Replies";
+import Likes from "@components/profile/MyLikes";
+import Replies from "@components/profile/MyReplies";
 import useSWR from "swr";
 import Link from "next/link";
 import MyTweets from "@components/profile/MyTweets";
@@ -86,7 +86,7 @@ function profile({ router }: WithRouterProps) {
             </TabMenu>
           </ul>
         </div>
-        <div>
+        <div className="min-h-[50vh]">
           {isTabTweets && <MyTweets isCurrent={isTabTweets} />}
           {isTabReplies && <Replies isCurrent={isTabReplies} />}
           {isTabLikes && <Likes isCurrent={isTabLikes} />}
