@@ -20,7 +20,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
     onCreateTweet(form);
     reset({ payload: "" });
   };
-  useEffect(() => { }, [isCreatePage]);
+  useEffect(() => {}, [isCreatePage]);
 
   const handleResizeHeight = useCallback((event: any) => {
     if (!isCreatePage) return;

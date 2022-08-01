@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const [popupOn, setPopupOn] = useState(false);
-  const popupToggle = useCallback(() => setPopupOn(prev => !prev), []);
+  const popupToggle = useCallback(() => setPopupOn((prev) => !prev), []);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
     if (previousPageData && previousPageData?.results?.length === 0)
       return null;
@@ -283,7 +283,11 @@ const Home: NextPage = () => {
               "absolute bottom-[110px] left-0 lg:left-1/2  lg:-translate-x-1/2 z-[1000]"
             )}
           >
-            <Popup onPopupClose={popupToggle} isVisible={popupOn} contents={profilePopup} />
+            <Popup
+              onPopupClose={popupToggle}
+              isVisible={popupOn}
+              contents={profilePopup}
+            />
           </div>
         </section>
         {/* center */}
@@ -342,7 +346,15 @@ const Home: NextPage = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <svg viewBox="0 0 15 15" aria-hidden="true" className="hidden peer-focus:block cursor-pointer absolute fill-blue-500 rounded-full right-3 top-0 bottom-0 my-auto w-4 h-4"><g><path d="M8.914 7.5l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L7.5 6.086 1.707.293c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L6.086 7.5.293 13.293c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L7.5 8.914l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L8.914 7.5z"></path></g></svg>
+              <svg
+                viewBox="0 0 15 15"
+                aria-hidden="true"
+                className="hidden peer-focus:block cursor-pointer absolute fill-blue-500 rounded-full right-3 top-0 bottom-0 my-auto w-4 h-4"
+              >
+                <g>
+                  <path d="M8.914 7.5l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L7.5 6.086 1.707.293c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L6.086 7.5.293 13.293c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L7.5 8.914l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L8.914 7.5z"></path>
+                </g>
+              </svg>
             </div>
           </div>
 
@@ -410,9 +422,7 @@ const Home: NextPage = () => {
                 <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="px-4 ml-2 w-48 font-bold ''">
-                  #Typescript
-                </h2>
+                <h2 className="px-4 ml-2 w-48 font-bold ''">#Typescript</h2>
                 <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
                   8,464 Tweets
                 </p>
@@ -474,9 +484,7 @@ const Home: NextPage = () => {
                 <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="px-4 ml-2 w-48 font-bold ''">
-                  #Next.js
-                </h2>
+                <h2 className="px-4 ml-2 w-48 font-bold ''">#Next.js</h2>
                 <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
                   9,416 Tweets
                 </p>

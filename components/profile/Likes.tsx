@@ -1,9 +1,10 @@
-import React from 'react'
-
-function Likes() {
-	return (
-		<div>This is Likes</div>
-	)
+import React from "react";
+interface Props {
+  isCurrent: boolean;
 }
 
-export default Likes
+function Likes({ isCurrent }: Props) {
+  return <div>This is Likes</div>;
+}
+
+export default Likes;

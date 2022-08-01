@@ -1,16 +1,15 @@
-import React from 'react'
-import MobileLayout from '@components/MobileLayout'
-import SearchBar from '@components/SearchBar'
+import React from "react";
+import MobileLayout from "@components/MobileLayout";
+import SearchBar from "@components/SearchBar";
 
 function search() {
-
-	return (
-		<MobileLayout>
-			<SearchBar />
-			{/* 검색결과 */}
-			<div></div>
-		</MobileLayout>
-	)
+  return (
+    <MobileLayout>
+      <SearchBar />
+      {/* 검색결과 */}
+      <div></div>
+    </MobileLayout>
+  );
 }
 
-export default search
+export default search;

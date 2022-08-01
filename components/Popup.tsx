@@ -13,7 +13,6 @@ interface PopupProps {
 }
 
 function Popup({ onPopupClose, isVisible, contents }: PopupProps) {
-
   return (
     <div
       className={cls(

@@ -1,9 +1,10 @@
-import React from 'react'
-
-function Replies() {
-	return (
-		<div>This is replies</div>
-	)
+import React from "react";
+interface Props {
+  isCurrent: boolean;
 }
 
-export default Replies
+function Replies({ isCurrent }: Props) {
+  return <div>This is replies</div>;
+}
+
+export default Replies;
