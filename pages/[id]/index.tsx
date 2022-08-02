@@ -1,5 +1,4 @@
 import React from "react";
-import { cls } from "@libs/utils";
 import MobileLayout from "@components/MobileLayout";
 import { ProfileResponse } from "@libs/interfaces";
 import { withRouter, NextRouter } from "next/router";
@@ -7,7 +6,6 @@ import Button from "@components/Button";
 import Likes from "@components/profile/MyLikes";
 import Replies from "@components/profile/MyReplies";
 import useSWR from "swr";
-import Link from "next/link";
 import MyTweets from "@components/profile/MyTweets";
 import TabMenu from "@components/profile/TabMenu";
 

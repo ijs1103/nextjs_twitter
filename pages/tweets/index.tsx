@@ -1,27 +1,57 @@
 import type { NextPage } from "next";
 import useUser from "@libs/useUser";
+import { useRef } from "react";
 import { useRouter } from "next/router";
-import { useCallback, useRef, useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import TweetForm from "@components/TweetForm";
 import MobileNav from "@components/MobileNav";
 import Header from "@components/Header";
 import useMutation from "@libs/useMutation";
+import useSWRInfinite , { SWRInfiniteKeyLoader } from "swr/infinite";
 import { cls } from "@libs/utils";
 import Popup from "@components/Popup";
-import InfiniteScrollList from "@components/InfiniteScrollList";
-import { MutationResult } from "@libs/interfaces";
+import { TweetsResponse, MutationResult } from "@libs/interfaces";
 import Link from "next/link";
+import useIntersectionObserver from "@libs/useIntersectionObserver";
+import NotFound from "@components/NotFound";
+import TweetBox from "@components/TweetBox";
+import Loader from "@components/Loader";
 
 const Home: NextPage = () => {
   const { user } = useUser();
   const router = useRouter();
   const [popupOn, setPopupOn] = useState(false);
   const popupToggle = useCallback(() => setPopupOn((prev) => !prev), []);
+  /* 무한스크롤 및 트위터 리스트 관련 */
+  const ref = useRef<HTMLDivElement>(null);
+  const isIntersecting = useIntersectionObserver(ref);
+  const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
+    if (previousPageData && previousPageData?.results?.length === 0)
+      return null;
+    if (pageIndex === 0) return "/api/tweets?offset=0&limit=5";
+    return `/api/tweets?offset=${pageIndex * 5}&limit=5`;
+  };
+  const { data, error, isValidating, setSize, mutate } =
+    useSWRInfinite<TweetsResponse>(getKey, {
+      revalidateFirstPage: false,
+      revalidateOnFocus: false,
+    });
+  const tweets = data?.map((item) => item.tweets).flat() ?? [];
+  const isEnd = tweets.length === data?.[0]?.total;
+  const isEmpty = data?.[0]?.tweets?.length === 0;
+  const isLoading = (!data && !error) || isValidating;
+  useEffect(() => {
+    if (isIntersecting && !isEnd && !isLoading) {
+      setSize((oldSize) => oldSize + 1);
+    }
+  }, [isIntersecting]);
+  /* 트위터 생성 관련 */
   const [createTweet, { loading, data: mutateData, error: mutateError }] =
-  useMutation<MutationResult>("/api/tweets");
+    useMutation<MutationResult>("/api/tweets");
   useEffect(() => {
     mutateData?.ok && mutate();
   }, [mutateData]);
+  /* 로그아웃 관련 */
   const [logout, { data: logoutData, error: logoutError }] = useMutation<{
     ok: boolean;
   }>("/api/users/log-out");
@@ -43,7 +73,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen bg-black">
       <div className="flex">
         {/* left */}
-        <section className="z-10 hidden sm:block top-0 left-0 fixed h-full w-[80px] lg:w-[300px] ''  py-4">
+        <section className="z-10 hidden sm:block top-0 left-0 fixed h-full w-[80px] lg:w-[300px] py-4">
           <svg
             viewBox="0 0 24 24"
             className="mx-auto h-10 w-10 ''"
@@ -264,8 +294,7 @@ const Home: NextPage = () => {
         <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
           <TweetForm onCreateTweet={createTweet} />
-          <InfiniteScrollList url='/api/tweets' />
-          {/* {tweets.map((tweet: any) => {
+          {!isEmpty ? tweets.map((tweet: any) => {
             return (
               <TweetBox
                 key={tweet.id}
@@ -278,8 +307,8 @@ const Home: NextPage = () => {
                 isMyTweet={tweet.isMyTweet}
               />
             );
-          })}
-          <Loader ref={ref} isLoading={isLoading} /> */}
+          }): <NotFound />}
+          <Loader ref={ref} isLoading={isLoading} />
           <button
             onClick={onMobileCreate}
             className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400 '' font-bold py-4 px-4 rounded-full"

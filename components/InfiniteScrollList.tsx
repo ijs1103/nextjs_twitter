@@ -29,6 +29,7 @@ function InfiniteScrollList({ url, isCurrent }: Props ) {
       revalidateFirstPage: false,
       revalidateOnFocus: false,
     });
+    console.log(data);
   const items = data?.map((item) => {
     return isDataTypeTweet ? item.tweets : item.likes
     }).flat() ?? [];
