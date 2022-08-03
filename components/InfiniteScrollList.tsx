@@ -10,9 +10,10 @@ interface Props {
 	url: string;
 	/* isCurrent : 프로필 페이지에서 탭메뉴들 중 현재 활성화된 탭인지 여부 */
 	isCurrent?: boolean;
+  isUpdated?: boolean;
 }
 
-function InfiniteScrollList({ url, isCurrent }: Props ) {
+function InfiniteScrollList({ url, isCurrent, isUpdated }: Props ) {
 
   const isDataTypeTweet = url.toLowerCase().includes('tweets');
   const ref = useRef<HTMLDivElement>(null);
@@ -24,12 +25,17 @@ function InfiniteScrollList({ url, isCurrent }: Props ) {
       pageIndex * 5
     }&limit=5`;
   };
-  const { data, error, isValidating, setSize } =
+  const { data, error, isValidating, setSize, mutate } =
     useSWRInfinite<any>(getKey, {
       revalidateFirstPage: false,
       revalidateOnFocus: false,
     });
-    console.log(data);
+  /*  */
+  useEffect(() => {
+    if (!isUpdated) return
+    mutate()
+  }, [isUpdated])
+  
   const items = data?.map((item) => {
     return isDataTypeTweet ? item.tweets : item.likes
     }).flat() ?? [];
