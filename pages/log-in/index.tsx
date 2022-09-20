@@ -51,10 +51,10 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-xl mx-auto '' bg-black px-12 py-2">
+    <div className="w-full max-w-xl min-h-screen mx-auto '' bg-black px-12 py-2">
       <button
         onClick={onGoback}
-        className="transition px-1 py-1 rounded-full border-black border hover:bg-gray-800"
+        className="px-1 py-1 transition border border-black rounded-full hover:bg-gray-800"
       >
         <svg
           className="w-6 h-6"
@@ -70,7 +70,7 @@ function Login() {
         </svg>
       </button>
       <form
-        className="flex items-center flex-col h-full relative"
+        className="relative flex flex-col items-center h-full"
         onSubmit={handleSubmit(onValid)}
       >
         <span className="my-6 text-2xl font-bold">
@@ -85,10 +85,10 @@ function Login() {
               <button className="bg-white text-black text-sm rounded-[20px] w-full px-1 py-1 ">
                 Apple에서 가입하기
               </button>
-              <div className="pt-3 relative">
+              <div className="relative pt-3">
                 <div className="absolute w-full border-t border-gray-300" />
-                <div className="relative -top-3 text-center ">
-                  <span className="bg-black px-2 text-sm text-gray-500">
+                <div className="relative text-center -top-3 ">
+                  <span className="px-2 text-sm text-gray-500 bg-black">
                     또는
                   </span>
                 </div>
@@ -157,6 +157,7 @@ function Login() {
           {stage === 2 && (
             <Input
               id="password"
+              type="password"
               label="비밀번호"
               register={register("password", { required: true })}
               hasError={!!errors?.password}
@@ -178,7 +179,7 @@ function Login() {
         <span className="mt-10 text-sm">
           계정이 없으신가요?{" "}
           <Link href="/create-account">
-            <a className="hover:underline text-blue-500">가입하기</a>
+            <a className="text-blue-500 hover:underline">가입하기</a>
           </Link>
         </span>
       </form>

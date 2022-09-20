@@ -6,6 +6,8 @@ import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
 import { TweetDetail } from "@libs/interfaces";
 import MobileNav from "@components/MobileNav";
+import TweetForm from "@components/TweetForm";
+import InfiniteScrollList from "@components/InfiniteScrollList";
 
 function TweetDetail() {
   const router = useRouter();
@@ -33,7 +35,12 @@ function TweetDetail() {
       alert(editedData.error);
     }
   }, [editedData]);
+  const [createComment, { data: newComment }] = useMutation(`/api/comments/${router.query.id || data?.tweet.id}/new`);
 
+
+  const onCreateComment = useCallback(({ ...payload }) => {
+    createComment(payload);
+  }, []);
   return (
     <MobileLayout>
       {data && (
@@ -52,6 +59,9 @@ function TweetDetail() {
           isMyTweet={data.isMyTweet}
         />
       )}
+      {/* 댓글 */}
+      <TweetForm isCreatePage={true} onCreateTweet={onCreateComment} />
+      <InfiniteScrollList isUpdated={!!newComment} dataType="comments" url={`/api/comments/${router.query.id || data?.tweet.id}`} isDetail={true} />
       <MobileNav />
     </MobileLayout>
   );

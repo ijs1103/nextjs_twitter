@@ -7,23 +7,23 @@ import TweetBox from "@components/TweetBox";
 import NotFound from "@components/NotFound";
 
 interface Props {
-	url: string;
-	/* isCurrent : 프로필 페이지에서 탭메뉴들 중 현재 활성화된 탭인지 여부 */
-	isCurrent?: boolean;
+  url: string;
+  /* isCurrent : 프로필 페이지에서 탭메뉴들 중 현재 활성화된 탭인지 여부 */
+  isCurrent?: boolean;
   isUpdated?: boolean;
+  isDetail?: boolean;
+  dataType?: 'tweets' | 'likes' | 'comments'
 }
 
-function InfiniteScrollList({ url, isCurrent, isUpdated }: Props ) {
+function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, dataType }: Props) {
 
-  const isDataTypeTweet = url.toLowerCase().includes('tweets');
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
     if (typeof isCurrent !== 'undefined' && !isCurrent || previousPageData && previousPageData?.results?.length === 0)
       return null;
-    return `${url}?offset=${
-      pageIndex * 5
-    }&limit=5`;
+    return `${url}?offset=${pageIndex * 5
+      }&limit=5`;
   };
   const { data, error, isValidating, setSize, mutate } =
     useSWRInfinite<any>(getKey, {
@@ -35,14 +35,14 @@ function InfiniteScrollList({ url, isCurrent, isUpdated }: Props ) {
     if (!isUpdated) return
     mutate()
   }, [isUpdated])
-  
+
   const items = data?.map((item) => {
-    return isDataTypeTweet ? item.tweets : item.likes
-    }).flat() ?? [];
-  const isEmpty = isDataTypeTweet ? data?.[0]?.tweets?.length === 0 : data?.[0]?.likes?.length === 0;
+    return dataType === 'tweets' ? item.tweets : dataType === 'likes' ? item.likes : item.comments
+  }).flat() ?? [];
+  const isEmpty = dataType === 'tweets' ? data?.[0]?.tweets?.length === 0 : dataType === 'likes' ? data?.[0]?.likes?.length === 0 : data?.[0]?.comments?.length === 0
   const isEnd = items.length === data?.[0]?.total;
   const isLoading = (!data && !error) || isValidating;
-  
+
   useEffect(() => {
     if (isIntersecting && !isEnd && !isLoading) {
       setSize((oldSize) => oldSize + 1);
@@ -53,8 +53,8 @@ function InfiniteScrollList({ url, isCurrent, isUpdated }: Props ) {
       {!isEmpty
         ? items.map((item: any) => {
 
-            return (
-              isDataTypeTweet ? 
+          return (
+            dataType !== 'likes' ?
               <TweetBox
                 key={item.id}
                 id={item.id}
@@ -62,10 +62,11 @@ function InfiniteScrollList({ url, isCurrent, isUpdated }: Props ) {
                 userName={item.user.name}
                 payload={item.payload}
                 updatedAt={item.updatedAt}
-                likes={item._count.like}
+                likes={item._count?.like}
                 isMyTweet={item.isMyTweet}
+                isDetail={isDetail}
               />
-              : 
+              :
               <TweetBox
                 key={item.tweet.id}
                 id={item.tweet.id}
@@ -73,11 +74,12 @@ function InfiniteScrollList({ url, isCurrent, isUpdated }: Props ) {
                 userName={item.tweet.user.name}
                 payload={item.tweet.payload}
                 updatedAt={item.tweet.updatedAt}
-                likes={item.tweet._count.like}
+                likes={item.tweet._count?.like}
                 isMyTweet={item.tweet.isMyTweet}
+                isDetail={isDetail}
               />
-            );
-          })
+          );
+        })
         : <NotFound />}
       <Loader ref={ref} isLoading={isLoading} />
     </>

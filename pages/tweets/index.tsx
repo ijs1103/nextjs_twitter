@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         <section className="z-10 hidden sm:block top-0 left-0 fixed h-full w-[80px] lg:w-[300px] py-4">
           <svg
             viewBox="0 0 24 24"
-            className="mx-auto h-10 w-10 ''"
+            className="w-10 h-10 mx-auto ''"
             fill="currentColor"
           >
             <g>
@@ -53,13 +53,13 @@ const Home: NextPage = () => {
             </g>
           </svg>
 
-          <nav className="mt-5 px-2 space-y-1">
+          <nav className="px-2 mt-5 space-y-1">
             <a
               href="#"
-              className="group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6 "
+                className="w-6 h-6 lg:mr-4 "
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -75,10 +75,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -92,10 +92,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="mt-1 group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -109,10 +109,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="mt-1 group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -126,10 +126,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="mt-1 group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -143,10 +143,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="mt-1 group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -160,10 +160,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="mt-1 group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -177,10 +177,10 @@ const Home: NextPage = () => {
             </a>
             <a
               href="#"
-              className="mt-1 group flex justify-center lg:justify-start items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
-                className="lg:mr-4 h-6 w-6"
+                className="w-6 h-6 lg:mr-4"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -194,13 +194,13 @@ const Home: NextPage = () => {
             </a>
             <div className="flex justify-center">
               <Link href="/tweets/new">
-                <a className="text-center bg-blue-400 lg:w-48 mt-5 hover:bg-blue-600 '' font-bold py-2 px-2 lg:px-4 rounded-full">
+                <a className="mt-5 text-center bg-blue-400 lg:w-48 hover:bg-blue-600 '' font-bold py-2 px-2 lg:px-4 rounded-full">
                   <span className="hidden lg:block">Tweet</span>
                   <svg
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                     fill="#fff"
-                    className="w-4 h-4 block lg:hidden"
+                    className="block w-4 h-4 lg:hidden"
                   >
                     <g>
                       <path d="M8.8 7.2H5.6V3.9c0-.4-.3-.8-.8-.8s-.7.4-.7.8v3.3H.8c-.4 0-.8.3-.8.8s.3.8.8.8h3.3v3.3c0 .4.3.8.8.8s.8-.3.8-.8V8.7H9c.4 0 .8-.3.8-.8s-.5-.7-1-.7zm15-4.9v-.1h-.1c-.1 0-9.2 1.2-14.4 11.7-3.8 7.6-3.6 9.9-3.3 9.9.3.1 3.4-6.5 6.7-9.2 5.2-1.1 6.6-3.6 6.6-3.6s-1.5.2-2.1.2c-.8 0-1.4-.2-1.7-.3 1.3-1.2 2.4-1.5 3.5-1.7.9-.2 1.8-.4 3-1.2 2.2-1.6 1.9-5.5 1.8-5.7z"></path>
@@ -213,27 +213,27 @@ const Home: NextPage = () => {
 
           <div
             onClick={popupToggle}
-            className="absolute bottom-0 right-0 left-0  mx-2  mb-5 "
+            className="absolute bottom-0 left-0 right-0 mx-2 mb-5 "
           >
-            <div className="p-2 rounded-full hover:bg-blue-400 group block">
-              <div className="flex justify-center lg:justify-start items-center">
+            <div className="block p-2 rounded-full hover:bg-blue-400 group">
+              <div className="flex items-center justify-center lg:justify-around">
                 <div className="flex-shrink-0">
                   <img
-                    className="inline-block h-10 w-10 rounded-full"
+                    className="inline-block w-10 h-10 rounded-full"
                     src="http://placeimg.com/640/480/any"
                     alt="profile"
                   />
                 </div>
                 <div className="hidden lg:block lg:ml-3">
-                  <p className="text-sm leading-6 font-medium ''">
+                  <p className="text-sm font-medium leading-6">
                     {user?.name}
                   </p>
-                  <p className="text-xs leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                  <p className="text-xs font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300">
                     @nickname
                   </p>
                 </div>
                 <svg
-                  className="ml-3 hidden lg:block w-6"
+                  className="hidden w-6 ml-3 lg:block"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                   fill="#fff"
@@ -263,8 +263,8 @@ const Home: NextPage = () => {
         <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
           <TweetForm onCreateTweet={createTweet} />
-          <InfiniteScrollList isUpdated={!!mutateData} url={`/api/tweets`} />
-          
+          <InfiniteScrollList dataType="tweets" isUpdated={!!mutateData} url={`/api/tweets`} />
+
           <button
             onClick={onMobileCreate}
             className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400 '' font-bold py-4 px-4 rounded-full"
@@ -282,17 +282,17 @@ const Home: NextPage = () => {
           </button>
         </section>
         {/* right */}
-        <section className="w-2/5 hidden lg:block">
-          <div className="w-80 p-3 pb-0 mr-16">
+        <section className="hidden w-2/5 lg:block">
+          <div className="p-3 pb-0 mr-16 w-80">
             <div className="relative w-full">
               <input
                 type="text"
                 name="search"
                 placeholder="Search Twitter"
-                className="bg-gray-800 h-10 px-10 w-full rounded-full text-sm peer focus:border-2 border-blue-500 outline-none"
+                className="w-full h-10 px-10 text-sm bg-gray-800 border-blue-500 rounded-full outline-none peer focus:border-2"
               />
               <svg
-                className="cursor-pointer absolute left-2 top-0 bottom-0 my-auto fill-current peer-focus:fill-blue-500 w-6 h-6"
+                className="absolute top-0 bottom-0 w-6 h-6 my-auto cursor-pointer fill-current left-2 peer-focus:fill-blue-500"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -305,7 +305,7 @@ const Home: NextPage = () => {
               <svg
                 viewBox="0 0 15 15"
                 aria-hidden="true"
-                className="hidden peer-focus:block cursor-pointer absolute fill-blue-500 rounded-full right-3 top-0 bottom-0 my-auto w-4 h-4"
+                className="absolute top-0 bottom-0 hidden w-4 h-4 my-auto rounded-full cursor-pointer peer-focus:block fill-blue-500 right-3"
               >
                 <g>
                   <path d="M8.914 7.5l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L7.5 6.086 1.707.293c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L6.086 7.5.293 13.293c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L7.5 8.914l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L8.914 7.5z"></path>
@@ -314,20 +314,20 @@ const Home: NextPage = () => {
             </div>
           </div>
 
-          <div className="max-w-sm rounded-lg bg-gray-800 overflow-hidden shadow-lg m-4 mr-20">
+          <div className="max-w-sm m-4 mr-20 overflow-hidden bg-gray-800 rounded-lg shadow-lg">
             <div className="flex">
               <div className="flex-1 m-2">
-                <h2 className="px-4 py-2 text-xl w-48 font-semibold ''">
+                <h2 className="w-48 px-4 py-2 text-xl font-semibold ''">
                   Trends for you
                 </h2>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
                   href=""
-                  className=" text-2xl rounded-full '' hover:bg-black hover:text-blue-300 float-right"
+                  className="text-2xl rounded-full '' hover:bg-black hover:text-blue-300 float-right"
                 >
                   <svg
-                    className="m-2 h-6 w-6"
+                    className="w-6 h-6 m-2"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -344,21 +344,21 @@ const Home: NextPage = () => {
 
             <div className="flex">
               <div className="flex-1">
-                <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">
+                <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="px-4 ml-2 w-48 font-bold ''">#React</h2>
-                <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
+                <h2 className="w-48 px-4 ml-2 font-bold ''">#React</h2>
+                <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   5,466 Tweets
                 </p>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
                   href=""
-                  className=" text-2xl rounded-full text-gray-400 hover:bg-blue-800 hover:text-blue-300 float-right"
+                  className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
-                    className="m-2 h-5 w-5"
+                    className="w-5 h-5 m-2"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -375,21 +375,21 @@ const Home: NextPage = () => {
 
             <div className="flex">
               <div className="flex-1">
-                <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">
+                <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="px-4 ml-2 w-48 font-bold ''">#Typescript</h2>
-                <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
+                <h2 className="w-48 px-4 ml-2 font-bold ''">#Typescript</h2>
+                <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   8,464 Tweets
                 </p>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
                   href=""
-                  className=" text-2xl rounded-full text-gray-400 hover:bg-blue-800 hover:text-blue-300 float-right"
+                  className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
-                    className="m-2 h-5 w-5"
+                    className="w-5 h-5 m-2"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -406,21 +406,21 @@ const Home: NextPage = () => {
 
             <div className="flex">
               <div className="flex-1">
-                <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">
+                <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="px-4 ml-2 w-48 font-bold ''">#Vue</h2>
-                <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
+                <h2 className="w-48 px-4 ml-2 font-bold ''">#Vue</h2>
+                <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   5,586 Tweets
                 </p>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
                   href=""
-                  className=" text-2xl rounded-full text-gray-400 hover:bg-blue-800 hover:text-blue-300 float-right"
+                  className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
-                    className="m-2 h-5 w-5"
+                    className="w-5 h-5 m-2"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -437,21 +437,21 @@ const Home: NextPage = () => {
 
             <div className="flex">
               <div className="flex-1">
-                <p className="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">
+                <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="px-4 ml-2 w-48 font-bold ''">#Next.js</h2>
-                <p className="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">
+                <h2 className="w-48 px-4 ml-2 font-bold ''">#Next.js</h2>
+                <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   9,416 Tweets
                 </p>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
                   href=""
-                  className=" text-2xl rounded-full text-gray-400 hover:bg-blue-800 hover:text-blue-300 float-right"
+                  className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
-                    className="m-2 h-5 w-5"
+                    className="w-5 h-5 m-2"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -468,17 +468,17 @@ const Home: NextPage = () => {
 
             <div className="flex">
               <div className="flex-1 p-4">
-                <h2 className="ml-2 w-48 font-bold text-sm text-blue-400">
+                <h2 className="w-48 ml-2 text-sm font-bold text-blue-400">
                   Show more
                 </h2>
               </div>
             </div>
           </div>
 
-          <div className="max-w-sm rounded-lg bg-gray-800 overflow-hidden shadow-lg m-4 mr-20">
+          <div className="max-w-sm m-4 mr-20 overflow-hidden bg-gray-800 rounded-lg shadow-lg">
             <div className="flex">
               <div className="flex-1 m-2">
-                <h2 className="px-4 py-2 text-xl w-48 font-semibold ''">
+                <h2 className="w-48 px-4 py-2 text-xl font-semibold ''">
                   Who to follow
                 </h2>
               </div>
@@ -491,23 +491,23 @@ const Home: NextPage = () => {
                 <div className="flex items-center w-48">
                   <div>
                     <img
-                      className="inline-block h-10 w-auto rounded-full ml-4 mt-2"
+                      className="inline-block w-auto h-10 mt-2 ml-4 rounded-full"
                       src="http://placeimg.com/640/480/any"
                       alt=""
                     />
                   </div>
-                  <div className="ml-3 mt-3">
-                    <p className="text-base leading-6 font-medium ''">
+                  <div className="mt-3 ml-3">
+                    <p className="text-base font-medium leading-6 ''">
                       Nomad Coder
                     </p>
-                    <p className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                    <p className="text-sm font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300">
                       @nico
                     </p>
                   </div>
                 </div>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
-                <a href="" className=" float-right">
+                <a href="" className="float-right ">
                   <button className="bg-transparent hover:bg-blue-500 '' font-semibold hover:'' py-2 px-4 border border-white hover:border-transparent rounded-full">
                     Follow
                   </button>
@@ -521,23 +521,23 @@ const Home: NextPage = () => {
                 <div className="flex items-center w-48">
                   <div>
                     <img
-                      className="inline-block h-10 w-auto rounded-full ml-4 mt-2"
+                      className="inline-block w-auto h-10 mt-2 ml-4 rounded-full"
                       src="http://placeimg.com/640/480/any"
                       alt=""
                     />
                   </div>
-                  <div className="ml-3 mt-3">
-                    <p className="text-base leading-6 font-medium ''">
+                  <div className="mt-3 ml-3">
+                    <p className="text-base font-medium leading-6 ''">
                       Nomad Coder
                     </p>
-                    <p className="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                    <p className="text-sm font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300">
                       @nico
                     </p>
                   </div>
                 </div>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
-                <a href="" className=" float-right">
+                <a href="" className="float-right ">
                   <button className="bg-transparent hover:bg-blue-500 '' font-semibold hover:'' py-2 px-4 border border-white hover:border-transparent rounded-full">
                     Follow
                   </button>
@@ -549,7 +549,7 @@ const Home: NextPage = () => {
 
             <div className="flex">
               <div className="flex-1 p-4">
-                <h2 className="ml-2 w-48 font-bold text-sm text-blue-400">
+                <h2 className="w-48 ml-2 text-sm font-bold text-blue-400">
                   Show more
                 </h2>
               </div>
@@ -559,14 +559,14 @@ const Home: NextPage = () => {
           <div className="flow-root m-6">
             <div className="flex-1">
               <a href="#">
-                <p className="text-sm leading-6 font-medium text-gray-500">
+                <p className="text-sm font-medium leading-6 text-gray-500">
                   Terms of Service Privacy Policy Cookie Policy Accessibility
                   Ads info More
                 </p>
               </a>
             </div>
             <div className="flex-2">
-              <p className="text-sm leading-6 font-medium text-gray-600">
+              <p className="text-sm font-medium leading-6 text-gray-600">
                 {" "}
                 © 2022 Twitter, Inc.
               </p>

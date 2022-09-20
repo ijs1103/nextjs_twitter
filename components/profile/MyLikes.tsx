@@ -8,7 +8,7 @@ interface Props {
 function MyLikes({ isCurrent }: Props) {
   const router = useRouter();
   return (
-    <InfiniteScrollList url={`/api/profile/${router.query.id}/likes`} isCurrent={isCurrent} />
+    <InfiniteScrollList dataType="likes" url={`/api/profile/${router.query.id}/likes`} isCurrent={isCurrent} />
   );
 }
 

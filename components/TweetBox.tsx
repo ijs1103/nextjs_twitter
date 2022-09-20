@@ -12,7 +12,7 @@ interface Iprops {
   id: number;
   payload: string;
   updatedAt: Date;
-  likes: number;
+  likes: number | null;
   isDetail?: boolean;
   isLiked?: boolean;
   onLikeClick?: () => void;
@@ -60,8 +60,8 @@ function TweetBox({
     { title: "수정하기", onClickFn: handleEdit, disabled: !isMyTweet },
   ];
   return (
-    <Link href={!isDetail ? `/tweets/${id}` : "javascript:void(0);"}>
-      <a>
+    <Link href={`/tweets/${id}`}>
+      <a onClick={e => isDetail && e.preventDefault()}>
         <div
           className={cls(
             "border-b border-gray-700 '' ",
@@ -69,19 +69,19 @@ function TweetBox({
           )}
         >
           <div className="relative flex flex-shrink-0 p-4 pb-0">
-            <div className="flex-shrink-0 group block">
+            <div className="flex-shrink-0 block group">
               <div className="flex items-center">
                 <div>
                   <img
-                    className="inline-block h-10 w-10 rounded-full"
+                    className="inline-block w-10 h-10 rounded-full"
                     src="http://placeimg.com/640/480/any"
                     alt="profile"
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm sm:text-base leading-6 font-medium ''">
+                  <p className="text-sm font-medium leading-6 sm:text-base ''">
                     {userName}
-                    <span className="text-xs sm:text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                    <span className="text-xs font-medium leading-5 text-gray-400 transition duration-150 ease-in-out sm:text-sm group-hover:text-gray-300">
                       @nickname{" "}
                       {!isDetail && `· ${parsedUpdatedAt(isDetail, updatedAt)}`}
                     </span>
@@ -113,7 +113,7 @@ function TweetBox({
                     />
                   </svg>
                 </div>
-                <div className="absolute right-0 top-0">
+                <div className="absolute top-0 right-0">
                   <Popup
                     onPopupClose={popupClose}
                     isVisible={popupOn}
@@ -148,7 +148,7 @@ function TweetBox({
             )}
 
             {isDetail && (
-              <p className="text-xs sm:text-sm leading-5 font-medium text-gray-400 my-4">
+              <p className="my-4 text-xs font-medium leading-5 text-gray-400 sm:text-sm">
                 {parsedUpdatedAt(isDetail, updatedAt)}
               </p>
             )}
@@ -160,11 +160,11 @@ function TweetBox({
               !isDetail ? "pl-16" : "pl-0 border-t border-gray-700"
             )}
           >
-            <div className="w-full flex justify-around lg:justify-start items-center">
-              <div className="lg:flex-1 text-center">
+            <div className="flex items-center justify-around w-full lg:justify-start">
+              <div className="text-center lg:flex-1">
                 <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
-                    className="text-center h-6 w-6"
+                    className="w-6 h-6 text-center"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -177,10 +177,10 @@ function TweetBox({
                 </div>
               </div>
 
-              <div className="lg:flex-1 text-center">
+              <div className="text-center lg:flex-1">
                 <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
-                    className="text-center h-7 w-6"
+                    className="w-6 text-center h-7"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -195,13 +195,13 @@ function TweetBox({
 
               <div
                 onClick={onLikeClick}
-                className="lg:flex-1 flex items-center text-center"
+                className="flex items-center text-center lg:flex-1"
               >
                 <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
                     className={cls(
                       "text-center h-7 w-6 ",
-                      isLiked || !isDetail && likes > 0 ? "text-red-600" : "''"
+                      isLiked || !isDetail && likes && likes > 0 ? "text-red-600" : "''"
                     )}
                     fill="currentColor"
                     strokeLinecap="round"
@@ -213,13 +213,13 @@ function TweetBox({
                     <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                   </svg>
                 </div>
-                {!isDetail && <span className="text-xs mt-1">{likes}</span>}
+                {!isDetail && <span className="mt-1 text-xs">{likes}</span>}
               </div>
 
-              <div className="lg:flex-1 text-center">
+              <div className="text-center lg:flex-1">
                 <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
                   <svg
-                    className="text-center h-7 w-6"
+                    className="w-6 text-center h-7"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"

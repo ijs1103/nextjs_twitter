@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import MobileLayout from "@components/MobileLayout";
 import { useRouter } from "next/router";
 import useMutation from "@libs/useMutation";
-import Header from "@components/Header";
 import Button from "@components/Button";
 
 function TweetDelete() {
@@ -29,7 +28,6 @@ function TweetDelete() {
   };
   return (
     <MobileLayout>
-      <Header />
       <div className="mt-[200px] flex flex-col items-center">
         <p className="text-gray-500 text-3xl">
           해당 트윗을 정말 삭제하시겠습니까?

@@ -7,7 +7,7 @@ interface Props {
 function MyTweets({ isCurrent }: Props) {
   const router = useRouter();
   return (
-    <InfiniteScrollList url={`/api/profile/${router.query.id}/myTweets`} isCurrent={isCurrent} />
+    <InfiniteScrollList dataType="tweets" url={`/api/profile/${router.query.id}/myTweets`} isCurrent={isCurrent} />
   );
 }
 

@@ -8,13 +8,25 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const {
-    query: { id },
-    session: { user },
+    query: { id, limit, offset },
   } = req;
-  const tweet = await client.tweet.findUnique({
+  const allComments = await client.comment.findMany({
     where: {
-      id: +id.toString(),
+      tweetId: +id,
     },
+    select: {
+      id: true,
+    },
+  });
+  const comments = await client.comment.findMany({
+    where: {
+      tweetId: +id,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+    take: +limit,
+    skip: +offset,
     include: {
       user: {
         select: {
@@ -22,27 +34,22 @@ async function handler(
           name: true,
         },
       },
-      _count: {
-        select: {
-          like: true,
+      tweet: {
+        include: {
+          user: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
     },
   });
-  const isLiked = Boolean(
-    await client.like.findFirst({
-      where: {
-        tweetId: tweet?.id,
-        userId: user?.id,
-      },
-      select: {
-        id: true,
-      },
-    })
-  );
-  
-  const isMyTweet = req.session.user?.id === tweet?.userId;
-  res.json({ ok: true, tweet, isLiked, isMyTweet });
+  return res.json({
+    ok: true,
+    comments,
+    total: allComments.length,
+  });
 }
 
 export default withApiSession(
