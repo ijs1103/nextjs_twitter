@@ -1,4 +1,5 @@
 import { SWRConfig } from "swr";
+import { RecoilRoot } from 'recoil';
 import "../global.css";
 
 export default function App({ Component, pageProps }: any) {
@@ -9,9 +10,11 @@ export default function App({ Component, pageProps }: any) {
           fetch(url).then((response) => response.json()),
       }}
     >
-      <div className="bg-black text-white">
-        <Component {...pageProps} />
-      </div>
+      <RecoilRoot>
+        <div className="text-white bg-black">
+          <Component {...pageProps} />
+        </div>
+      </RecoilRoot>
     </SWRConfig>
   );
 }

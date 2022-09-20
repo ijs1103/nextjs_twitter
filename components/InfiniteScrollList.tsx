@@ -5,6 +5,8 @@ import useIntersectionObserver from "@libs/useIntersectionObserver";
 import Loader from "@components/Loader";
 import TweetBox from "@components/TweetBox";
 import NotFound from "@components/NotFound";
+import useSWR from "swr";
+import { ProfileResponse } from "@libs/interfaces";
 
 interface Props {
   url: string;
@@ -16,7 +18,7 @@ interface Props {
 }
 
 function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, dataType }: Props) {
-
+  const { data: myInfo } = useSWR<ProfileResponse>(isDetail ? "/api/users/me" : null);
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
@@ -63,7 +65,7 @@ function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, dataT
                 payload={item.payload}
                 updatedAt={item.updatedAt}
                 likes={item._count?.like}
-                isMyTweet={item.isMyTweet}
+                isMyTweet={item.isMyTweet ?? item?.user?.id === myInfo?.profile?.id}
                 isDetail={isDetail}
               />
               :

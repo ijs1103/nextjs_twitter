@@ -11,6 +11,9 @@ declare module "iron-session" {
 const cookieOptions = {
   cookieName: "tweetersession",
   password: "kpn7hXYwAqiiPARpdTVsnxkkiVUVTLbz",
+  cookieOptions: {
+    secure: process.env.NODE_ENV === "production",
+  },
 };
 
 export function withApiSession(fn: any) {
