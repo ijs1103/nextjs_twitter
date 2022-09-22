@@ -1,12 +1,15 @@
-import { useState, useCallback, memo } from "react";
+import { useEffect, useState, useCallback, memo } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import Popup from "@components/Popup";
 import { useRouter } from "next/router";
 import { cls, parsedUpdatedAt } from "@libs/utils";
 import Button from "./Button";
+import useMutation from "@libs/useMutation";
+import { useSetRecoilState } from "recoil";
+import { isCommentState } from "./states";
 
-interface Iprops {
+interface Props {
   userId: number;
   userName: string;
   id: number;
@@ -14,6 +17,7 @@ interface Iprops {
   updatedAt: Date;
   likes: number | null;
   isDetail?: boolean;
+  isComment?: boolean;
   isLiked?: boolean;
   onLikeClick?: () => void;
   onEdit?: (payload: string) => void;
@@ -28,11 +32,12 @@ function TweetBox({
   updatedAt,
   likes,
   isDetail = false,
+  isComment = false,
   isLiked,
   onLikeClick,
   onEdit,
   isMyTweet,
-}: Iprops) {
+}: Props) {
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
   const [popupOn, setPopupOn] = useState(false);
@@ -41,20 +46,33 @@ function TweetBox({
   const { register, handleSubmit, setValue } = useForm<{ payload: string }>({
     mode: "onChange",
   });
+  const [editComment] = useMutation(
+    `/api/comments/${id}/update`
+  );
   const handleEdit = useCallback(() => {
     setEditMode(true);
     popupClose();
     setValue("payload", payload);
   }, []);
-
+  const handleDelete = useCallback(() => {
+    router.push(`/tweets/${id}/delete`);
+  }, []);
+  const onEditComment = useCallback((payload: string) => {
+    editComment({ payload });
+  }, []);
   const onValid = (form: { payload: string }) => {
-    onEdit && onEdit(form.payload);
+    isComment ? onEditComment(form.payload) : onEdit && onEdit(form.payload);
     setEditMode(false);
+    document.location.href = location.pathname;
   };
+  const setIsComment = useSetRecoilState(isCommentState)
+  useEffect(() => {
+    setIsComment(isComment)
+  }, [isComment])
   const tweetPopup = [
     {
       title: "삭제하기",
-      onClickFn: () => router.push(`/tweets/${id}/delete`),
+      onClickFn: handleDelete,
       disabled: !isMyTweet,
     },
     { title: "수정하기", onClickFn: handleEdit, disabled: !isMyTweet },

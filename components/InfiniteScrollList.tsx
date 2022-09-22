@@ -14,10 +14,11 @@ interface Props {
   isCurrent?: boolean;
   isUpdated?: boolean;
   isDetail?: boolean;
+  isComment?: boolean;
   dataType?: 'tweets' | 'likes' | 'comments'
 }
 
-function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, dataType }: Props) {
+function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, isComment = false, dataType }: Props) {
   const { data: myInfo } = useSWR<ProfileResponse>(isDetail ? "/api/users/me" : null);
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
@@ -67,6 +68,7 @@ function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, dataT
                 likes={item._count?.like}
                 isMyTweet={item.isMyTweet ?? item?.user?.id === myInfo?.profile?.id}
                 isDetail={isDetail}
+                isComment={isComment}
               />
               :
               <TweetBox
@@ -79,6 +81,7 @@ function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, dataT
                 likes={item.tweet._count?.like}
                 isMyTweet={item.tweet.isMyTweet}
                 isDetail={isDetail}
+                isComment={isComment}
               />
           );
         })
