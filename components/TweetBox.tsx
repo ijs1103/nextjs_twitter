@@ -172,7 +172,7 @@ function TweetBox({
             )}
           </div>
 
-          <div
+          {!isComment && <div
             className={cls(
               "flex ",
               !isDetail ? "pl-16" : "pl-0 border-t border-gray-700"
@@ -250,7 +250,7 @@ function TweetBox({
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </a>
     </Link>
