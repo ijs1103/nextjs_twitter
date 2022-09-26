@@ -12,14 +12,14 @@ async function handler(
   } = req;
   const likedTweets = await client.like.findMany({
     where: {
-      userId: +id
+      userId: +id,
     },
     select: {
       tweet: {
         select: {
-          id: true
-        }
-      }
+          id: true,
+        },
+      },
     },
   });
 
@@ -44,10 +44,11 @@ async function handler(
           _count: {
             select: {
               like: true,
+              comments: true,
             },
           },
-        }
-      }
+        },
+      },
     },
   });
   return res.json({

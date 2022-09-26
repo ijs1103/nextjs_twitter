@@ -37,6 +37,7 @@ async function handler(
       _count: {
         select: {
           like: true,
+          comments: true,
         },
       },
     },

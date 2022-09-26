@@ -62,7 +62,8 @@ function InfiniteScrollList({ url, isUpdated, isDetail = false, isComment = fals
                 userName={item.user.name}
                 payload={item.payload}
                 updatedAt={item.updatedAt}
-                likes={item._count?.like}
+                likeCnt={item._count?.like}
+                commentCnt={item._count?.comments}
                 isMyTweet={item.isMyTweet ?? item?.user?.id === myInfo?.profile?.id}
                 isDetail={isDetail}
                 isComment={isComment}
@@ -75,7 +76,8 @@ function InfiniteScrollList({ url, isUpdated, isDetail = false, isComment = fals
                 userName={item.tweet.user.name}
                 payload={item.tweet.payload}
                 updatedAt={item.tweet.updatedAt}
-                likes={item.tweet._count?.like}
+                likeCnt={item.tweet._count?.like}
+                commentCnt={item.tweet._count?.comments}
                 isMyTweet={item.tweet.isMyTweet}
                 isDetail={isDetail}
                 isComment={isComment}
