@@ -57,7 +57,6 @@ function TweetDetail({ tweetId }: ServerSideProps) {
           userName={data.tweet.user.name}
           payload={data.tweet.payload}
           updatedAt={data.tweet.updatedAt}
-          likes={data.tweet._count.like}
           isLiked={data.isLiked}
           isDetail={true}
           onLikeClick={onLikeClick}

@@ -1,7 +1,11 @@
-import React from "react";
+import InfiniteScrollList from "@components/InfiniteScrollList";
+import { useRouter } from "next/router";
 
 function Replies() {
-  return <div>This is replies</div>;
+  const router = useRouter();
+  return (
+    <InfiniteScrollList dataType="comments" url={`/api/profile/${router.query.id}/replies`} />
+  );
 }
 
 export default Replies;

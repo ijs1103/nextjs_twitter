@@ -17,8 +17,8 @@ interface Props {
   id: number;
   payload: string;
   updatedAt: Date;
-  likeCnt: number;
-  commentCnt: number;
+  likeCnt?: number;
+  commentCnt?: number;
   isDetail?: boolean;
   isComment?: boolean;
   isLiked?: boolean;
@@ -231,7 +231,7 @@ function TweetBox({
                   <svg
                     className={cls(
                       "text-center h-7 w-6 ",
-                      isLiked || !isDetail && likeCnt > 0 ? "text-red-600" : ""
+                      isLiked || !isDetail && likeCnt && likeCnt > 0 ? "text-red-600" : ""
                     )}
                     fill="currentColor"
                     strokeLinecap="round"
