@@ -17,7 +17,7 @@ function profile({ router }: WithRouterProps) {
   const { data, error } = useSWR<ProfileResponse>(
     `/api/profile/${router.query?.id}`
   );
-  const toggleFollow = () => {};
+  const toggleFollow = () => { };
   const {
     query: { tab },
   } = router;
@@ -28,11 +28,11 @@ function profile({ router }: WithRouterProps) {
     <MobileLayout>
       <>
         <div className="relative">
-          <div className="bg-white h-48"></div>
-          <div className="absolute -translate-y-1/2 top-1/2 left-4 bg-gray-500 rounded-full w-24 h-24"></div>
+          <div className="h-48 bg-white"></div>
+          <div className="absolute w-24 h-24 -translate-y-1/2 bg-gray-500 rounded-full top-1/2 left-4"></div>
           <div className="relative h-48 px-4">
-            <div className="mt-4 flex justify-end gap-2">
-              <div className="cursor-pointer rounded-full p-1 border-gray-500 border-2 text-gray-300">
+            <div className="flex justify-end gap-2 mt-4">
+              <div className="p-1 text-gray-300 border-2 border-gray-500 rounded-full cursor-pointer">
                 <svg
                   className="w-8 h-8"
                   stroke="currentColor"
@@ -49,10 +49,10 @@ function profile({ router }: WithRouterProps) {
               </div>
               <Button name="follow" onClick={toggleFollow} />
             </div>
-            <div className="mt-4 flex flex-col gap-3">
+            <div className="flex flex-col gap-3 mt-4">
               <div className="">
-                <span className="font-bold text-2xl">{data?.profile.name}</span>
-                <span className="text-gray-500 block">@nickname</span>
+                <span className="text-2xl font-bold">{data?.profile.name}</span>
+                <span className="block text-gray-500">@nickname</span>
               </div>
               <div className="flex gap-3 text-sm">
                 <span className="text-gray-500">
@@ -65,7 +65,7 @@ function profile({ router }: WithRouterProps) {
             </div>
           </div>
         </div>
-        <div className="border-b border-gray-700 text-sm">
+        <div className="text-sm border-b border-gray-700">
           <ul className="flex text-gray-500">
             <TabMenu url={`/${router.query?.id}`} isCurrent={isTabTweets}>
               Tweets
@@ -85,9 +85,9 @@ function profile({ router }: WithRouterProps) {
           </ul>
         </div>
         <div className="min-h-[50vh]">
-          {isTabTweets && <MyTweets isCurrent={isTabTweets} />}
-          {isTabReplies && <Replies isCurrent={isTabReplies} />}
-          {isTabLikes && <Likes isCurrent={isTabLikes} />}
+          {isTabTweets && <MyTweets />}
+          {isTabReplies && <Replies />}
+          {isTabLikes && <Likes />}
         </div>
       </>
     </MobileLayout>

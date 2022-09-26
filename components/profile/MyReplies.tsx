@@ -1,9 +1,6 @@
 import React from "react";
-interface Props {
-  isCurrent: boolean;
-}
 
-function Replies({ isCurrent }: Props) {
+function Replies() {
   return <div>This is replies</div>;
 }
 

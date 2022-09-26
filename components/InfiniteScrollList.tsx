@@ -10,20 +10,18 @@ import { ProfileResponse } from "@libs/interfaces";
 
 interface Props {
   url: string;
-  /* isCurrent : 프로필 페이지에서 탭메뉴들 중 현재 활성화된 탭인지 여부 */
-  isCurrent?: boolean;
   isUpdated?: boolean;
   isDetail?: boolean;
   isComment?: boolean;
   dataType?: 'tweets' | 'likes' | 'comments'
 }
 
-function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, isComment = false, dataType }: Props) {
+function InfiniteScrollList({ url, isUpdated, isDetail = false, isComment = false, dataType }: Props) {
   const { data: myInfo } = useSWR<ProfileResponse>(isDetail ? "/api/users/me" : null);
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
-    if (typeof isCurrent !== 'undefined' && !isCurrent || previousPageData && previousPageData?.results?.length === 0)
+    if (previousPageData && previousPageData?.results?.length === 0)
       return null;
     return `${url}?offset=${pageIndex * 5
       }&limit=5`;
@@ -33,7 +31,6 @@ function InfiniteScrollList({ url, isCurrent, isUpdated, isDetail = false, isCom
       revalidateFirstPage: false,
       revalidateOnFocus: false,
     });
-  /*  */
   useEffect(() => {
     if (!isUpdated) return
     mutate()

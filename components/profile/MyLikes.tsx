@@ -1,14 +1,10 @@
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { useRouter } from "next/router";
 
-interface Props {
-  isCurrent: boolean;
-}
-
-function MyLikes({ isCurrent }: Props) {
+function MyLikes() {
   const router = useRouter();
   return (
-    <InfiniteScrollList dataType="likes" url={`/api/profile/${router.query.id}/likes`} isCurrent={isCurrent} />
+    <InfiniteScrollList dataType="likes" url={`/api/profile/${router.query.id}/likes`} />
   );
 }
 

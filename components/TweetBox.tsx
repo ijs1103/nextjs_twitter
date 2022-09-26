@@ -8,6 +8,8 @@ import Button from "./Button";
 import useMutation from "@libs/useMutation";
 import { useSetRecoilState } from "recoil";
 import { isCommentState } from "./states";
+import { ProfileResponse } from "@libs/interfaces";
+import useSWR from "swr";
 
 interface Props {
   userId: number;
@@ -77,6 +79,13 @@ function TweetBox({
     },
     { title: "수정하기", onClickFn: handleEdit, disabled: !isMyTweet },
   ];
+  const { data: myInfo } = useSWR<ProfileResponse>(isDetail ? "/api/users/me" : null);
+
+  const handleLikeClick = () => {
+    // 로그인한 사용자 === 트위터 작성자 => 좋아요 누르지 못하게 처리
+    if (myInfo?.profile.id === userId) return;
+    onLikeClick && onLikeClick();
+  }
   return (
     <Link href={`/tweets/${id}`}>
       <a onClick={e => isDetail && e.preventDefault()}>
@@ -212,7 +221,7 @@ function TweetBox({
               </div>
 
               <div
-                onClick={onLikeClick}
+                onClick={handleLikeClick}
                 className="flex items-center text-center lg:flex-1"
               >
                 <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
