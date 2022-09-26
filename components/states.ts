@@ -10,5 +10,5 @@ export const currentTweetIdState = atom({
 });
 export const prevUrlState = atom({
   key: "prevUrl",
-  default: "",
+  default: "/tweets",
 });

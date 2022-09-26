@@ -9,15 +9,13 @@ import TweetForm from "@components/TweetForm";
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { GetServerSideProps } from 'next'
 import { useSetRecoilState } from "recoil";
-import { currentTweetIdState, prevUrlState } from "@components/states";
+import { currentTweetIdState } from "@components/states";
 
 interface ServerSideProps {
   tweetId: number
 }
 
 function TweetDetail({ tweetId }: ServerSideProps) {
-  const setprevUrl = useSetRecoilState(prevUrlState)
-  setprevUrl('/tweets');
   const { data, mutate } = useSWR<TweetDetail>(
     `/api/tweets/${tweetId}`
   );

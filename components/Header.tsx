@@ -8,9 +8,10 @@ function Header() {
   const prevUrl = useRecoilValue(prevUrlState)
   const router = useRouter();
   const isGobackBtn = router.query.id || router.pathname === "/tweets/new";
+  const url = router.asPath === prevUrl ? '/tweets' : prevUrl
   return (
     <div className="sticky top-0 left-0 z-10 flex justify-between w-full bg-black opacity-70 backdrop-blur-md">
-      <Link href="/tweets">
+      <Link href={url}>
         <a>
           <div className="m-2">
             {!isGobackBtn ? (
@@ -19,7 +20,6 @@ function Header() {
               </h2>
             ) : (
               <svg
-                onClick={() => router.push("/tweets")}
                 className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -42,7 +42,7 @@ function Header() {
           </g>
         </svg>
       </div>
-    </div>
+    </div >
   );
 }
 

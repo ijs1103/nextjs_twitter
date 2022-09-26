@@ -1,5 +1,4 @@
 import InfiniteScrollList from "@components/InfiniteScrollList";
-
 import { useRouter } from "next/router";
 
 function MyTweets() {

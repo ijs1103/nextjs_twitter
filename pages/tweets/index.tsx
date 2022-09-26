@@ -11,6 +11,8 @@ import Popup from "@components/Popup";
 import { MutationResult } from "@libs/interfaces";
 import Link from "next/link";
 import InfiniteScrollList from "@components/InfiniteScrollList";
+import { useSetRecoilState } from "recoil";
+import { prevUrlState } from "@components/states";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -38,6 +40,8 @@ const Home: NextPage = () => {
   const onMobileCreate = () => {
     router.push("/tweets/new");
   };
+  const setprevUrl = useSetRecoilState(prevUrlState)
+  setprevUrl('/tweets');
   return (
     <div className="min-h-screen bg-black">
       <div className="flex">

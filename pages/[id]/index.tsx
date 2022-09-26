@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import MobileLayout from "@components/MobileLayout";
 import { ProfileResponse } from "@libs/interfaces";
 import { withRouter, NextRouter } from "next/router";
@@ -8,6 +8,8 @@ import Replies from "@components/profile/MyReplies";
 import useSWR from "swr";
 import MyTweets from "@components/profile/MyTweets";
 import TabMenu from "@components/profile/TabMenu";
+import { useSetRecoilState } from "recoil";
+import { prevUrlState } from "@components/states";
 
 interface WithRouterProps {
   router: NextRouter;
@@ -24,6 +26,11 @@ function profile({ router }: WithRouterProps) {
   const isTabTweets = !tab;
   const isTabReplies = tab === "replies";
   const isTabLikes = tab === "likes";
+  const setPrevUrl = useSetRecoilState(prevUrlState)
+  useEffect(() => {
+    if (!router.isReady) return;
+    setPrevUrl(router.asPath);
+  }, [router.isReady])
   return (
     <MobileLayout>
       <>
