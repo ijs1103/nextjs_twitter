@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 function Replies() {
   const router = useRouter();
   return (
-    <InfiniteScrollList dataType="comments" url={`/api/profile/${router.query.id}/replies`} />
+    <InfiniteScrollList dataType="comments" url={`/api/profile/${router.query.id}/replies`} isComment={true} />
   );
 }
 

@@ -22,6 +22,7 @@ const Home: NextPage = () => {
   /* 트위터 생성 관련 */
   const [createTweet, { loading, data: mutateData, error: mutateError }] =
     useMutation<MutationResult>("/api/tweets");
+
   /* 로그아웃 관련 */
   const [logout, { data: logoutData, error: logoutError }] = useMutation<{
     ok: boolean;
@@ -41,7 +42,9 @@ const Home: NextPage = () => {
     router.push("/tweets/new");
   };
   const setprevUrl = useSetRecoilState(prevUrlState)
-  setprevUrl('/tweets');
+  useEffect(() => {
+    setprevUrl('/tweets');
+  }, [])
   return (
     <div className="min-h-screen bg-black">
       <div className="flex">
@@ -59,7 +62,7 @@ const Home: NextPage = () => {
 
           <nav className="px-2 mt-5 space-y-1">
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -78,7 +81,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Home</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -95,7 +98,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Explore</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -112,7 +115,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Notifications</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -129,7 +132,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Messages</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -146,7 +149,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Bookmarks</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -163,7 +166,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Lists</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -180,7 +183,7 @@ const Home: NextPage = () => {
               <span className="hidden lg:block">Profiles</span>
             </a>
             <a
-              href="javascript:void(0);"
+              onClick={e => e.preventDefault}
               className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
@@ -267,7 +270,7 @@ const Home: NextPage = () => {
         <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
           <TweetForm onCreateTweet={createTweet} />
-          <InfiniteScrollList dataType="tweets" isUpdated={!!mutateData} url={`/api/tweets`} />
+          <InfiniteScrollList dataType="tweets" newData={mutateData} url={`/api/tweets`} />
 
           <button
             onClick={onMobileCreate}
@@ -327,7 +330,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
-                  href="javascript:void(0);"
+                  onClick={e => e.preventDefault}
                   className="text-2xl rounded-full '' hover:bg-black hover:text-blue-300 float-right"
                 >
                   <svg
@@ -358,7 +361,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
-                  href="javascript:void(0);"
+                  onClick={e => e.preventDefault}
                   className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
@@ -389,7 +392,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
-                  href="javascript:void(0);"
+                  onClick={e => e.preventDefault}
                   className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
@@ -420,7 +423,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
-                  href="javascript:void(0);"
+                  onClick={e => e.preventDefault}
                   className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
@@ -451,7 +454,7 @@ const Home: NextPage = () => {
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
-                  href="javascript:void(0);"
+                  onClick={e => e.preventDefault}
                   className="float-right text-2xl text-gray-400 rounded-full hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg
@@ -511,7 +514,7 @@ const Home: NextPage = () => {
                 </div>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
-                <a href="javascript:void(0);" className="float-right ">
+                <a onClick={e => e.preventDefault} className="float-right ">
                   <button className="bg-transparent hover:bg-blue-500 '' font-semibold hover:'' py-2 px-4 border border-white hover:border-transparent rounded-full">
                     Follow
                   </button>
@@ -541,7 +544,7 @@ const Home: NextPage = () => {
                 </div>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
-                <a href="javascript:void(0);" className="float-right ">
+                <a onClick={e => e.preventDefault} className="float-right ">
                   <button className="bg-transparent hover:bg-blue-500 '' font-semibold hover:'' py-2 px-4 border border-white hover:border-transparent rounded-full">
                     Follow
                   </button>
@@ -562,7 +565,7 @@ const Home: NextPage = () => {
 
           <div className="flow-root m-6">
             <div className="flex-1">
-              <a href="javascript:void(0);">
+              <a onClick={e => e.preventDefault}>
                 <p className="text-sm font-medium leading-6 text-gray-500">
                   Terms of Service Privacy Policy Cookie Policy Accessibility
                   Ads info More

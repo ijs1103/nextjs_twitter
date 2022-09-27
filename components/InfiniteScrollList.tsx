@@ -6,17 +6,17 @@ import Loader from "@components/Loader";
 import TweetBox from "@components/TweetBox";
 import NotFound from "@components/NotFound";
 import useSWR from "swr";
-import { ProfileResponse } from "@libs/interfaces";
+import { ProfileResponse, MutationResult } from "@libs/interfaces";
 
 interface Props {
   url: string;
-  isUpdated?: boolean;
+  newData?: MutationResult;
   isDetail?: boolean;
   isComment?: boolean;
   dataType?: 'tweets' | 'likes' | 'comments'
 }
 
-function InfiniteScrollList({ url, isUpdated, isDetail = false, isComment = false, dataType }: Props) {
+function InfiniteScrollList({ url, newData, isDetail = false, isComment = false, dataType }: Props) {
   const { data: myInfo } = useSWR<ProfileResponse>(isDetail ? "/api/users/me" : null);
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
@@ -32,9 +32,8 @@ function InfiniteScrollList({ url, isUpdated, isDetail = false, isComment = fals
       revalidateOnFocus: false,
     });
   useEffect(() => {
-    if (!isUpdated) return
     mutate()
-  }, [isUpdated])
+  }, [newData])
 
   const items = data?.map((item) => {
     return dataType === 'tweets' ? item.tweets : dataType === 'likes' ? item.likes : item.comments
