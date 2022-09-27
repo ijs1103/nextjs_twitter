@@ -67,7 +67,7 @@ function TweetDetail({ tweetId }: ServerSideProps) {
       )}
       {/* 댓글 */}
       <TweetForm isCreatePage={true} onCreateTweet={onCreateComment} />
-      <InfiniteScrollList isUpdated={!!newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail={true} isComment={true} />
+      <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail={true} isComment={true} />
       <MobileNav />
     </MobileLayout>
   );

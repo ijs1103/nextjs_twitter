@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import { cls, parsedUpdatedAt } from "@libs/utils";
 import Button from "./Button";
 import useMutation from "@libs/useMutation";
-import { useSetRecoilState } from "recoil";
-import { isCommentState } from "./states";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { prevUrlState, isCommentState } from "./states";
 import { ProfileResponse } from "@libs/interfaces";
 import useSWR from "swr";
 
@@ -66,10 +66,11 @@ function TweetBox({
   const onEditComment = useCallback((payload: string) => {
     editComment({ payload });
   }, []);
+  const prevUrl = useRecoilValue(prevUrlState);
   const onValid = ({ payload }: IForm) => {
     isComment ? onEditComment(payload) : onEdit && onEdit(payload);
     setEditMode(false);
-    if (isComment) document.location.href = location.pathname;
+    if (isComment) document.location.href = prevUrl.includes('replies') ? prevUrl : location.pathname;
   };
   const setIsComment = useSetRecoilState(isCommentState)
   useEffect(() => {
