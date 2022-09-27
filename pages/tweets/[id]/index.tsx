@@ -25,25 +25,26 @@ function TweetDetail({ tweetId }: ServerSideProps) {
   );
   const onLikeClick = useCallback(() => {
     if (!data) return;
-    mutate((prev) => prev && { ...prev, isLiked: !prev.isLiked }, false);
+    mutate(prev => prev && { ...prev, isLiked: !prev.isLiked }, false);
     toggleLike({});
   }, [data]);
   const onEdit = useCallback((payload: string) => {
     editTweet({ payload });
+    mutate(prev => prev && { ...prev, tweet: { ...prev.tweet, payload } }, false);
   }, []);
   useEffect(() => {
     if (!editedData) return;
     if (editedData.ok) {
       alert("트윗이 정상적으로 수정되었습니다!");
-      document.location.href = `/tweets/${tweetId}`;
     } else {
       alert(editedData.error);
     }
   }, [editedData]);
   const [createComment, { data: newComment }] = useMutation(`/api/comments/${tweetId}/new`);
   const setCurrentTweetId = useSetRecoilState(currentTweetIdState)
-  setCurrentTweetId(tweetId);
-
+  useEffect(() => {
+    setCurrentTweetId(tweetId);
+  }, [])
   const onCreateComment = useCallback(({ ...payload }) => {
     createComment(payload);
   }, []);

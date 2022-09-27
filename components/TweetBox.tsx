@@ -26,6 +26,9 @@ interface Props {
   onEdit?: (payload: string) => void;
   isMyTweet: boolean;
 }
+interface IForm {
+  payload: string;
+}
 
 function TweetBox({
   userId,
@@ -45,7 +48,6 @@ function TweetBox({
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
   const [popupOn, setPopupOn] = useState(false);
-  const popupOpen = () => setPopupOn(true);
   const popupClose = useCallback(() => setPopupOn(false), []);
   const { register, handleSubmit, setValue } = useForm<{ payload: string }>({
     mode: "onChange",
@@ -64,10 +66,10 @@ function TweetBox({
   const onEditComment = useCallback((payload: string) => {
     editComment({ payload });
   }, []);
-  const onValid = (form: { payload: string }) => {
-    isComment ? onEditComment(form.payload) : onEdit && onEdit(form.payload);
+  const onValid = ({ payload }: IForm) => {
+    isComment ? onEditComment(payload) : onEdit && onEdit(payload);
     setEditMode(false);
-    document.location.href = location.pathname;
+    if (isComment) document.location.href = location.pathname;
   };
   const setIsComment = useSetRecoilState(isCommentState)
   useEffect(() => {
@@ -125,7 +127,7 @@ function TweetBox({
                     "p-1 rounded-full hover:bg-slate-500 cursor-pointer top-1/2 right-2 ",
                     editMode ? "hidden" : "absolute"
                   )}
-                  onClick={popupOpen}
+                  onClick={() => setPopupOn(true)}
                 >
                   <svg
                     className="w-6 h-6"
