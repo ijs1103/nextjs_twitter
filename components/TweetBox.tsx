@@ -169,12 +169,8 @@ function TweetBox({
                   className="p-2.5 whitespace-pre-wrap break-words w-full text-sm bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
                 ></textarea>
                 <div className="flex justify-between">
-                  <Button
-                    name="취소"
-                    onClick={() => setEditMode(false)}
-                    isCancel
-                  />
-                  <Button name="수정" onClick={handleSubmit(onValid)} />
+                  <Button onClick={() => setEditMode(false)} isCancel>취소</Button>
+                  <Button onClick={handleSubmit(onValid)}>수정</Button>
                 </div>{" "}
               </div>
             )}

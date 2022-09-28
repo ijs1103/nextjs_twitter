@@ -1,13 +1,13 @@
-import React from "react";
 import { cls } from "@libs/utils";
+
 interface Props {
-  name: string;
+  children: React.ReactNode;
   isDisable?: boolean;
   isCancel?: boolean;
   onClick?: () => void;
 }
 
-function Button({ name, isDisable = false, isCancel = false, onClick }: Props) {
+function Button({ children, isDisable = false, isCancel = false, onClick }: Props) {
   return (
     <button
       onClick={onClick}
@@ -19,7 +19,7 @@ function Button({ name, isDisable = false, isCancel = false, onClick }: Props) {
           : "bg-blue-400 hover:bg-blue-600"
       )}
     >
-      {name}
+      {children}
     </button>
   );
 }

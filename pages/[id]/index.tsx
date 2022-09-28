@@ -54,7 +54,7 @@ function profile({ router }: WithRouterProps) {
                   />
                 </svg>
               </div>
-              <Button name="follow" onClick={toggleFollow} />
+              <Button onClick={toggleFollow}>follow</Button>
             </div>
             <div className="flex flex-col gap-3 mt-4">
               <div className="">
