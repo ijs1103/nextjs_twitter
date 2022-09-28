@@ -19,6 +19,7 @@ function profile({ router }: WithRouterProps) {
   const { data, error } = useSWR<ProfileResponse>(
     `/api/profile/${router.query?.id}`
   );
+  const isFollowing = true;
   const toggleFollow = () => { };
   const {
     query: { tab },
@@ -54,7 +55,7 @@ function profile({ router }: WithRouterProps) {
                   />
                 </svg>
               </div>
-              <Button onClick={toggleFollow}>follow</Button>
+              {isFollowing ? <Button onClick={toggleFollow} isFollowing>Following</Button> : <Button onClick={toggleFollow}>Follow</Button>}
             </div>
             <div className="flex flex-col gap-3 mt-4">
               <div className="">

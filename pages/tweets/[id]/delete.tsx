@@ -39,8 +39,8 @@ function TweetDelete() {
           해당 {isComment ? '댓글' : '트윗'}을 정말 삭제하시겠습니까?
         </p>
         <div className="flex gap-3">
-          <Button onClick={onDelete} name="삭제" isCancel />
-          <Button onClick={onCancel} name="취소" />
+          <Button onClick={onDelete} isCancel>삭제</Button>
+          <Button onClick={onCancel}>취소</Button>
         </div>
       </div>
     </MobileLayout>
