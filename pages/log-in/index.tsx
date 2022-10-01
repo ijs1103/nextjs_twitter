@@ -21,12 +21,13 @@ function Login() {
     register,
     handleSubmit,
     getValues,
-    setValue,
     reset,
     formState: { errors, isValid },
   } = useForm<LoginForm>({ mode: "onChange" });
   useEffect(() => {
-    data?.ok && router.replace("/tweets");
+    if (data?.ok) {
+      router.replace("/tweets");
+    }
     data?.error && alert(data?.error);
   }, [stage, data]);
   const toggleMethod = () => {

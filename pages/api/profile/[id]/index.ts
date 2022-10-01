@@ -14,6 +14,10 @@ async function handler(
     where: {
       id: +id,
     },
+    include: {
+      followers: true,
+      following: true,
+    },
   });
   return res.json({
     ok: true,

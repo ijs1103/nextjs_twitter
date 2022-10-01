@@ -10,7 +10,7 @@ interface TweetWith extends Tweet {
   };
 }
 interface LikeWith extends Like {
-  tweet: Tweet,
+  tweet: Tweet;
   _count: {
     like: number;
   };
@@ -28,8 +28,8 @@ interface CommentWith extends Comment {
     userId: number;
     user: {
       name: string;
-    }
-  }
+    };
+  };
 }
 export interface TweetsResponse {
   ok: boolean;
@@ -51,9 +51,13 @@ export interface TweetDetail {
   isLiked: boolean;
   isMyTweet: boolean;
 }
+export interface UserWith extends User {
+  followers: User[];
+  following: User[];
+}
 export interface ProfileResponse {
   ok: boolean;
-  profile: User;
+  profile: UserWith;
 }
 export interface CommentsResponse {
   ok: boolean;

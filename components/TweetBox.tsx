@@ -103,13 +103,13 @@ function TweetBox({
           <div className="relative flex flex-shrink-0 p-4 pb-0">
             <div className="flex-shrink-0 block group">
               <div className="flex items-center">
-                <div>
+                <Link href={`/${userId}`}>
                   <img
                     className="inline-block w-10 h-10 rounded-full"
                     src="http://placeimg.com/640/480/any"
                     alt="profile"
                   />
-                </div>
+                </Link>
                 <div className="ml-3">
                   <p className="text-sm font-medium leading-6 sm:text-base">
                     {userName}

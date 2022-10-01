@@ -1,37 +1,55 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MobileLayout from "@components/MobileLayout";
-import { ProfileResponse } from "@libs/interfaces";
-import { withRouter, NextRouter } from "next/router";
+import { UserWith } from "@libs/interfaces";
 import Button from "@components/Button";
 import Likes from "@components/profile/MyLikes";
 import Replies from "@components/profile/MyReplies";
-import useSWR from "swr";
 import MyTweets from "@components/profile/MyTweets";
 import TabMenu from "@components/profile/TabMenu";
 import { useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
+import useMutation from "@libs/useMutation";
+import type { NextPageContext } from "next";
+import { useRouter } from "next/router";
+import { withSsrSession } from "@libs/withSession";
+import client from "@libs/db";
 
-interface WithRouterProps {
-  router: NextRouter;
+interface ServerSideProps {
+  userId: number;
+  logginedId: number;
+  profile: UserWith;
+  followers_cnt: number;
+  followings_cnt: number;
 }
-
-function profile({ router }: WithRouterProps) {
-  const { data, error } = useSWR<ProfileResponse>(
-    `/api/profile/${router.query?.id}`
-  );
-  const isFollowing = true;
-  const toggleFollow = () => { };
-  const {
-    query: { tab },
-  } = router;
+const Profile = (props: ServerSideProps) => {
+  const { userId, logginedId, profile, followers_cnt, followings_cnt } = props
+  const router = useRouter();
+  const isMyProfile = logginedId === userId
+  const [follow] = useMutation('/api/users/follow')
+  const [unFollow] = useMutation('/api/users/unFollow')
+  const computedIsFollowing = useMemo(() => {
+    // 프로필이 내 프로필인 경우 얼리 리턴
+    if (isMyProfile) return false
+    return Boolean(profile.followers.find(cur => cur.id === logginedId))
+  }, [profile])
+  const [isFollowing, setIsFollowing] = useState(computedIsFollowing)
+  const handleFollow = () => {
+    follow({ id: userId })
+    setIsFollowing(true)
+  }
+  const handleUnFollow = () => {
+    unFollow({ id: userId })
+    setIsFollowing(false)
+  }
+  const { query: { tab } } = router;
   const isTabTweets = !tab;
   const isTabReplies = tab === "replies";
   const isTabLikes = tab === "likes";
   const setPrevUrl = useSetRecoilState(prevUrlState)
   useEffect(() => {
-    if (!router.isReady) return;
-    setPrevUrl(router.asPath);
-  }, [router.isReady])
+    // 현재 선택한 탭이 'Tweets'(내가 작성한 트윗목록)일 경우 뒤로가기 경로를 홈으로 , 'Replies'나 'Likes'일 경우 뒤로가기 경로를 프로필 페이지로 설정
+    setPrevUrl(isTabTweets ? '/tweets' : location.href);
+  }, [])
   return (
     <MobileLayout>
       <>
@@ -55,19 +73,19 @@ function profile({ router }: WithRouterProps) {
                   />
                 </svg>
               </div>
-              {isFollowing ? <Button onClick={toggleFollow} isFollowing>Following</Button> : <Button onClick={toggleFollow}>Follow</Button>}
+              {isMyProfile ? <Button onClick={() => { }}>Edit Profile</Button> : isFollowing ? <Button onClick={handleUnFollow} isFollowing>UnFollow</Button> : <Button onClick={handleFollow}>Follow</Button>}
             </div>
             <div className="flex flex-col gap-3 mt-4">
               <div className="">
-                <span className="text-2xl font-bold">{data?.profile.name}</span>
+                <span className="text-2xl font-bold">{profile.name}</span>
                 <span className="block text-gray-500">@nickname</span>
               </div>
               <div className="flex gap-3 text-sm">
                 <span className="text-gray-500">
-                  <strong className="text-white">0</strong> Following
+                  <strong className="text-white">{followings_cnt}</strong> Following
                 </span>
                 <span className="text-gray-500">
-                  <strong className="text-white">103.2k</strong> Followers
+                  <strong className="text-white">{followers_cnt}</strong> Followers
                 </span>
               </div>
             </div>
@@ -75,17 +93,17 @@ function profile({ router }: WithRouterProps) {
         </div>
         <div className="text-sm border-b border-gray-700">
           <ul className="flex text-gray-500">
-            <TabMenu url={`/${router.query?.id}`} isCurrent={isTabTweets}>
+            <TabMenu url={`/${userId}`} isCurrent={isTabTweets}>
               Tweets
             </TabMenu>
             <TabMenu
-              url={`/${router.query?.id}?tab=replies`}
+              url={`/${userId}?tab=replies`}
               isCurrent={isTabReplies}
             >
               Replies
             </TabMenu>
             <TabMenu
-              url={`/${router.query?.id}?tab=likes`}
+              url={`/${userId}?tab=likes`}
               isCurrent={isTabLikes}
             >
               Likes
@@ -101,5 +119,47 @@ function profile({ router }: WithRouterProps) {
     </MobileLayout>
   );
 }
+export default Profile;
 
-export default withRouter(profile);
+export const getServerSideProps = withSsrSession(async function ({ req, query }: NextPageContext) {
+  const userId = query.id as string
+  const logginedId = req?.session.user?.id
+  const profile = await client.user.findUnique({
+    where: { id: +userId },
+    include: {
+      followers: {
+        select: {
+          id: true
+        }
+      },
+    },
+  });
+  // 서버의 비용을 최소화하는 count 메서드
+  const followers_cnt = await client.user.count({
+    where: {
+      following: {
+        some: {
+          id: +userId
+        }
+      }
+    }
+  })
+  const followings_cnt = await client.user.count({
+    where: {
+      followers: {
+        some: {
+          id: +userId
+        }
+      }
+    }
+  })
+  return {
+    props: {
+      userId: +userId,
+      logginedId,
+      profile: JSON.parse(JSON.stringify(profile)),
+      followers_cnt,
+      followings_cnt
+    }
+  };
+});

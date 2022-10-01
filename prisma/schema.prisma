@@ -20,6 +20,8 @@ model User {
   like Like[]
   tweets Tweet[]
   comments Comment[]
+  followers User[] @relation("FollowRelation")
+  following User[] @relation("FollowRelation")
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 }
