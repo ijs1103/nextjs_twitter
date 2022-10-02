@@ -12,7 +12,7 @@ function Replies() {
     setPrevUrl(router.asPath);
   }, [router.isReady]);
   return (
-    <InfiniteScrollList dataType="comments" url={`/api/profile/${router.query.id}/replies`} isDetail={true} isComment={true} />
+    <InfiniteScrollList dataType="comments" url={`/api/profile/${router.query.id}/myReplies`} isDetail={true} isComment={true} />
   );
 }
 

@@ -11,7 +11,7 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  const { name, password, phone, email, birth } = req.body;
+  const { name, nickName, password, phone, email, birth } = req.body;
   const method = phone ? { phone } : email ? { email } : null;
   if (!method) return res.status(400).json({ ok: false });
   const existingUser = await client.user.findFirst({
@@ -27,6 +27,7 @@ async function handler(
   await client.user.create({
     data: {
       name,
+      nickName,
       password,
       ...method,
       birth,

@@ -14,6 +14,7 @@ import useSWR from "swr";
 interface Props {
   userId: number;
   userName: string;
+  nickName: string;
   id: number;
   payload: string;
   updatedAt: Date;
@@ -33,6 +34,7 @@ interface IForm {
 function TweetBox({
   userId,
   userName,
+  nickName,
   id,
   payload,
   updatedAt,
@@ -112,9 +114,9 @@ function TweetBox({
                 </Link>
                 <div className="ml-3">
                   <p className="text-sm font-medium leading-6 sm:text-base">
-                    {userName}
+                    {nickName}{" "}
                     <span className="text-xs font-medium leading-5 text-gray-400 transition duration-150 ease-in-out sm:text-sm group-hover:text-gray-300">
-                      @nickname{" "}
+                      @{userName}
                       {!isDetail && `· ${parsedUpdatedAt(isDetail, updatedAt)}`}
                     </span>
                   </p>

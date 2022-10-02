@@ -6,13 +6,13 @@ interface PopupLi {
   onClickFn: () => void;
   disabled: boolean;
 }
-interface PopupProps {
+interface Props {
   contents: PopupLi[];
   isVisible: boolean;
   onPopupClose: () => void;
 }
 
-function Popup({ onPopupClose, isVisible, contents }: PopupProps) {
+function Popup({ onPopupClose, isVisible, contents }: Props) {
   return (
     <div
       className={cls(

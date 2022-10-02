@@ -233,10 +233,10 @@ const Home: NextPage = () => {
                 </div>
                 <div className="hidden lg:block lg:ml-3">
                   <p className="text-sm font-medium leading-6">
-                    {user?.name}
+                    {user?.nickName}
                   </p>
                   <p className="text-xs font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300">
-                    @nickname
+                    @{user?.name}
                   </p>
                 </div>
                 <svg

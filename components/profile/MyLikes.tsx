@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 function MyLikes() {
   const router = useRouter();
   return (
-    <InfiniteScrollList dataType="likes" url={`/api/profile/${router.query.id}/likes`} />
+    <InfiniteScrollList dataType="likes" url={`/api/profile/${router.query.id}/myLikes`} />
   );
 }
 

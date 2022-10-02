@@ -7,6 +7,7 @@ interface TweetWith extends Tweet {
   user: {
     id: number;
     name: string;
+    nickName: string;
   };
 }
 interface LikeWith extends Like {
@@ -17,6 +18,7 @@ interface LikeWith extends Like {
   user: {
     id: number;
     name: string;
+    nickName: string;
   };
 }
 interface CommentWith extends Comment {
@@ -28,6 +30,7 @@ interface CommentWith extends Comment {
     userId: number;
     user: {
       name: string;
+      nickName: string;
     };
   };
 }

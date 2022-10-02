@@ -5,11 +5,11 @@ import { cls } from "@libs/utils";
 interface textareaForm {
   payload: string;
 }
-interface TweetFormProps {
+interface Props {
   isCreatePage?: boolean;
   onCreateTweet: (data: any) => void;
 }
-function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
+function TweetForm({ isCreatePage = false, onCreateTweet }: Props) {
   const {
     register,
     handleSubmit,
@@ -20,7 +20,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
     onCreateTweet(form);
     reset({ payload: "" });
   };
-  useEffect(() => {}, [isCreatePage]);
+  useEffect(() => { }, [isCreatePage]);
 
   const handleResizeHeight = useCallback((event: any) => {
     if (!isCreatePage) return;
@@ -36,9 +36,9 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
       onSubmit={handleSubmit(onValid)}
     >
       <div className="flex">
-        <div className="flex-shrink-0 m-2 w-10 py-1">
+        <div className="flex-shrink-0 w-10 py-1 m-2">
           <img
-            className="inline-block h-10 w-10 rounded-full"
+            className="inline-block w-10 h-10 rounded-full"
             src="http://placeimg.com/40/40/any"
             alt="profile"
           />
@@ -58,13 +58,13 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
       <div className="flex justify-between border-b border-gray-700">
         <div className="w-64 px-2">
           <div className="flex items-center">
-            <div className="flex-1 text-center px-1 py-1">
+            <div className="flex-1 px-1 py-1 text-center">
               <a
                 href="#"
-                className="mt-1 group flex justify-center items-center text-blue-400 px-1 py-1 md:px-2 md:py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+                className="flex items-center justify-center px-1 py-1 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full group md:px-2 md:py-2 hover:bg-blue-800 hover:text-blue-300"
               >
                 <svg
-                  className="text-center h-7 w-6"
+                  className="w-6 text-center h-7"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -77,13 +77,13 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
               </a>
             </div>
 
-            <div className="flex-1 text-center py-2 m-2">
+            <div className="flex-1 py-2 m-2 text-center">
               <a
                 href="#"
-                className="mt-1 group flex justify-center items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+                className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full group hover:bg-blue-800 hover:text-blue-300"
               >
                 <svg
-                  className="text-center h-7 w-6"
+                  className="w-6 text-center h-7"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -97,13 +97,13 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
               </a>
             </div>
 
-            <div className="flex-1 text-center py-2 m-2">
+            <div className="flex-1 py-2 m-2 text-center">
               <a
                 href="#"
-                className="mt-1 group flex justify-center items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+                className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full group hover:bg-blue-800 hover:text-blue-300"
               >
                 <svg
-                  className="text-center h-7 w-6"
+                  className="w-6 text-center h-7"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -116,13 +116,13 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
               </a>
             </div>
 
-            <div className="flex-1 text-center py-2 m-2">
+            <div className="flex-1 py-2 m-2 text-center">
               <a
                 href="#"
-                className="mt-1 group flex justify-center items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300"
+                className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full group hover:bg-blue-800 hover:text-blue-300"
               >
                 <svg
-                  className="text-center h-7 w-6"
+                  className="w-6 text-center h-7"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -141,7 +141,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: TweetFormProps) {
           <button
             disabled={!isValid}
             type="submit"
-            className="bg-blue-400 mt-5 hover:bg-blue-600 '' font-bold py-2 px-2 sm:px-8 rounded-full mr-4"
+            className="mt-5 bg-blue-400 hover:bg-blue-600 '' font-bold py-2 px-2 sm:px-8 rounded-full mr-4"
           >
             Tweet
           </button>

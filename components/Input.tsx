@@ -1,7 +1,7 @@
 import type { UseFormRegisterReturn } from "react-hook-form";
 import { memo, useState } from "react";
 import { cls } from "@libs/utils";
-interface InputProps {
+interface Props {
   id: string;
   label: string;
   register: UseFormRegisterReturn;
@@ -20,7 +20,7 @@ function Input({
   setStage,
   disabled,
   type = "text",
-}: InputProps) {
+}: Props) {
   const [focused, setFocused] = useState(false);
   const onInput = (e: any) => {
     if (hasError) {

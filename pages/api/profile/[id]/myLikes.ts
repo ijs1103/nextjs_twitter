@@ -10,15 +10,20 @@ async function handler(
   const {
     query: { id, limit, offset },
   } = req;
-  const allComments = await client.comment.findMany({
+  const likedTweets = await client.like.findMany({
     where: {
       userId: +id,
     },
     select: {
-      id: true,
+      tweet: {
+        select: {
+          id: true,
+        },
+      },
     },
   });
-  const comments = await client.comment.findMany({
+
+  const likes = await client.like.findMany({
     where: {
       userId: +id,
     },
@@ -28,17 +33,19 @@ async function handler(
     take: +limit,
     skip: +offset,
     include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-        },
-      },
       tweet: {
         include: {
           user: {
             select: {
+              id: true,
               name: true,
+              nickName: true,
+            },
+          },
+          _count: {
+            select: {
+              like: true,
+              comments: true,
             },
           },
         },
@@ -47,8 +54,8 @@ async function handler(
   });
   return res.json({
     ok: true,
-    comments,
-    total: allComments.length,
+    likes,
+    total: likedTweets.length,
   });
 }
 

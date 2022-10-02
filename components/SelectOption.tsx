@@ -1,14 +1,14 @@
 import { memo } from "react";
 import { FunctionalUpdateFn } from "@libs/types";
 
-interface Iprops {
+interface Props {
   id: "month" | "date" | "year";
   label: "월" | "일" | "년";
   optionData: JSX.Element[];
   onSetBirth: (Fn: FunctionalUpdateFn) => void;
   value: number | undefined;
 }
-function SelectOption({ id, label, optionData, onSetBirth, value }: Iprops) {
+function SelectOption({ id, label, optionData, onSetBirth, value }: Props) {
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value;
     switch (id) {
@@ -30,13 +30,13 @@ function SelectOption({ id, label, optionData, onSetBirth, value }: Iprops) {
     }
   };
   return (
-    <div className="flex-1 relative">
+    <div className="relative flex-1">
       <label htmlFor={id} className="absolute text-xs top-1 left-2">
         {label}
       </label>
       <select
         onChange={onChange}
-        className="w-full appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-transparent border-gray-600 border rounded px-2 pt-4 pb-2"
+        className="w-full px-2 pt-4 pb-2 bg-transparent border border-gray-600 rounded appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500"
         name={id}
         id={id}
         defaultValue={value || ""}
@@ -45,7 +45,7 @@ function SelectOption({ id, label, optionData, onSetBirth, value }: Iprops) {
         {optionData}
       </select>
       <svg
-        className="absolute top-1/2 -translate-y-1/2 right-1 md:right-2 w-4 md:w-8 h-4 md:h-8"
+        className="absolute w-4 h-4 -translate-y-1/2 top-1/2 right-1 md:right-2 md:w-8 md:h-8"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"

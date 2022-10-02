@@ -20,6 +20,7 @@ async function handler(
         select: {
           id: true,
           name: true,
+          nickName: true,
         },
       },
       _count: {
@@ -40,7 +41,7 @@ async function handler(
       },
     })
   );
-  
+
   const isMyTweet = req.session.user?.id === tweet?.userId;
   res.json({ ok: true, tweet, isLiked, isMyTweet });
 }

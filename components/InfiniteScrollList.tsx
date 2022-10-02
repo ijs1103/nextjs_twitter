@@ -34,7 +34,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
   useEffect(() => {
     mutate()
   }, [newData])
-
+  console.log(data)
   const items = data?.map((item) => {
     return dataType === 'tweets' ? item.tweets : dataType === 'likes' ? item.likes : item.comments
   }).flat() ?? [];
@@ -59,6 +59,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
                 id={item.id}
                 userId={item.user.id}
                 userName={item.user.name}
+                nickName={item.user.nickName}
                 payload={item.payload}
                 updatedAt={item.updatedAt}
                 likeCnt={item._count?.like}
@@ -73,6 +74,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
                 id={item.tweet.id}
                 userId={item.tweet.user.id}
                 userName={item.tweet.user.name}
+                nickName={item.tweet.user.nickName}
                 payload={item.tweet.payload}
                 updatedAt={item.tweet.updatedAt}
                 likeCnt={item.tweet._count?.like}

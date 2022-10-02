@@ -9,6 +9,7 @@ import { FunctionalUpdateFn } from "@libs/types";
 
 interface SignupForm {
   name: string;
+  nickName: string;
   email?: string;
   birth: string;
   phone?: string;
@@ -78,11 +79,11 @@ export default function SignupForm() {
     setStage(1);
   };
   return (
-    <div className="min-h-screen md:h-screen w-full max-w-xl mx-auto '' bg-black px-12 py-2">
+    <div className="w-full max-w-xl min-h-screen mx-auto md:h-screen '' bg-black px-12 py-2">
       <div className="flex items-center gap-5">
         <button
           onClick={onGoback}
-          className="transition px-1 py-1 rounded-full border-black border hover:bg-gray-800"
+          className="px-1 py-1 transition border border-black rounded-full hover:bg-gray-800"
         >
           <svg
             className="w-5 h-5"
@@ -100,7 +101,7 @@ export default function SignupForm() {
         <span className="">3단계 중 {stage}단계</span>
       </div>
       <form
-        className="flex flex-col h-full relative"
+        className="relative flex flex-col h-full"
         onSubmit={handleSubmit(onValid)}
       >
         <span className="my-6 text-2xl font-bold">
@@ -120,6 +121,19 @@ export default function SignupForm() {
               {errors?.name && (
                 <span className="ml-3 text-xs text-red-600">
                   이름을 입력하세요
+                </span>
+              )}
+              <Input
+                id="nickName"
+                setStage={onSetStage}
+                isFilled={!!getValues("nickName")}
+                label="닉네임"
+                register={register("nickName", { required: true })}
+                hasError={!!errors?.nickName}
+              />
+              {errors?.nickName && (
+                <span className="ml-3 text-xs text-red-600">
+                  닉네임을 입력하세요
                 </span>
               )}
               <Input
@@ -213,7 +227,7 @@ export default function SignupForm() {
                   이 정보는 공개적으로 표시되지 않습니다. 비즈니스, 반려동물 등
                   계정 주제에 상관없이 나의 연령을 확인하세요.
                 </p>
-                <div className="mt-4 flex gap-3">
+                <div className="flex gap-3 mt-4">
                   <SelectOption
                     value={birth?.month}
                     onSetBirth={onSetBirth}
@@ -256,9 +270,9 @@ export default function SignupForm() {
           <TermsOfService />
         )}
         {stage === 3 && (
-          <p className="mt-5 text-lg text-red-600 text-center">{data?.error}</p>
+          <p className="mt-5 text-lg text-center text-red-600">{data?.error}</p>
         )}
-        <div className="md:absolute mt-3 mb-10 bottom-0 w-full space-y-6">
+        <div className="bottom-0 w-full mt-3 mb-10 space-y-6 md:absolute">
           {stage === 3 && (
             <p className="text-xs">
               가입하면 <span className="text-blue-400">쿠키 사용</span>을 포함해
@@ -275,7 +289,7 @@ export default function SignupForm() {
           <button
             disabled={!isValid || (birth && Object.keys(birth).length !== 3)}
             onClick={onGoNext}
-            className="disabled:opacity-30 w-full bg-blue-500 '' font-bold px-2 py-3 rounded-3xl"
+            className="w-full bg-blue-500 disabled:opacity-30 '' font-bold px-2 py-3 rounded-3xl"
           >
             {stage !== 3 ? "다음" : "가입"}
           </button>
