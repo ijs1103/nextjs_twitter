@@ -6,14 +6,16 @@ import Likes from "@components/profile/MyLikes";
 import Replies from "@components/profile/MyReplies";
 import MyTweets from "@components/profile/MyTweets";
 import TabMenu from "@components/profile/TabMenu";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
 import useMutation from "@libs/useMutation";
 import type { NextPageContext } from "next";
 import { useRouter } from "next/router";
 import { withSsrSession } from "@libs/withSession";
 import client from "@libs/db";
-import ProfileModal from "@components/ProfileModal";
+import ProfileModal from "@components/profile/ProfileModal";
+import Avatar from "@components/Avatar";
+import { editedAvatarState } from "@components/states";
 
 interface ServerSideProps {
   userId: number;
@@ -55,11 +57,15 @@ const Profile = (props: ServerSideProps) => {
   const handleEditProfile = () => {
     setIsModalOn(true);
   }
+  // editedAvatar: 방금 변경한 프로필 이미지 url
+  const editedAvatar = useRecoilValue(editedAvatarState)
   return (
     <MobileLayout>
       <div className="relative">
         <div className="h-48 bg-white"></div>
-        <div className="absolute w-24 h-24 -translate-y-1/2 bg-gray-500 rounded-full top-1/2 left-4"></div>
+        <div className="absolute w-24 h-24 -translate-y-1/2 bg-gray-500 rounded-full top-1/2 left-4">
+          <Avatar url={editedAvatar ? editedAvatar : profile.avatar} isBig />
+        </div>
         <div className="relative h-48 px-4">
           <div className="flex justify-end gap-2 mt-4">
             <div className="p-1 text-gray-300 border-2 border-gray-500 rounded-full cursor-pointer">
@@ -119,7 +125,7 @@ const Profile = (props: ServerSideProps) => {
         {isTabReplies && <Replies />}
         {isTabLikes && <Likes />}
       </div>
-      {isModalOn && <ProfileModal onClose={() => setIsModalOn(false)} />}
+      {isMyProfile && isModalOn && <ProfileModal avatarUrl={profile.avatar} nickName={profile.nickName} onClose={() => setIsModalOn(false)} />}
     </MobileLayout>
   );
 }

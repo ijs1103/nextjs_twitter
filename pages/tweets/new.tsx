@@ -4,9 +4,12 @@ import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
 import { MutationResult } from "@libs/interfaces";
 import { useEffect } from "react";
+import { ProfileResponse } from "@libs/interfaces";
+import useSWR from "swr";
 
 function createTweet() {
-  const [createTweet, { loading, data, error }] =
+  const { data: myData } = useSWR<ProfileResponse>("/api/users/me");
+  const [createTweet, { data, error }] =
     useMutation<MutationResult>("/api/tweets");
   useEffect(() => {
     if (data?.ok) {
@@ -14,11 +17,12 @@ function createTweet() {
       // 새롭게 생성된 트윗을 보기 위해 document.location.href를 사용하여 트윗 목록 페이지로 보내주었다
       document.location.href = "/tweets";
     }
+    if (error) alert(error)
   }, [data]);
 
   return (
     <MobileLayout>
-      <TweetForm isCreatePage={true} onCreateTweet={createTweet} />
+      <TweetForm isCreatePage={true} onCreateTweet={createTweet} avatar={myData?.profile.avatar} />
     </MobileLayout>
   );
 }

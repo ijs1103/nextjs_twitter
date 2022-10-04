@@ -57,6 +57,7 @@ function TweetDetail({ tweetId }: ServerSideProps) {
           userId={data.tweet.user.id}
           userName={data.tweet.user.name}
           nickName={data.tweet.user.nickName}
+          avatar={data.tweet.user.avatar}
           payload={data.tweet.payload}
           updatedAt={data.tweet.updatedAt}
           isLiked={data.isLiked}
@@ -67,7 +68,7 @@ function TweetDetail({ tweetId }: ServerSideProps) {
         />
       )}
       {/* 댓글 */}
-      <TweetForm isCreatePage onCreateTweet={onCreateComment} />
+      <TweetForm isCreatePage onCreateTweet={onCreateComment} avatar={data?.tweet.user.avatar} />
       <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail isComment />
       <MobileNav />
     </MobileLayout>

@@ -18,6 +18,7 @@ model User {
   email String? @unique
   birth String
   password String
+  avatar String?
   like Like[]
   tweets Tweet[]
   comments Comment[]

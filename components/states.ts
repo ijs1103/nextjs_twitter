@@ -12,3 +12,7 @@ export const prevUrlState = atom({
   key: "prevUrl",
   default: "/tweets",
 });
+export const editedAvatarState = atom({
+  key: "editedAvatar",
+  default: "",
+});

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useCallback } from "react";
 import { cls } from "@libs/utils";
+import Avatar from "@components/Avatar";
 
 interface textareaForm {
   payload: string;
@@ -8,13 +9,14 @@ interface textareaForm {
 interface Props {
   isCreatePage?: boolean;
   onCreateTweet: (data: any) => void;
+  avatar: string | null | undefined;
 }
-function TweetForm({ isCreatePage = false, onCreateTweet }: Props) {
+function TweetForm({ isCreatePage = false, onCreateTweet, avatar }: Props) {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<textareaForm>({ mode: "onChange" });
   const onValid = (form: textareaForm) => {
     onCreateTweet(form);
@@ -37,11 +39,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: Props) {
     >
       <div className="flex">
         <div className="flex-shrink-0 w-10 py-1 m-2">
-          <img
-            className="inline-block w-10 h-10 rounded-full"
-            src="http://placeimg.com/40/40/any"
-            alt="profile"
-          />
+          <Avatar url={avatar} />
         </div>
         <div className="flex-1 px-2 pt-2 mt-2">
           <textarea
@@ -50,7 +48,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet }: Props) {
               onChange: (e) => handleResizeHeight(e),
             })}
             rows={2}
-            className="p-2.5 whitespace-pre-wrap break-words w-full text-sm '' bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
+            className="p-2.5 whitespace-pre-wrap break-words w-full text-sm bg-gray-900 rounded-lg border border-gray-500 outline-none focus:ring-black focus:border-black"
             placeholder="What's happening?"
           ></textarea>
         </div>

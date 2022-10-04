@@ -10,6 +10,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prevUrlState, isCommentState } from "./states";
 import { ProfileResponse } from "@libs/interfaces";
 import useSWR from "swr";
+import Avatar from "@components/Avatar";
 
 interface Props {
   userId: number;
@@ -18,6 +19,7 @@ interface Props {
   id: number;
   payload: string;
   updatedAt: Date;
+  avatar: string | null;
   likeCnt?: number;
   commentCnt?: number;
   isDetail?: boolean;
@@ -38,6 +40,7 @@ function TweetBox({
   id,
   payload,
   updatedAt,
+  avatar,
   likeCnt,
   commentCnt,
   isDetail = false,
@@ -106,11 +109,7 @@ function TweetBox({
             <div className="flex-shrink-0 block group">
               <div className="flex items-center">
                 <Link href={`/${userId}`}>
-                  <img
-                    className="inline-block w-10 h-10 rounded-full"
-                    src="http://placeimg.com/640/480/any"
-                    alt="profile"
-                  />
+                  <Avatar url={avatar} />
                 </Link>
                 <div className="ml-3">
                   <p className="text-sm font-medium leading-6 sm:text-base">

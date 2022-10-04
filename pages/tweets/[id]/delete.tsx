@@ -19,7 +19,6 @@ function TweetDelete() {
     if (loading) return;
     deleteTweet({});
   };
-  console.log(prevUrl)
   useEffect(() => {
     if (!data) return;
     if (data.ok) {

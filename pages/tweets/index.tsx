@@ -13,6 +13,7 @@ import Link from "next/link";
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
+import Avatar from "@components/Avatar";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -63,7 +64,7 @@ const Home: NextPage = () => {
           <nav className="px-2 mt-5 space-y-1">
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4 "
@@ -82,7 +83,7 @@ const Home: NextPage = () => {
             </a>
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 text-base font-semibold leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4"
@@ -99,7 +100,7 @@ const Home: NextPage = () => {
             </a>
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4"
@@ -116,7 +117,7 @@ const Home: NextPage = () => {
             </a>
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4"
@@ -133,7 +134,7 @@ const Home: NextPage = () => {
             </a>
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4"
@@ -150,7 +151,7 @@ const Home: NextPage = () => {
             </a>
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4"
@@ -165,26 +166,27 @@ const Home: NextPage = () => {
               </svg>
               <span className="hidden lg:block">Lists</span>
             </a>
-            <a
-              onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
-            >
-              <svg
-                className="w-6 h-6 lg:mr-4"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <Link href={`/${user?.id}`}>
+              <a
+                className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
               >
-                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-              </svg>
-              <span className="hidden lg:block">Profiles</span>
-            </a>
+                <svg
+                  className="w-6 h-6 lg:mr-4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span className="hidden lg:block">Profile</span>
+              </a>
+            </Link>
             <a
               onClick={e => e.preventDefault}
-              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
+              className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 rounded-full cursor-pointer group lg:justify-start hover:bg-blue-800 hover:text-blue-300"
             >
               <svg
                 className="w-6 h-6 lg:mr-4"
@@ -225,11 +227,7 @@ const Home: NextPage = () => {
             <div className="block p-2 rounded-full hover:bg-blue-400 group">
               <div className="flex items-center justify-center lg:justify-around">
                 <div className="flex-shrink-0">
-                  <img
-                    className="inline-block w-10 h-10 rounded-full"
-                    src="http://placeimg.com/640/480/any"
-                    alt="profile"
-                  />
+                  <Avatar url={user?.avatar} />
                 </div>
                 <div className="hidden lg:block lg:ml-3">
                   <p className="text-sm font-medium leading-6">
@@ -269,7 +267,7 @@ const Home: NextPage = () => {
         {/* center */}
         <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
-          <TweetForm onCreateTweet={createTweet} />
+          <TweetForm onCreateTweet={createTweet} avatar={user?.avatar} />
           <InfiniteScrollList dataType="tweets" newData={mutateData} url={`/api/tweets`} />
 
           <button
