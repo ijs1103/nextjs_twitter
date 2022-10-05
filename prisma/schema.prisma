@@ -32,6 +32,9 @@ model Tweet {
   id              Int         @id @default(autoincrement())
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
+  retweetId    Int? @unique
+  retweet      Tweet?        @relation("RetweetRelation", fields: [retweetId], references: [id])
+  originTweet Tweet? @relation("RetweetRelation")
   payload String
   like Like[]
   comments Comment[]

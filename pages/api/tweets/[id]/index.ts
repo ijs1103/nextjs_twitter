@@ -42,9 +42,20 @@ async function handler(
       },
     })
   );
-
+  // 게시물이 리트윗 당했는지 여부
+  const isRetweeted = Boolean(
+    await client.tweet.findFirst({
+      where: {
+        retweetId: tweet?.id,
+        userId: user?.id,
+      },
+      select: {
+        id: true,
+      },
+    })
+  );
   const isMyTweet = req.session.user?.id === tweet?.userId;
-  res.json({ ok: true, tweet, isLiked, isMyTweet });
+  res.json({ ok: true, tweet, isLiked, isMyTweet, isRetweeted });
 }
 
 export default withApiSession(

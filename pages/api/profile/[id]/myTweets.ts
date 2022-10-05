@@ -42,6 +42,24 @@ async function handler(
           comments: true,
         },
       },
+      retweet: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              nickName: true,
+              avatar: true,
+            },
+          },
+          _count: {
+            select: {
+              like: true,
+              comments: true,
+            },
+          },
+        },
+      },
     },
   });
   return res.json({

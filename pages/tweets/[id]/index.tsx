@@ -10,16 +10,19 @@ import InfiniteScrollList from "@components/InfiniteScrollList";
 import { GetServerSideProps } from 'next'
 import { useSetRecoilState } from "recoil";
 import { currentTweetIdState } from "@components/states";
+import { ProfileResponse } from "@libs/interfaces";
 
 interface ServerSideProps {
   tweetId: number
 }
 
 function TweetDetail({ tweetId }: ServerSideProps) {
+  const { data: myInfo } = useSWR<ProfileResponse>("/api/users/me");
   const { data, mutate } = useSWR<TweetDetail>(
     `/api/tweets/${tweetId}`
   );
   const [toggleLike] = useMutation(`/api/tweets/${tweetId}/like`);
+  const [toggleRetweet] = useMutation(`/api/tweets/${tweetId}/retweet`);
   const [editTweet, { data: editedData }] = useMutation(
     `/api/tweets/${tweetId}/update`
   );
@@ -27,6 +30,11 @@ function TweetDetail({ tweetId }: ServerSideProps) {
     if (!data) return;
     mutate(prev => prev && { ...prev, isLiked: !prev.isLiked }, false);
     toggleLike({});
+  }, [data]);
+  const onRetweetClick = useCallback(() => {
+    if (!data) return;
+    mutate(prev => prev && { ...prev, isRetweeted: !prev.isRetweeted }, false);
+    toggleRetweet({});
   }, [data]);
   const onEdit = useCallback((payload: string) => {
     editTweet({ payload });
@@ -61,14 +69,16 @@ function TweetDetail({ tweetId }: ServerSideProps) {
           payload={data.tweet.payload}
           updatedAt={data.tweet.updatedAt}
           isLiked={data.isLiked}
+          isRetweeted={data.isRetweeted}
           onLikeClick={onLikeClick}
+          onRetweetClick={onRetweetClick}
           onEdit={onEdit}
           isMyTweet={data.isMyTweet}
           isDetail
         />
       )}
       {/* 댓글 */}
-      <TweetForm isCreatePage onCreateTweet={onCreateComment} avatar={data?.tweet.user.avatar} />
+      <TweetForm isCreatePage onCreateTweet={onCreateComment} avatar={myInfo?.profile.avatar} />
       <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail isComment />
       <MobileNav />
     </MobileLayout>

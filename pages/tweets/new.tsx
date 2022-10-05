@@ -8,7 +8,7 @@ import { ProfileResponse } from "@libs/interfaces";
 import useSWR from "swr";
 
 function createTweet() {
-  const { data: myData } = useSWR<ProfileResponse>("/api/users/me");
+  const { data: myInfo } = useSWR<ProfileResponse>("/api/users/me");
   const [createTweet, { data, error }] =
     useMutation<MutationResult>("/api/tweets");
   useEffect(() => {
@@ -22,7 +22,7 @@ function createTweet() {
 
   return (
     <MobileLayout>
-      <TweetForm isCreatePage={true} onCreateTweet={createTweet} avatar={myData?.profile.avatar} />
+      <TweetForm isCreatePage={true} onCreateTweet={createTweet} avatar={myInfo?.profile.avatar} />
     </MobileLayout>
   );
 }

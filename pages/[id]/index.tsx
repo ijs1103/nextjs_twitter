@@ -51,8 +51,8 @@ const Profile = (props: ServerSideProps) => {
   const setPrevUrl = useSetRecoilState(prevUrlState)
   useEffect(() => {
     // 현재 선택한 탭이 'Tweets'(내가 작성한 트윗목록)일 경우 뒤로가기 경로를 홈으로 , 'Replies'나 'Likes'일 경우 뒤로가기 경로를 프로필 페이지로 설정
-    setPrevUrl(isTabTweets ? '/tweets' : location.href);
-  }, [])
+    setPrevUrl(isTabTweets ? '/tweets' : `/${userId}`);
+  }, [tab])
   const [isModalOn, setIsModalOn] = useState(false)
   const handleEditProfile = () => {
     setIsModalOn(true);
@@ -131,7 +131,7 @@ const Profile = (props: ServerSideProps) => {
 }
 export default Profile;
 
-export const getServerSideProps = withSsrSession(async function ({ req, query }: NextPageContext) {
+export const getServerSideProps = withSsrSession(async function ({ query, req }: NextPageContext) {
   const userId = query.id as string
   const logginedId = req?.session.user?.id
   const profile = await client.user.findUnique({
