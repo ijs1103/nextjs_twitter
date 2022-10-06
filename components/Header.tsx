@@ -7,7 +7,7 @@ import { prevUrlState } from "./states";
 function Header() {
   const prevUrl = useRecoilValue(prevUrlState)
   const router = useRouter();
-  const isGobackBtn = router.query.id || router.pathname === "/tweets/new";
+  const isGobackBtn = router.query.id || router.pathname === "/tweets/new" || router.pathname.includes('search');
   const url = router.asPath === prevUrl ? '/tweets' : prevUrl
   return (
     <div className="sticky top-0 left-0 z-10 flex justify-between w-full bg-black opacity-70 backdrop-blur-md">

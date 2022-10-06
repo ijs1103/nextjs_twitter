@@ -16,6 +16,7 @@ import client from "@libs/db";
 import ProfileModal from "@components/profile/ProfileModal";
 import Avatar from "@components/Avatar";
 import { editedAvatarState } from "@components/states";
+import FloatingButton from "@components/FloatingButton";
 
 interface ServerSideProps {
   userId: number;
@@ -126,6 +127,7 @@ const Profile = (props: ServerSideProps) => {
         {isTabLikes && <Likes />}
       </div>
       {isMyProfile && isModalOn && <ProfileModal avatarUrl={profile.avatar} nickName={profile.nickName} onClose={() => setIsModalOn(false)} />}
+      <FloatingButton />
     </MobileLayout>
   );
 }

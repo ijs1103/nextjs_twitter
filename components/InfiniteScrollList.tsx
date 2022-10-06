@@ -13,18 +13,20 @@ interface Props {
   newData?: MutationResult;
   isDetail?: boolean;
   isComment?: boolean;
-  dataType?: 'tweets' | 'likes' | 'comments'
+  dataType?: 'tweets' | 'likes' | 'comments';
+  keyword?: string | string[];
 }
 
-function InfiniteScrollList({ url, newData, isDetail = false, isComment = false, dataType }: Props) {
+function InfiniteScrollList({ url, newData, isDetail = false, isComment = false, dataType, keyword }: Props) {
   const { data: myInfo } = useSWR<ProfileResponse>(isDetail ? "/api/users/me" : null);
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref);
   const getKey: SWRInfiniteKeyLoader = (pageIndex, previousPageData) => {
     if (previousPageData && previousPageData?.results?.length === 0)
       return null;
-    return `${url}?offset=${pageIndex * 5
-      }&limit=5`;
+    return !keyword ? `${url}?offset=${pageIndex * 5
+      }&limit=5` : `${url}?offset=${pageIndex * 5
+      }&limit=5&keyword=${keyword}`;
   };
   const { data, error, isValidating, setSize, mutate } =
     useSWRInfinite<any>(getKey, {

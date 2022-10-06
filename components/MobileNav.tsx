@@ -1,49 +1,52 @@
+import Link from "next/link";
 import React from "react";
 
 function MobileNav() {
   return (
     <div className="sm:hidden h-[55px] fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black '' border-t border-gray-600">
-      <a
-        href="#"
-        className="transition-all duration-500 px-2 py-2 rounded-full hover:bg-blue-800 hover:text-blue-300"
-      >
-        <svg
-          className="h-6 w-6 "
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 24 24"
+      <Link href={'/tweets'}>
+        <a
+          className="px-2 py-2 transition-all duration-500 rounded-full hover:bg-blue-800 hover:text-blue-300"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"
-          />
-        </svg>
-      </a>
+          <svg
+            className="w-6 h-6 "
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"
+            />
+          </svg>
+        </a>
+      </Link>
+      <Link href={'/search'}>
+        <a
+          className="px-2 py-2 transition-all duration-500 rounded-full hover:bg-blue-800 hover:text-blue-300"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </a>
+      </Link>
       <a
         href="#"
-        className="transition-all duration-500 px-2 py-2 rounded-full hover:bg-blue-800 hover:text-blue-300"
+        className="px-2 py-2 transition-all duration-500 rounded-full hover:bg-blue-800 hover:text-blue-300"
       >
         <svg
           className="w-6 h-6"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </a>
-      <a
-        href="#"
-        className="transition-all duration-500 px-2 py-2 rounded-full hover:bg-blue-800 hover:text-blue-300"
-      >
-        <svg
-          className="h-6 w-6"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -56,10 +59,10 @@ function MobileNav() {
       </a>
       <a
         href="#"
-        className="transition-all duration-500 px-2 py-2 rounded-full hover:bg-blue-800 hover:text-blue-300"
+        className="px-2 py-2 transition-all duration-500 rounded-full hover:bg-blue-800 hover:text-blue-300"
       >
         <svg
-          className="h-6 w-6"
+          className="w-6 h-6"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"

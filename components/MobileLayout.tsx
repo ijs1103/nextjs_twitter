@@ -6,7 +6,7 @@ interface Props {
 
 function MobileLayout({ children }: Props) {
   return (
-    <div className="min-h-screen max-w-xl mx-auto bg-black">
+    <div className="max-w-xl min-h-screen mx-auto bg-black">
       <Header />
       {children}
     </div>

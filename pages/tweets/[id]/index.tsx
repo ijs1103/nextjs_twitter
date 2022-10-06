@@ -4,7 +4,6 @@ import TweetBox from "@components/TweetBox";
 import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
 import { TweetDetail } from "@libs/interfaces";
-import MobileNav from "@components/MobileNav";
 import TweetForm from "@components/TweetForm";
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { GetServerSideProps } from 'next'
@@ -80,7 +79,6 @@ function TweetDetail({ tweetId }: ServerSideProps) {
       {/* 댓글 */}
       <TweetForm isCreatePage onCreateTweet={onCreateComment} avatar={myInfo?.profile.avatar} />
       <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail isComment />
-      <MobileNav />
     </MobileLayout>
   );
 }

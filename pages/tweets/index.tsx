@@ -3,7 +3,6 @@ import useUser from "@libs/useUser";
 import { useRouter } from "next/router";
 import { useCallback, useState, useEffect } from "react";
 import TweetForm from "@components/TweetForm";
-import MobileNav from "@components/MobileNav";
 import Header from "@components/Header";
 import useMutation from "@libs/useMutation";
 import { cls } from "@libs/utils";
@@ -14,6 +13,8 @@ import InfiniteScrollList from "@components/InfiniteScrollList";
 import { useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
 import Avatar from "@components/Avatar";
+import SearchBar from "@components/SearchBar";
+import FloatingButton from "@components/FloatingButton";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -39,9 +40,6 @@ const Home: NextPage = () => {
     },
     { title: "로그아웃", onClickFn: () => logout({}), disabled: false },
   ];
-  const onMobileCreate = () => {
-    router.push("/tweets/new");
-  };
   const setprevUrl = useSetRecoilState(prevUrlState)
   useEffect(() => {
     setprevUrl('/tweets');
@@ -265,58 +263,17 @@ const Home: NextPage = () => {
           </div>
         </section>
         {/* center */}
-        <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
+        <section className="min-h-screen sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
           <TweetForm onCreateTweet={createTweet} avatar={user?.avatar} />
           <InfiniteScrollList dataType="tweets" newData={mutateData} url={`/api/tweets`} />
-
-          <button
-            onClick={onMobileCreate}
-            className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400 '' font-bold py-4 px-4 rounded-full"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              fill="#fff"
-              className="w-5 h-5"
-            >
-              <g>
-                <path d="M8.8 7.2H5.6V3.9c0-.4-.3-.8-.8-.8s-.7.4-.7.8v3.3H.8c-.4 0-.8.3-.8.8s.3.8.8.8h3.3v3.3c0 .4.3.8.8.8s.8-.3.8-.8V8.7H9c.4 0 .8-.3.8-.8s-.5-.7-1-.7zm15-4.9v-.1h-.1c-.1 0-9.2 1.2-14.4 11.7-3.8 7.6-3.6 9.9-3.3 9.9.3.1 3.4-6.5 6.7-9.2 5.2-1.1 6.6-3.6 6.6-3.6s-1.5.2-2.1.2c-.8 0-1.4-.2-1.7-.3 1.3-1.2 2.4-1.5 3.5-1.7.9-.2 1.8-.4 3-1.2 2.2-1.6 1.9-5.5 1.8-5.7z"></path>
-              </g>
-            </svg>
-          </button>
         </section>
+        {/* floating button */}
+        <FloatingButton />
         {/* right */}
         <section className="hidden w-2/5 lg:block">
           <div className="p-3 pb-0 mr-16 w-80">
-            <div className="relative w-full">
-              <input
-                type="text"
-                name="search"
-                placeholder="Search Twitter"
-                className="w-full h-10 px-10 text-sm bg-gray-800 border-blue-500 rounded-full outline-none peer focus:border-2"
-              />
-              <svg
-                className="absolute top-0 bottom-0 w-6 h-6 my-auto cursor-pointer fill-current left-2 peer-focus:fill-blue-500"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <svg
-                viewBox="0 0 15 15"
-                aria-hidden="true"
-                className="absolute top-0 bottom-0 hidden w-4 h-4 my-auto rounded-full cursor-pointer peer-focus:block fill-blue-500 right-3"
-              >
-                <g>
-                  <path d="M8.914 7.5l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L7.5 6.086 1.707.293c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L6.086 7.5.293 13.293c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L7.5 8.914l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L8.914 7.5z"></path>
-                </g>
-              </svg>
-            </div>
+            <SearchBar isInMain />
           </div>
 
           <div className="max-w-sm m-4 mr-20 overflow-hidden bg-gray-800 rounded-lg shadow-lg">
@@ -579,7 +536,6 @@ const Home: NextPage = () => {
           </div>
         </section>
       </div>
-      <MobileNav />
     </div>
   );
 };
