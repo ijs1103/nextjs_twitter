@@ -10,7 +10,7 @@ async function handler(
   const {
     session: { user },
   } = req;
-  const newAvatar = req.body.avatar;
+  const newAvatar = req.body.image;
   const newNickName = req.body.nickName;
 
   await client.user.update({

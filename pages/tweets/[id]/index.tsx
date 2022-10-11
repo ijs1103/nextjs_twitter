@@ -55,8 +55,9 @@ function TweetDetail({ tweetId }: ServerSideProps) {
   const onCreateComment = useCallback(({ ...payload }) => {
     createComment(payload);
   }, []);
+
   return (
-    <MobileLayout>
+    <MobileLayout title={'Detail'}>
       {data && (
         <TweetBox
           key={data.tweet.id}

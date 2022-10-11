@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 const isCommentState = atom({
   key: "isComment",
   default: false,
@@ -20,6 +20,7 @@ const isSocialLogginedState = atom({
   key: "isSocialLoggined",
   default: !!localStorage?.getItem("isSocialLoggined"),
 });
+
 export {
   isCommentState,
   currentTweetIdState,

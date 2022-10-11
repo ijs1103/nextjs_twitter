@@ -63,7 +63,7 @@ const Profile = (props: ServerSideProps) => {
   // editedimage:방금 변경한 프로필 이미지 url
   const editedAvatar = useRecoilValue(editedAvatarState)
   return (
-    <MobileLayout>
+    <MobileLayout title={'Profile'}>
       <div className="relative">
         <div className="h-48 bg-white"></div>
         <div className="absolute w-24 h-24 -translate-y-1/2 bg-gray-500 rounded-full top-1/2 left-4">

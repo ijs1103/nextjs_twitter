@@ -3,14 +3,17 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { prevUrlState } from "./states";
+interface Props {
+  title?: string;
+}
 
-function Header() {
+function Header({ title }: Props) {
   const prevUrl = useRecoilValue(prevUrlState)
   const router = useRouter();
   const isGobackBtn = router.query.id || router.pathname === "/tweets/new" || router.pathname.includes('search');
   const url = router.asPath === prevUrl ? '/tweets' : prevUrl
   return (
-    <div className="sticky top-0 left-0 z-10 flex justify-between w-full bg-black opacity-70 backdrop-blur-md">
+    <div className="sticky top-0 left-0 z-10 flex items-center justify-between w-full bg-black opacity-70 backdrop-blur-md">
       <Link href={url}>
         <a>
           <div className="m-2">
@@ -35,6 +38,7 @@ function Header() {
           </div>
         </a>
       </Link>
+      {title && <h2 className="text-base font-semibold select-none lg:text-xl">{title}</h2>}
       <div className="flex items-center justify-center px-2">
         <svg className="w-6 h-6" fill="#fff" viewBox="0 0 24 24">
           <g>

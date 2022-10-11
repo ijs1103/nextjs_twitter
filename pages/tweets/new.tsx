@@ -21,7 +21,7 @@ function createTweet() {
   }, [data]);
 
   return (
-    <MobileLayout>
+    <MobileLayout title={'Write'}>
       <TweetForm isCreatePage={true} onCreateTweet={createTweet} image={myInfo?.profile.image} />
     </MobileLayout>
   );

@@ -140,7 +140,9 @@ function TweetBox({
             <div className="flex-shrink-0 block group">
               <div className="flex items-center">
                 <Link href={`/${!retweet ? userId : retweet.userId}`}>
-                  <Avatar url={!retweet ? image : retweet.user.image} />
+                  <a>
+                    <Avatar url={!retweet ? image : retweet.user.image} />
+                  </a>
                 </Link>
                 <div className="ml-3">
                   <p className="text-sm font-medium leading-6 sm:text-base">

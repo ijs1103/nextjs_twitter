@@ -1,13 +1,14 @@
 import Header from "@components/Header";
 
 interface Props {
+  title?: string;
   children: React.ReactNode;
 }
 
-function MobileLayout({ children }: Props) {
+function MobileLayout({ title, children }: Props) {
   return (
     <div className="max-w-xl min-h-screen mx-auto bg-black">
-      <Header />
+      <Header title={title} />
       {children}
     </div>
   );
