@@ -16,7 +16,7 @@ function Popup({ onPopupClose, isVisible, contents }: Props) {
   return (
     <div
       className={cls(
-        "divide-y-[1px] divide-gray-700 bg-black w-[200px] space-y-2 rounded-xl border border-gray-700 backdrop:bg-gray-300 z-[1000] ",
+        "divide-y-[1px] divide-gray-700 bg-black w-[200px] space-y-2 rounded-xl border border-gray-700 backdrop:bg-gray-300 z-[1000] overflow-hidden ",
         isVisible ? "block" : "hidden"
       )}
     >
@@ -42,7 +42,7 @@ function Popup({ onPopupClose, isVisible, contents }: Props) {
           <span className="sr-only">Close popup</span>
         </button>
       </div>
-      <ul className="flex flex-col divide-y-[1px] divide-gray-700">
+      <ul className="cursor-pointer flex flex-col divide-y-[1px] divide-gray-700">
         {contents.map((content, idx) => {
           return (
             <li

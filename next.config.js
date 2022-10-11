@@ -3,8 +3,9 @@ module.exports = {
   swcMinify: true,
   images: {
     domains: [
-      "seaagainuploads.s3.ap-northeast-2.amazonaws.com",
-      "abs.twimg.com",
+      "seaagainuploads.s3.ap-northeast-2.amazonaws.com", // aws-s3 이미지
+      "abs.twimg.com", // NotFound 컴포넌트 이미지
+      "lh3.googleusercontent.com", // google 프로필 이미지
     ],
   },
 };

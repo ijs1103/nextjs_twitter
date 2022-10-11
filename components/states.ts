@@ -1,18 +1,29 @@
 import { atom, selector } from "recoil";
-
-export const isCommentState = atom({
+const isCommentState = atom({
   key: "isComment",
   default: false,
 });
-export const currentTweetIdState = atom({
+const currentTweetIdState = atom({
   key: "currentTweetId",
   default: 0,
 });
-export const prevUrlState = atom({
+const prevUrlState = atom({
   key: "prevUrl",
   default: "/tweets",
 });
-export const editedAvatarState = atom({
+const editedAvatarState = atom({
   key: "editedAvatar",
   default: "",
 });
+const localStorage = typeof window !== "undefined" ? window.localStorage : null;
+const isSocialLogginedState = atom({
+  key: "isSocialLoggined",
+  default: !!localStorage?.getItem("isSocialLoggined"),
+});
+export {
+  isCommentState,
+  currentTweetIdState,
+  prevUrlState,
+  editedAvatarState,
+  isSocialLogginedState,
+};

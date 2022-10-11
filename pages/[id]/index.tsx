@@ -9,7 +9,7 @@ import TabMenu from "@components/profile/TabMenu";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
 import useMutation from "@libs/useMutation";
-import type { NextPageContext } from "next";
+import type { NextPageContext, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { withSsrSession } from "@libs/withSession";
 import client from "@libs/db";
@@ -17,6 +17,8 @@ import ProfileModal from "@components/profile/ProfileModal";
 import Avatar from "@components/Avatar";
 import { editedAvatarState } from "@components/states";
 import FloatingButton from "@components/FloatingButton";
+import { unstable_getServerSession } from "next-auth/next"
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
 interface ServerSideProps {
   userId: number;
@@ -58,14 +60,14 @@ const Profile = (props: ServerSideProps) => {
   const handleEditProfile = () => {
     setIsModalOn(true);
   }
-  // editedAvatar: 방금 변경한 프로필 이미지 url
+  // editedimage:방금 변경한 프로필 이미지 url
   const editedAvatar = useRecoilValue(editedAvatarState)
   return (
     <MobileLayout>
       <div className="relative">
         <div className="h-48 bg-white"></div>
         <div className="absolute w-24 h-24 -translate-y-1/2 bg-gray-500 rounded-full top-1/2 left-4">
-          <Avatar url={editedAvatar ? editedAvatar : profile.avatar} isBig />
+          <Avatar url={editedAvatar ? editedAvatar : profile.image} isBig />
         </div>
         <div className="relative h-48 px-4">
           <div className="flex justify-end gap-2 mt-4">
@@ -126,45 +128,82 @@ const Profile = (props: ServerSideProps) => {
         {isTabReplies && <Replies />}
         {isTabLikes && <Likes />}
       </div>
-      {isMyProfile && isModalOn && <ProfileModal avatarUrl={profile.avatar} nickName={profile.nickName} onClose={() => setIsModalOn(false)} />}
+      {isMyProfile && isModalOn && <ProfileModal avatarUrl={profile.image} nickName={profile.nickName || ''} onClose={() => setIsModalOn(false)} />}
       <FloatingButton />
     </MobileLayout>
   );
 }
 export default Profile;
 
-export const getServerSideProps = withSsrSession(async function ({ query, req }: NextPageContext) {
+export const getServerSideProps = withSsrSession(async function ({ query, req, res }: GetServerSidePropsContext) {
   const userId = query.id as string
-  const logginedId = req?.session.user?.id
-  const profile = await client.user.findUnique({
-    where: { id: +userId },
-    include: {
-      followers: {
-        select: {
-          id: true
-        }
+  // nextAuthSession: 소셜 로그인 완료시 생성되는 session 
+  const nextAuthSession = await unstable_getServerSession(req, res, authOptions)
+  let profile, followers_cnt, followings_cnt, logginedId;
+  // 소셜 로그인 했을때 
+  if (nextAuthSession) {
+    profile = await client.user.findUnique({
+      where: { email: nextAuthSession.user?.email + '' },
+      include: {
+        followers: {
+          select: {
+            id: true
+          }
+        },
       },
-    },
-  });
-  // 서버의 비용을 최소화하는 count 메서드
-  const followers_cnt = await client.user.count({
-    where: {
-      following: {
-        some: {
-          id: +userId
+    });
+    logginedId = profile?.id
+    followers_cnt = await client.user.count({
+      where: {
+        following: {
+          some: {
+            id: profile?.id
+          }
         }
       }
-    }
-  })
-  const followings_cnt = await client.user.count({
-    where: {
-      followers: {
-        some: {
-          id: +userId
+    })
+    followings_cnt = await client.user.count({
+      where: {
+        followers: {
+          some: {
+            id: profile?.id
+          }
         }
       }
-    }
-  })
+    })
+  } else {
+    // 일반 로그인 했을때
+    profile = await client.user.findUnique({
+      where: { id: +userId },
+      include: {
+        followers: {
+          select: {
+            id: true
+          }
+        },
+      },
+    });
+    logginedId = req?.session.user?.id
+    // 서버의 비용을 최소화하는 count 메서드
+    followers_cnt = await client.user.count({
+      where: {
+        following: {
+          some: {
+            id: +userId
+          }
+        }
+      }
+    })
+    followings_cnt = await client.user.count({
+      where: {
+        followers: {
+          some: {
+            id: +userId
+          }
+        }
+      }
+    })
+  }
   return {
     props: {
       userId: +userId,

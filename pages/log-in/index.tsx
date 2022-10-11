@@ -4,6 +4,7 @@ import useMutation from "@libs/useMutation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Input from "@components/Input";
+import GoogleLoginBtn from "@components/GoogleLoginBtn";
 
 interface LoginForm {
   email?: string;
@@ -80,12 +81,7 @@ function Login() {
         <div className="mt-5 space-y-3 w-[300px]">
           {stage === 1 && (
             <>
-              <button className="bg-white text-black text-sm rounded-[20px] w-full px-1 py-1 ">
-                Google 계정으로 가입하기
-              </button>
-              <button className="bg-white text-black text-sm rounded-[20px] w-full px-1 py-1 ">
-                Apple에서 가입하기
-              </button>
+              <GoogleLoginBtn />
               <div className="relative pt-3">
                 <div className="absolute w-full border-t border-gray-300" />
                 <div className="relative text-center -top-3 ">

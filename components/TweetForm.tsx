@@ -9,9 +9,9 @@ interface textareaForm {
 interface Props {
   isCreatePage?: boolean;
   onCreateTweet: (data: any) => void;
-  avatar: string | null | undefined;
+  image: string | null | undefined;
 }
-function TweetForm({ isCreatePage = false, onCreateTweet, avatar }: Props) {
+function TweetForm({ isCreatePage = false, onCreateTweet, image }: Props) {
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet, avatar }: Props) {
     >
       <div className="flex">
         <div className="flex-shrink-0 w-10 py-1 m-2">
-          <Avatar url={avatar} />
+          <Avatar url={image} />
         </div>
         <div className="flex-1 px-2 pt-2 mt-2">
           <textarea

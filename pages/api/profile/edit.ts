@@ -19,7 +19,7 @@ async function handler(
     },
     data: {
       ...(newNickName && { nickName: newNickName }),
-      ...(newAvatar && { avatar: newAvatar }),
+      ...(newAvatar && { image: newAvatar }),
     },
   });
 

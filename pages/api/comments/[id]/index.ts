@@ -33,7 +33,7 @@ async function handler(
           id: true,
           name: true,
           nickName: true,
-          avatar: true,
+          image: true,
         },
       },
       tweet: {

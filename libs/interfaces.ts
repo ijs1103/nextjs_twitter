@@ -9,7 +9,7 @@ export interface TweetWith extends Tweet {
     id: number;
     name: string;
     nickName: string;
-    avatar: string | null;
+    image: string | null;
   };
 }
 interface LikeWith extends Like {
@@ -21,7 +21,7 @@ interface LikeWith extends Like {
     id: number;
     name: string;
     nickName: string;
-    avatar: string | null;
+    image: string | null;
   };
 }
 interface CommentWith extends Comment {
@@ -34,7 +34,7 @@ interface CommentWith extends Comment {
     user: {
       name: string;
       nickName: string;
-      avatar: string | null;
+      image: string | null;
     };
   };
 }

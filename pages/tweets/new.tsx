@@ -22,7 +22,7 @@ function createTweet() {
 
   return (
     <MobileLayout>
-      <TweetForm isCreatePage={true} onCreateTweet={createTweet} avatar={myInfo?.profile.avatar} />
+      <TweetForm isCreatePage={true} onCreateTweet={createTweet} image={myInfo?.profile.image} />
     </MobileLayout>
   );
 }

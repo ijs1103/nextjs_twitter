@@ -6,7 +6,7 @@ interface Props {
 
 const Loader = forwardRef<HTMLDivElement, Props>((props, ref) => {
   return (
-    <div ref={ref} className="pb-[105px] sm:pb-0 flex justify-center">
+    <div ref={ref} className="h-[100px] sm:pb-0 flex justify-center">
       {props.isLoading ? (
         <div role="status">
           <svg

@@ -10,11 +10,13 @@ import Popup from "@components/Popup";
 import { MutationResult } from "@libs/interfaces";
 import Link from "next/link";
 import InfiniteScrollList from "@components/InfiniteScrollList";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
 import Avatar from "@components/Avatar";
 import SearchBar from "@components/SearchBar";
 import FloatingButton from "@components/FloatingButton";
+import { isSocialLogginedState } from "@components/states";
+import { signOut } from "next-auth/react";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -24,7 +26,6 @@ const Home: NextPage = () => {
   /* 트위터 생성 관련 */
   const [createTweet, { loading, data: mutateData, error: mutateError }] =
     useMutation<MutationResult>("/api/tweets");
-
   /* 로그아웃 관련 */
   const [logout, { data: logoutData, error: logoutError }] = useMutation<{
     ok: boolean;
@@ -32,13 +33,22 @@ const Home: NextPage = () => {
   useEffect(() => {
     logoutData?.ok && router.replace("/");
   }, [logoutData]);
+  const isSocialLoggined = useRecoilValue(isSocialLogginedState)
+  const socialLogOut = async () => {
+    localStorage.removeItem('isSocialLoggined')
+    await signOut({ callbackUrl: 'http://localhost:3000' })
+  }
+  const handleLogOut = async () => {
+    if (isSocialLoggined) await socialLogOut()
+    logout({})
+  }
   const profilePopup = [
     {
       title: "프로필 보기",
       onClickFn: () => router.push(`/${user?.id}`),
       disabled: false,
     },
-    { title: "로그아웃", onClickFn: () => logout({}), disabled: false },
+    { title: "로그아웃", onClickFn: handleLogOut, disabled: false },
   ];
   const setprevUrl = useSetRecoilState(prevUrlState)
   useEffect(() => {
@@ -220,12 +230,12 @@ const Home: NextPage = () => {
 
           <div
             onClick={popupToggle}
-            className="absolute bottom-0 left-0 right-0 mx-2 mb-5 "
+            className="absolute bottom-0 left-0 right-0 mx-2 mb-5 cursor-pointer "
           >
-            <div className="block p-2 rounded-full hover:bg-blue-400 group">
+            <div className="block p-2 transition-colors rounded-full hover:bg-blue-400 group">
               <div className="flex items-center justify-center lg:justify-around">
                 <div className="flex-shrink-0">
-                  <Avatar url={user?.avatar} />
+                  <Avatar url={user?.image} />
                 </div>
                 <div className="hidden lg:block lg:ml-3">
                   <p className="text-sm font-medium leading-6">
@@ -263,9 +273,9 @@ const Home: NextPage = () => {
           </div>
         </section>
         {/* center */}
-        <section className="min-h-screen sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
+        <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
-          <TweetForm onCreateTweet={createTweet} avatar={user?.avatar} />
+          <TweetForm onCreateTweet={createTweet} image={user?.image} />
           <InfiniteScrollList dataType="tweets" newData={mutateData} url={`/api/tweets`} />
         </section>
         {/* floating button */}

@@ -16,7 +16,7 @@ interface ConfigType {
 export default function withHandler({
   methods,
   handler,
-  isPrivate = true,
+  isPrivate = false,
 }: ConfigType) {
   return async function (
     req: NextApiRequest,
@@ -24,8 +24,10 @@ export default function withHandler({
   ): Promise<any> {
     if (req.method && !methods.includes(req.method as any))
       res.status(405).end();
-    if (isPrivate && !req.session.user)
+    if (isPrivate && !req.session.user) {
       res.status(401).json({ ok: false, error: "로그인이 필요합니다." });
+    }
+
     try {
       handler(req, res);
     } catch (error) {

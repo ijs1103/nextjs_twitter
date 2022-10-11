@@ -42,7 +42,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
   const isEmpty = dataType === 'tweets' ? data?.[0]?.tweets?.length === 0 : dataType === 'likes' ? data?.[0]?.likes?.length === 0 : data?.[0]?.comments?.length === 0
   const isEnd = items.length === data?.[0]?.total;
   const isLoading = (!data && !error) || isValidating;
-
+  console.log(data)
   useEffect(() => {
     if (isIntersecting && !isEnd && !isLoading) {
       setSize((oldSize) => oldSize + 1);
@@ -61,7 +61,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
                 userId={item.user.id}
                 userName={item.user.name}
                 nickName={item.user.nickName}
-                avatar={item.user.avatar}
+                image={item.user.image}
                 payload={item.payload}
                 updatedAt={item.updatedAt}
                 likeCnt={item._count?.like}
@@ -80,7 +80,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
                 userId={item.tweet.user.id}
                 userName={item.tweet.user.name}
                 nickName={item.tweet.user.nickName}
-                avatar={item.tweet.user.avatar}
+                image={item.tweet.user.image}
                 payload={item.tweet.payload}
                 updatedAt={item.tweet.updatedAt}
                 likeCnt={item.tweet._count?.like}
