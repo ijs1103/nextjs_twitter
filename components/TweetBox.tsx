@@ -11,6 +11,8 @@ import { prevUrlState, isCommentState } from "./states";
 import { ProfileResponse, TweetWith } from "@libs/interfaces";
 import useSWR from "swr";
 import Avatar from "@components/Avatar";
+import { AnimatePresence } from 'framer-motion';
+import TweetPhoto from "./TweetPhoto";
 
 // isRetweetd: 리트윗 당해진 원본 게시글인지 아닌지
 // isRetweet: 원본을 리트윗한 게시글인지 아닌지
@@ -35,6 +37,7 @@ interface Props {
   isMyTweet: boolean;
   retweetId?: number;
   retweet?: TweetWith;
+  photo?: string | null;
 }
 interface IForm {
   payload: string;
@@ -60,7 +63,8 @@ function TweetBox({
   isRetweet = false,
   isMyTweet,
   retweetId,
-  retweet
+  retweet,
+  photo
 }: Props) {
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
@@ -179,7 +183,7 @@ function TweetBox({
                     />
                   </svg>
                 </div>
-                <div className="absolute top-0 right-0">
+                <div className="absolute top-0 right-0 z-10">
                   <Popup
                     onPopupClose={popupClose}
                     isVisible={popupOn}
@@ -208,6 +212,9 @@ function TweetBox({
                 </div>{" "}
               </div>
             )}
+            <AnimatePresence>
+              {photo ? <TweetPhoto url={photo} /> : null}
+            </AnimatePresence>
 
             {isDetail && (
               <p className="my-4 text-xs font-medium leading-5 text-gray-400 sm:text-sm">
@@ -215,7 +222,6 @@ function TweetBox({
               </p>
             )}
           </div>
-
           {!isComment && <div
             className={cls(
               "flex ",

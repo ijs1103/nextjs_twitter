@@ -72,6 +72,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
                 isRetweet={!!item.retweetId}
                 retweetId={item.retweetId}
                 retweet={item.retweet}
+                photo={item.photo}
               />
               :
               <TweetBox
@@ -91,6 +92,7 @@ function InfiniteScrollList({ url, newData, isDetail = false, isComment = false,
                 isRetweet={!!item.tweet.retweetId}
                 retweetId={item.tweet.retweetId}
                 retweet={item.tweet.retweet}
+                photo={item.tweet.photo}
               />
           );
         })

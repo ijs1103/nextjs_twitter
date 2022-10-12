@@ -1,35 +1,64 @@
 import { useForm } from "react-hook-form";
-import { useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { cls } from "@libs/utils";
 import Avatar from "@components/Avatar";
+import { AnimatePresence } from 'framer-motion';
+import TweetPhoto from "./TweetPhoto";
+import axios from "axios";
+import { BUCKET_URL } from "@libs/constants";
 
-interface textareaForm {
+interface TweetForm {
   payload: string;
+  file?: FileList;
 }
 interface Props {
   isCreatePage?: boolean;
   onCreateTweet: (data: any) => void;
   image: string | null | undefined;
+  isComment?: boolean;
 }
-function TweetForm({ isCreatePage = false, onCreateTweet, image }: Props) {
+function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = false }: Props) {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { isValid },
-  } = useForm<textareaForm>({ mode: "onChange" });
-  const onValid = (form: textareaForm) => {
-    onCreateTweet(form);
-    reset({ payload: "" });
-  };
-  useEffect(() => { }, [isCreatePage]);
-
-  const handleResizeHeight = useCallback((event: any) => {
-    if (!isCreatePage) return;
-    if (event === null || event.target === null) {
-      return;
+  } = useForm<TweetForm>({ mode: "onChange" });
+  const [previewUrl, setPreviewUrl] = useState('');
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
+  const fileWatch = watch('file');
+  useEffect(() => {
+    let blobUrl = ''
+    if (fileWatch?.length) {
+      const file = fileWatch[0]
+      setUploadFile(file)
+      blobUrl = URL.createObjectURL(file)
+      setPreviewUrl(blobUrl)
     }
-    event.target.style.height = "38px";
+    return () => {
+      URL.revokeObjectURL(blobUrl)
+    }
+  }, [fileWatch]);
+  const onValid = async (form: TweetForm) => {
+    let newTweetPhoto = ''
+    if (uploadFile) {
+      const { data: { url, objectName } } = await axios.post('/api/tweets/uploadPhoto', { name: uploadFile.name, type: uploadFile.type })
+      await axios.put(url, uploadFile, {
+        headers: {
+          'Content-type': uploadFile.type,
+          'Access-Control-Allow-Origin': '*',
+        },
+      })
+      newTweetPhoto = BUCKET_URL + objectName
+    }
+    onCreateTweet({ ...(newTweetPhoto && { photo: newTweetPhoto }), payload: form.payload })
+    reset();
+    setPreviewUrl('');
+  };
+  const handleResizeHeight = useCallback((event: any) => {
+    if (event === null || event.target === null) return;
+    event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
   }, []);
   return (
@@ -53,13 +82,15 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image }: Props) {
           ></textarea>
         </div>
       </div>
-      <div className="flex justify-between border-b border-gray-700">
-        <div className="w-64 px-2">
+      <AnimatePresence>
+        {previewUrl ? <TweetPhoto url={previewUrl} /> : null}
+      </AnimatePresence>
+      <div className={cls("flex items-center border-b border-gray-700 ", isComment ? "justify-end" : "justify-between")}>
+        {!isComment && <div className="w-64 px-2">
           <div className="flex items-center">
             <div className="flex-1 px-1 py-1 text-center">
-              <a
-                href="#"
-                className="flex items-center justify-center px-1 py-1 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full group md:px-2 md:py-2 hover:bg-blue-800 hover:text-blue-300"
+
+              <label className="flex items-center justify-center px-1 py-1 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full cursor-pointer group md:px-2 md:py-2 hover:bg-blue-800 hover:text-blue-300"
               >
                 <svg
                   className="w-6 text-center h-7"
@@ -72,7 +103,13 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image }: Props) {
                 >
                   <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-              </a>
+                <input
+                  {...register('file')}
+                  type='file'
+                  accept='image/*'
+                  className='hidden'
+                />
+              </label>
             </div>
 
             <div className="flex-1 py-2 m-2 text-center">
@@ -133,17 +170,15 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image }: Props) {
               </a>
             </div>
           </div>
-        </div>
+        </div>}
 
-        <div>
-          <button
-            disabled={!isValid}
-            type="submit"
-            className="mt-5 bg-blue-400 hover:bg-blue-600 '' font-bold py-2 px-2 sm:px-8 rounded-full mr-4"
-          >
-            Tweet
-          </button>
-        </div>
+        <button
+          disabled={!isValid}
+          type="submit"
+          className="px-2 py-2 mt-2 mb-4 mr-4 font-bold transition-colors bg-blue-400 rounded-full cursor-pointer hover:bg-blue-600 sm:px-8"
+        >
+          {isComment ? 'Comment' : 'Tweet'}
+        </button>
       </div>
     </form>
   );

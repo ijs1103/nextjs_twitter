@@ -74,11 +74,12 @@ function TweetDetail({ tweetId }: ServerSideProps) {
           onRetweetClick={onRetweetClick}
           onEdit={onEdit}
           isMyTweet={data.isMyTweet}
+          photo={data.tweet.photo}
           isDetail
         />
       )}
       {/* 댓글 */}
-      <TweetForm isCreatePage onCreateTweet={onCreateComment} image={myInfo?.profile.image} />
+      <TweetForm isCreatePage onCreateTweet={onCreateComment} image={myInfo?.profile.image} isComment />
       <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail isComment />
     </MobileLayout>
   );

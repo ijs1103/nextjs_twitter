@@ -71,6 +71,7 @@ async function handler(
     const tweet = await client.tweet.create({
       data: {
         payload,
+        ...(req.body.photo && { photo: req.body.photo }),
         user: {
           connect: {
             id: user?.id,
