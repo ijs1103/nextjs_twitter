@@ -9,7 +9,7 @@ interface Props {
   isFilled?: boolean;
   setStage?: () => void;
   disabled?: boolean;
-  type?: "text" | "password";
+  type?: "text" | "password" | "number";
 }
 function Input({
   id,
