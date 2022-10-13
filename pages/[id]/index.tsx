@@ -9,7 +9,7 @@ import TabMenu from "@components/profile/TabMenu";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prevUrlState } from "@components/states";
 import useMutation from "@libs/useMutation";
-import type { NextPageContext, GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { withSsrSession } from "@libs/withSession";
 import client from "@libs/db";
@@ -142,8 +142,15 @@ export const getServerSideProps = withSsrSession(async function ({ query, req, r
   let profile, followers_cnt, followings_cnt, logginedId;
   // 소셜 로그인 했을때 
   if (nextAuthSession) {
-    profile = await client.user.findUnique({
+    const logginedUser = await client.user.findUnique({
       where: { email: nextAuthSession.user?.email + '' },
+      select: {
+        id: true
+      }
+    });
+    logginedId = logginedUser?.id
+    profile = await client.user.findUnique({
+      where: { id: +userId },
       include: {
         followers: {
           select: {
@@ -152,7 +159,6 @@ export const getServerSideProps = withSsrSession(async function ({ query, req, r
         },
       },
     });
-    logginedId = profile?.id
     followers_cnt = await client.user.count({
       where: {
         following: {
