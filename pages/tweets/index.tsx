@@ -58,7 +58,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen bg-black">
       <div className="flex">
         {/* left */}
-        <section className="z-10 hidden sm:block top-0 left-0 fixed h-full w-[80px] lg:w-[300px] py-4">
+        <section className="z-10 top-0 left-0 fixed h-full w-[80px] lg:w-[300px] py-4">
           <svg
             viewBox="0 0 24 24"
             className="w-10 h-10 mx-auto ''"
@@ -230,7 +230,7 @@ const Home: NextPage = () => {
 
           <div
             onClick={popupToggle}
-            className="absolute bottom-0 left-0 right-0 mx-2 mb-5 cursor-pointer "
+            className="absolute left-0 right-0 mx-2 mb-5 cursor-pointer bottom-10 sm:bottom-0 "
           >
             <div className="block p-2 transition-colors rounded-full hover:bg-blue-400 group">
               <div className="flex items-center justify-center lg:justify-around">
@@ -273,7 +273,7 @@ const Home: NextPage = () => {
           </div>
         </section>
         {/* center */}
-        <section className="sm:ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
+        <section className="ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
           <TweetForm onCreateTweet={createTweet} image={user?.image} />
           <InfiniteScrollList dataType="tweets" newData={mutateData} url={`/api/tweets`} />

@@ -9,7 +9,7 @@ function search() {
   const router = useRouter();
   const [keyword, setKeyword] = useState(router.query.keyword ?? '')
   return (
-    <MobileLayout>
+    <MobileLayout title="Search">
       <div className="mx-2 mt-6">
         <SearchBar setKeyword={setKeyword} />
       </div>

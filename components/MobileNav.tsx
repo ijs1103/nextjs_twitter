@@ -3,7 +3,7 @@ import React from "react";
 
 function MobileNav() {
   return (
-    <div className="sm:hidden h-[55px] fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black '' border-t border-gray-600">
+    <div className="z-20 sm:hidden h-[55px] fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black border-t border-gray-600">
       <Link href={'/tweets'}>
         <a
           className="px-2 py-2 transition-all duration-500 rounded-full hover:bg-blue-800 hover:text-blue-300"
