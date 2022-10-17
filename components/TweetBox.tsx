@@ -213,7 +213,7 @@ function TweetBox({
               </div>
             )}
             <AnimatePresence>
-              {photo ? <TweetPhoto url={photo} /> : null}
+              {photo ? <TweetPhoto url={photo} isDetail={isDetail} /> : null}
             </AnimatePresence>
 
             {isDetail && (
