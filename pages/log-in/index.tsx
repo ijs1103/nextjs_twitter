@@ -14,7 +14,7 @@ interface LoginForm {
 
 function Login() {
   const router = Router;
-  const [login, { data, loading }] = useMutation("/api/users/log-in");
+  const [login, { data }] = useMutation("/api/users/log-in");
   const [method, setMethod] = useState<"phone" | "email">("phone");
   const [stage, setStage] = useState<1 | 2>(1);
   const [isSubmitted, setIsSubmitted] = useState(false);

@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -8,4 +12,4 @@ module.exports = {
       "lh3.googleusercontent.com", // google 프로필 이미지
     ],
   },
-};
+});

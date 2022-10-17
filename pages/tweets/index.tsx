@@ -24,10 +24,10 @@ const Home: NextPage = () => {
   const [popupOn, setPopupOn] = useState(false);
   const popupToggle = useCallback(() => setPopupOn((prev) => !prev), []);
   /* 트위터 생성 관련 */
-  const [createTweet, { loading, data: mutateData, error: mutateError }] =
+  const [createTweet, { data: mutateData }] =
     useMutation<MutationResult>("/api/tweets");
   /* 로그아웃 관련 */
-  const [logout, { data: logoutData, error: logoutError }] = useMutation<{
+  const [logout, { data: logoutData }] = useMutation<{
     ok: boolean;
   }>("/api/users/log-out");
   useEffect(() => {

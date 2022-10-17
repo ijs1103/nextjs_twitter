@@ -25,9 +25,9 @@ interface IBirth {
 }
 export default function SignupForm() {
   const router = Router;
-  const [signup, { data, loading }] = useMutation("/api/create-account");
-  const [sendCode, { data: sendCodeData, loading: sendCodeLoading }] = useMutation("/api/create-account/createCode");
-  const [checkCode, { data: checkCodeData, loading: checkCodeLoading }] = useMutation("/api/create-account/checkCode");
+  const [signup, { data }] = useMutation("/api/create-account");
+  const [sendCode, { data: sendCodeData }] = useMutation("/api/create-account/createCode");
+  const [checkCode, { data: checkCodeData }] = useMutation("/api/create-account/checkCode");
   const [method, setMethod] = useState<"phone" | "email">("email");
   const [stage, setStage] = useState<1 | 2 | 3>(1);
   const [isSubmitted, setIsSubmitted] = useState(false);

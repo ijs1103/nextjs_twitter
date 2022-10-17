@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import client from "@libs/db";
 import { withApiSession } from "@libs/withSession";
-import { authOptions } from "pages/api/auth/[...nextauth]";
-import { unstable_getServerSession } from "next-auth/next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
