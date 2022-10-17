@@ -6,7 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 import TweetPhoto from "./TweetPhoto";
 import axios from "axios";
 import { BUCKET_URL } from "@libs/constants";
-import EmojiPicker from "./EmojiPicker";
+import dynamic from 'next/dynamic'
 
 interface TweetForm {
   payload: string;
@@ -70,6 +70,10 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
     setValue("payload", newPayload);
     setEmojiOn(false);
   }
+  const EmojiPicker = dynamic(() => import('./EmojiPicker'));
+  const handleEmojiClick = () => {
+    setEmojiOn(true)
+  }
   return (
     <>
       <form
@@ -123,7 +127,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
               </div>
               <div className="flex-1 py-2 m-2 text-center">
                 <span
-                  onClick={() => setEmojiOn(true)}
+                  onClick={handleEmojiClick}
                   className="flex items-center justify-center px-2 py-2 mt-1 text-base font-medium leading-6 text-blue-400 rounded-full cursor-pointer group hover:bg-blue-800 hover:text-blue-300"
                 >
                   <svg

@@ -7,7 +7,7 @@ import TermsOfService from "@components/TermsOfService";
 import useMutation from "@libs/useMutation";
 import { FunctionalUpdateFn } from "@libs/types";
 import Button from "@components/Button";
-import CodeModal from "@components/CodeModal";
+import dynamic from 'next/dynamic'
 
 interface SignupForm {
   name: string;
@@ -24,6 +24,7 @@ interface IBirth {
   year: number;
 }
 export default function SignupForm() {
+  const CodeModal = dynamic(() => import('../../components/CodeModal'))
   const router = Router;
   const [signup, { data }] = useMutation("/api/create-account");
   const [sendCode, { data: sendCodeData }] = useMutation("/api/create-account/createCode");
