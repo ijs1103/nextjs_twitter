@@ -18,6 +18,7 @@ function Avatar({ url, isBig = false }: Props) {
 					layout='fill'
 					blurDataURL={BLUR_DATA_URL}
 					placeholder='blur'
+					priority={isBig ? true : false}
 				/>
 			</div> :
 			<div className={cls('cursor-pointer flex items-center justify-center p-1 rounded-full bg-gray-500 ', isBig ? 'w-24 h-24' : 'w-10 h-10')}>
