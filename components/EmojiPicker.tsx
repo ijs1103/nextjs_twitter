@@ -1,6 +1,4 @@
-import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
-
 interface Props {
 	setter: (emoji: string) => void;
 	onClose: () => void;
@@ -9,6 +7,12 @@ interface Props {
 function EmojiPicker({ setter, onClose }: Props) {
 	const handleSelect = (emoji: any) => {
 		setter(emoji.native);
+	}
+	const data = async () => {
+		const response = await fetch(
+			'https://cdn.jsdelivr.net/npm/@emoji-mart/data',
+		)
+		return response.json()
 	}
 	return (
 		<div className='fixed z-10 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
