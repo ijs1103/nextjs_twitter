@@ -7,6 +7,7 @@ import TweetPhoto from "./TweetPhoto";
 import axios from "axios";
 import { BUCKET_URL } from "@libs/constants";
 import dynamic from 'next/dynamic'
+import { throttle } from "lodash";
 
 interface TweetForm {
   payload: string;
@@ -60,11 +61,11 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
     reset();
     setPreviewUrl('');
   };
-  const handleResizeHeight = useCallback((event: any) => {
+  const handleResizeHeight = useCallback(throttle((event: any) => {
     if (event === null || event.target === null) return;
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
-  }, []);
+  }, 500), []);
   const setEmojiToInput = useCallback((emoji: string) => {
     const newPayload = getValues("payload") + emoji;
     setValue("payload", newPayload);
