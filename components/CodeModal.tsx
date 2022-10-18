@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import Button from './Button';
 import Input from './Input';
 import type { UseFormRegisterReturn } from "react-hook-form";
@@ -29,4 +29,4 @@ function CodeModal({ onClose, getCode, register, onCheckCode }: Props) {
 	)
 }
 
-export default CodeModal
+export default memo(CodeModal)

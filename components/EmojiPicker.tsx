@@ -1,4 +1,5 @@
 import Picker from '@emoji-mart/react'
+import { memo } from 'react';
 interface Props {
 	setter: (emoji: string) => void;
 	onClose: () => void;
@@ -22,4 +23,4 @@ function EmojiPicker({ setter, onClose }: Props) {
 	)
 }
 
-export default EmojiPicker
+export default memo(EmojiPicker);

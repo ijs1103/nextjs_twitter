@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import MobileLayout from "@components/MobileLayout";
 import { useRouter } from "next/router";
 import useMutation from "@libs/useMutation";
@@ -28,9 +28,9 @@ function TweetDelete() {
       alert(data.error);
     }
   }, [data]);
-  const onCancel = () => {
+  const onCancel = useCallback(() => {
     router.back();
-  };
+  }, []);
   return (
     <MobileLayout>
       <div className="mt-[200px] flex flex-col items-center">

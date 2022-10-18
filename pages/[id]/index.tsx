@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import MobileLayout from "@components/MobileLayout";
 import { UserWith } from "@libs/interfaces";
 import Button from "@components/Button";
@@ -40,14 +40,14 @@ const Profile = (props: ServerSideProps) => {
     return Boolean(profile.followers.find(cur => cur.id === logginedId))
   }, [profile])
   const [isFollowing, setIsFollowing] = useState(computedIsFollowing)
-  const handleFollow = () => {
+  const handleFollow = useCallback(() => {
     follow({ id: userId })
     setIsFollowing(true)
-  }
-  const handleUnFollow = () => {
+  }, [userId]);
+  const handleUnFollow = useCallback(() => {
     unFollow({ id: userId })
     setIsFollowing(false)
-  }
+  }, [userId]);
   const { query: { tab } } = router;
   const isTabTweets = !tab;
   const isTabReplies = tab === "replies";
@@ -58,9 +58,9 @@ const Profile = (props: ServerSideProps) => {
     setPrevUrl(isTabTweets ? '/tweets' : `/${userId}`);
   }, [tab])
   const [isModalOn, setIsModalOn] = useState(false)
-  const handleEditProfile = () => {
+  const handleEditProfile = useCallback(() => {
     setIsModalOn(true);
-  }
+  }, []);
   // editedimage:방금 변경한 프로필 이미지 url
   const editedAvatar = useRecoilValue(editedAvatarState)
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useState, useEffect, useRef, ChangeEvent, memo } from "react";
 import Button from "@components/Button";
 import useMutation from "@libs/useMutation";
 import AvatarEditor from "react-avatar-editor";
@@ -169,4 +169,4 @@ function ProfileModal({ onClose, nickName, avatarUrl }: Props) {
   );
 }
 
-export default ProfileModal;
+export default memo(ProfileModal);

@@ -73,3 +73,7 @@ export interface CommentsResponse {
   comments: CommentWith[];
   total: number;
 }
+export interface createTweetBody {
+  payload: string;
+  photo?: string;
+}

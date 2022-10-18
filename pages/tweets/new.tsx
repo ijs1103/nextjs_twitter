@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import TweetForm from "@components/TweetForm";
 import MobileLayout from "@components/MobileLayout";
 import useMutation from "@libs/useMutation";
-import { MutationResult } from "@libs/interfaces";
+import { MutationResult, createTweetBody } from "@libs/interfaces";
 import { useEffect } from "react";
 import { ProfileResponse } from "@libs/interfaces";
 import useSWR from "swr";
@@ -19,10 +19,10 @@ function createTweet() {
     }
     if (error) alert(error)
   }, [data]);
-
+  const onCreateTweet = useCallback((data: createTweetBody) => createTweet(data), []);
   return (
     <MobileLayout title={'Write'}>
-      <TweetForm isCreatePage={true} onCreateTweet={createTweet} image={myInfo?.profile.image} />
+      <TweetForm isCreatePage onCreateTweet={onCreateTweet} image={myInfo?.profile.image} />
     </MobileLayout>
   );
 }

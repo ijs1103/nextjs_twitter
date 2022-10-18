@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 
 interface Props {
   setKeyword?: (keyword: string) => void;
@@ -54,4 +54,4 @@ function SearchBar({ setKeyword, isInMain = false }: Props) {
   );
 }
 
-export default SearchBar;
+export default memo(SearchBar);

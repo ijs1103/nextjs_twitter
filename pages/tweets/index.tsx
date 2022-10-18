@@ -7,7 +7,7 @@ import Header from "@components/Header";
 import useMutation from "@libs/useMutation";
 import { cls } from "@libs/utils";
 import Popup from "@components/Popup";
-import { MutationResult } from "@libs/interfaces";
+import { MutationResult, createTweetBody } from "@libs/interfaces";
 import Link from "next/link";
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -26,6 +26,7 @@ const Home: NextPage = () => {
   /* 트위터 생성 관련 */
   const [createTweet, { data: mutateData }] =
     useMutation<MutationResult>("/api/tweets");
+  const onCreateTweet = useCallback((data: createTweetBody) => createTweet(data), []);
   /* 로그아웃 관련 */
   const [logout, { data: logoutData }] = useMutation<{
     ok: boolean;
@@ -275,7 +276,7 @@ const Home: NextPage = () => {
         {/* center */}
         <section className="ml-[80px] lg:ml-[300px] w-full lg:w-3/5 border-x border-gray-700">
           <Header />
-          <TweetForm onCreateTweet={createTweet} image={user?.image} />
+          <TweetForm onCreateTweet={onCreateTweet} image={user?.image} />
           <InfiniteScrollList dataType="tweets" newData={mutateData} url={`/api/tweets`} />
         </section>
         {/* floating button */}

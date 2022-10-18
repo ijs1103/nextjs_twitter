@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
 import Input from "@components/Input";
@@ -51,7 +51,7 @@ export default function SignupForm() {
     const birth = form.birth.split(".").join("");
     signup({ ...form, birth });
   };
-  const onSetBirth = (Fn: FunctionalUpdateFn) => setBirth(Fn);
+  const onSetBirth = useCallback((Fn: FunctionalUpdateFn) => setBirth(Fn), []);
   const onGoback = () => {
     switch (stage) {
       case 1:
@@ -83,28 +83,28 @@ export default function SignupForm() {
     method === "phone" ? setMethod("email") : setMethod("phone");
     setIsCodeChecked(false);
   };
-  const onSetStage = () => {
+  const onSetStage = useCallback(() => {
     if (stage !== 3) return;
     setStage(1);
-  };
-  const handleSendCode = () => {
+  }, [stage]);
+  const handleSendCode = useCallback(() => {
     const value = method === 'email' ? getValues('email') : getValues('phone');
     // 이메일이나 휴대폰 input이 빈값일때 얼리리턴
     if (!value) return;
     sendCode({ [method]: value });
-  }
+  }, [method]);
   useEffect(() => {
     if (sendCodeData?.ok) {
       alert('해당 이메일/휴대폰으로 6자리 인증번호가 발송되었습니다.');
       setCodeModalOn(true);
     }
   }, [sendCodeData]);
-  const onCheckCode = () => {
+  const onCheckCode = useCallback(() => {
     const code = getValues('code');
     if (!code) return;
     const value = method === 'email' ? getValues('email') : getValues('phone');
     checkCode({ number: code, [method]: value });
-  }
+  }, [method]);
   useEffect(() => {
     if (!checkCodeData) return;
     if (checkCodeData.ok) {

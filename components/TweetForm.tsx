@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { cls } from "@libs/utils";
 import Avatar from "@components/Avatar";
 import { AnimatePresence } from 'framer-motion';
@@ -65,11 +65,11 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
   }, []);
-  const setEmojiToInput = (emoji: string) => {
+  const setEmojiToInput = useCallback((emoji: string) => {
     const newPayload = getValues("payload") + emoji;
     setValue("payload", newPayload);
     setEmojiOn(false);
-  }
+  }, []);
   const EmojiPicker = dynamic(() => import('./EmojiPicker'));
   const handleEmojiClick = () => {
     setEmojiOn(true)
@@ -197,4 +197,4 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
   );
 }
 
-export default TweetForm;
+export default memo(TweetForm);
