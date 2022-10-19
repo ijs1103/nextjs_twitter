@@ -7,7 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={pageProps.session} basePath="/espace-personnel/api/auth">
       <SWRConfig
         value={{
           fetcher: (url: string) =>
