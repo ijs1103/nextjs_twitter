@@ -17,6 +17,7 @@ import SearchBar from "@components/common/SearchBar";
 import FloatingButton from "@components/common/FloatingButton";
 import { isSocialLogginedState } from "@components/states";
 import { signOut } from "next-auth/react";
+import { DEPLOY_URL } from "@libs/client/constants";
 
 const Home: NextPage = () => {
   const { user } = useUser();
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
   const isSocialLoggined = useRecoilValue(isSocialLogginedState)
   const socialLogOut = async () => {
     localStorage.removeItem('isSocialLoggined')
-    await signOut({ callbackUrl: 'http://localhost:3000' })
+    await signOut({ callbackUrl: DEPLOY_URL })
   }
   const handleLogOut = async () => {
     if (isSocialLoggined) await socialLogOut()

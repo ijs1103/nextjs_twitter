@@ -3,11 +3,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 model User {
   id            Int    @id @default(autoincrement())
@@ -58,7 +60,7 @@ model Tweet {
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   retweetId    Int? @unique
-  retweet      Tweet?        @relation("RetweetRelation", fields: [retweetId], references: [id])
+  retweet      Tweet?        @relation("RetweetRelation", fields: [retweetId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   originTweet Tweet? @relation("RetweetRelation")
   payload String
   photo String?
