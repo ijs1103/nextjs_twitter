@@ -1,10 +1,10 @@
 import { useEffect, useCallback } from "react";
 import useSWR, { mutate } from "swr";
-import TweetBox from "@components/TweetBox";
-import MobileLayout from "@components/MobileLayout";
+import TweetBox from "@components/tweet/TweetBox";
+import MobileLayout from "@components/layout/MobileLayout";
 import useMutation from "@libs/useMutation";
 import { TweetDetail, TweetWith } from "@libs/interfaces";
-import TweetForm from "@components/TweetForm";
+import TweetForm from "@components/tweet/TweetForm";
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { useSetRecoilState } from "recoil";
 import { currentTweetIdState } from "@components/states";

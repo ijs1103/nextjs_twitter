@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
-import Input from "@components/Input";
-import SelectOption from "@components/SelectOption";
-import TermsOfService from "@components/TermsOfService";
+import Input from "@components/common/Input";
+import SelectOption from "@components/auth/SelectOption";
+import TermsOfService from "@components/auth/TermsOfService";
 import useMutation from "@libs/useMutation";
 import { FunctionalUpdateFn } from "@libs/types";
-import Button from "@components/Button";
+import Button from "@components/common/Button";
 import dynamic from 'next/dynamic'
 
 interface SignupForm {
@@ -24,7 +24,7 @@ interface IBirth {
   year: number;
 }
 export default function SignupForm() {
-  const CodeModal = dynamic(() => import('../../components/CodeModal'))
+  const CodeModal = dynamic(() => import('../../components/auth/CodeModal'))
   const router = Router;
   const [signup, { data }] = useMutation("/api/create-account");
   const [sendCode, { data: sendCodeData }] = useMutation("/api/create-account/createCode");

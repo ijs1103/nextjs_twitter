@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import Button from './Button';
-import Input from './Input';
+import Button from '@components/common/Button';
+import Input from '@components/common/Input';
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 interface Props {

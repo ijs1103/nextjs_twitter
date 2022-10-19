@@ -3,16 +3,16 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { cls, parsedUpdatedAt } from "@libs/utils";
-import Button from "./Button";
+import Button from "@components/common/Button";
 import useMutation from "@libs/useMutation";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { prevUrlState, isCommentState } from "./states";
+import { prevUrlState, isCommentState } from "../states";
 import { ProfileResponse, TweetWith } from "@libs/interfaces";
 import useSWR from "swr";
-import Avatar from "@components/Avatar";
+import Avatar from "@components/common/Avatar";
 import { AnimatePresence } from 'framer-motion';
 import TweetPhoto from "./TweetPhoto";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
 // isRetweetd: 리트윗 당해진 원본 게시글인지 아닌지
 // isRetweet: 원본을 리트윗한 게시글인지 아닌지
@@ -66,7 +66,7 @@ function TweetBox({
   retweet,
   photo
 }: Props) {
-  const Popup = dynamic(() => import('./Popup'))
+  const Popup = dynamic(() => import('../common/Popup'))
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
   const [popupOn, setPopupOn] = useState(false);

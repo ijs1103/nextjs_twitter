@@ -1,5 +1,5 @@
 import Router from "next/router";
-import GoogleLoginBtn from "@components/GoogleLoginBtn";
+import GoogleLoginBtn from "@components/auth/GoogleLoginBtn";
 
 export default () => {
   const router = Router;

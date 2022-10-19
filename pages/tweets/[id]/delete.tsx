@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import MobileLayout from "@components/MobileLayout";
+import MobileLayout from "@components/layout/MobileLayout";
 import { useRouter } from "next/router";
 import useMutation from "@libs/useMutation";
 import Button from "@components/Button";

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
-import MobileLayout from "@components/MobileLayout";
+import MobileLayout from "@components/layout/MobileLayout";
 import { UserWith } from "@libs/interfaces";
 import Button from "@components/Button";
 import MyTweets from "@components/profile/MyTweets";
@@ -11,7 +11,7 @@ import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { withSsrSession } from "@libs/withSession";
 import client from "@libs/db";
-import Avatar from "@components/Avatar";
+import Avatar from "@components/common/Avatar";
 import { editedAvatarState } from "@components/states";
 import FloatingButton from "@components/FloatingButton";
 import { unstable_getServerSession } from "next-auth/next"

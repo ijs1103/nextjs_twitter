@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { prevUrlState } from "./states";
+import { prevUrlState } from "../states";
 interface Props {
   title?: string;
 }

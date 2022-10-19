@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import MobileLayout from "@components/MobileLayout";
+import MobileLayout from "@components/layout/MobileLayout";
 import SearchBar from "@components/SearchBar";
 import InfiniteScrollList from "@components/InfiniteScrollList";
 import { useRouter } from "next/router";
