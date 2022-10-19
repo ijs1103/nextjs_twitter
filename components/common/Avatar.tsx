@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { cls } from '@libs/utils'
+import { cls } from '@libs/client/utils'
 import { BLUR_DATA_URL } from '@libs/client/constants'
 
 interface Props {

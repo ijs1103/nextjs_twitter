@@ -1,4 +1,4 @@
-import InfiniteScrollList from "@components/InfiniteScrollList";
+import InfiniteScrollList from "@components/common/InfiniteScrollList";
 import { useRouter } from "next/router";
 
 function Replies() {

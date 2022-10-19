@@ -2,7 +2,7 @@
 // import twilio from "twilio";
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
-import client from "@libs/db";
+import client from "@libs/client/db";
 
 // mail.setApiKey(process.env.SENDGRID_KEY!);
 // const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);

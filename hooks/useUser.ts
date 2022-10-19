@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { ProfileResponse } from "@libs/interfaces";
+import { ProfileResponse } from "@libs/client/interfaces";
 import useSWR from "swr";
 import { USE_USER_URL } from "../libs/client/constants";
 

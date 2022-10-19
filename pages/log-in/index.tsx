@@ -3,7 +3,7 @@ import Router from "next/router";
 import useMutation from "hooks/useMutation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import Input from "@components/Input";
+import Input from "@components/common/Input";
 import GoogleLoginBtn from "@components/auth/GoogleLoginBtn";
 
 interface LoginForm {

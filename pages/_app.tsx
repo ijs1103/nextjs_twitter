@@ -1,7 +1,7 @@
 import { SWRConfig } from "swr";
 import { RecoilRoot } from 'recoil';
 import "../global.css";
-import MobileNav from "@components/MobileNav";
+import MobileNav from "@components/layout/MobileNav";
 import type { AppProps } from "next/app";
 import { SessionProvider } from 'next-auth/react';
 

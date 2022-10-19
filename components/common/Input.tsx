@@ -1,6 +1,6 @@
 import type { UseFormRegisterReturn } from "react-hook-form";
 import { memo, useState } from "react";
-import { cls } from "@libs/utils";
+import { cls } from "@libs/client/utils";
 interface Props {
   id: string;
   label: string;

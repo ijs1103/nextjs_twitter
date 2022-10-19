@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import MobileLayout from "@components/layout/MobileLayout";
-import SearchBar from "@components/SearchBar";
-import InfiniteScrollList from "@components/InfiniteScrollList";
+import SearchBar from "@components/common/SearchBar";
+import InfiniteScrollList from "@components/common/InfiniteScrollList";
 import { useRouter } from "next/router";
-import FloatingButton from "@components/FloatingButton";
+import FloatingButton from "@components/common/FloatingButton";
 
 function search() {
   const router = useRouter();

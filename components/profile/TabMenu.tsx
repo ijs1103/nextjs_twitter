@@ -1,4 +1,4 @@
-import { cls } from "@libs/utils";
+import { cls } from "@libs/client/utils";
 import Link from "next/link";
 import { memo } from "react";
 
@@ -10,7 +10,7 @@ interface Props {
 function TabMenu({ url, isCurrent, children }: Props) {
   return (
     <Link href={url}>
-      <a className="transition duration-300 py-3 text-center flex-1 hover:bg-gray-800">
+      <a className="flex-1 py-3 text-center transition duration-300 hover:bg-gray-800">
         <li>
           <span
             className={cls(

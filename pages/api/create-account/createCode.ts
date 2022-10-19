@@ -1,8 +1,8 @@
 import twilio from "twilio";
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
-import client from "@libs/db";
-import smtpTransport from "@libs/email";
+import client from "@libs/client/db";
+import smtpTransport from "@libs/client/email";
 
 async function handler(
   req: NextApiRequest,

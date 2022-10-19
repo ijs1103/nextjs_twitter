@@ -4,9 +4,9 @@ import { SWRInfiniteKeyLoader } from "swr/infinite";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 import Loader from "@components/tweet/Loader";
 import TweetBox from "@components/tweet/TweetBox";
-import NotFound from "@components/NotFound";
+import NotFound from "@components/common/NotFound";
 import useSWR from "swr";
-import { ProfileResponse, MutationResult } from "@libs/interfaces";
+import { ProfileResponse, MutationResult } from "@libs/client/interfaces";
 
 interface Props {
   url: string;

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import MobileLayout from "@components/layout/MobileLayout";
-import { UserWith } from "@libs/interfaces";
-import Button from "@components/Button";
+import { UserWith } from "@libs/client/interfaces";
+import Button from "@components/common/Button";
 import MyTweets from "@components/profile/MyTweets";
 import TabMenu from "@components/profile/TabMenu";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -10,10 +10,10 @@ import useMutation from "hooks/useMutation";
 import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import { withSsrSession } from "@libs/server/withSession";
-import client from "@libs/db";
+import client from "@libs/client/db";
 import Avatar from "@components/common/Avatar";
 import { editedAvatarState } from "@components/states";
-import FloatingButton from "@components/FloatingButton";
+import FloatingButton from "@components/common/FloatingButton";
 import { unstable_getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import dynamic from 'next/dynamic'
