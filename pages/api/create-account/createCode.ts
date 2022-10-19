@@ -41,17 +41,19 @@ async function handler(
       subject: "Next Twitter Authentication Email",
       text: `Authentication Code : ${number}`,
     };
-    const result = smtpTransport.sendMail(mailOptions, (error, responses) => {
-      if (error) {
-        console.log(error);
-        return null;
-      } else {
-        console.log(responses);
-        return null;
-      }
+    const result = await new Promise((resolve, reject) => {
+      smtpTransport.sendMail(mailOptions, (error, responses) => {
+        if (error) {
+          console.log(error);
+          reject(error);
+        } else {
+          console.log(responses);
+          resolve(responses);
+        }
+      });
     });
     smtpTransport.close();
-    console.log(result);
+    console.log("result", result);
   }
   return res.json({
     ok: true,
