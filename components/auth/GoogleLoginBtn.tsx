@@ -1,3 +1,4 @@
+import { DEPLOY_URL } from '@libs/client/constants';
 import useMutation from 'hooks/useMutation';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -6,7 +7,7 @@ import { useEffect } from 'react'
 function GoogleLoginBtn() {
 	const router = useRouter();
 	const handleGoogleLogin = async () => {
-		await signIn("google", { callbackUrl: 'http://localhost:3000' })
+		await signIn("google", { callbackUrl: DEPLOY_URL })
 	}
 	const [socialLogin] = useMutation("/api/users/socialLogin");
 	const { data: session } = useSession();
