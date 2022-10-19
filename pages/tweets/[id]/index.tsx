@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import useSWR, { mutate } from "swr";
 import TweetBox from "@components/tweet/TweetBox";
 import MobileLayout from "@components/layout/MobileLayout";
-import useMutation from "@libs/useMutation";
+import useMutation from "hooks/useMutation";
 import { TweetDetail, TweetWith } from "@libs/interfaces";
 import TweetForm from "@components/tweet/TweetForm";
 import InfiniteScrollList from "@components/InfiniteScrollList";
@@ -10,7 +10,7 @@ import { useSetRecoilState } from "recoil";
 import { currentTweetIdState } from "@components/states";
 import { ProfileResponse } from "@libs/interfaces";
 import type { GetServerSidePropsContext } from "next";
-import { withSsrSession } from "@libs/withSession";
+import { withSsrSession } from "@libs/server/withSession";
 import client from "@libs/db";
 
 interface ServerSideProps {

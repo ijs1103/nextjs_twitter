@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import TweetForm from "@components/tweet/TweetForm";
 import MobileLayout from "@components/layout/MobileLayout";
-import useMutation from "@libs/useMutation";
+import useMutation from "hooks/useMutation";
 import { MutationResult, createTweetBody } from "@libs/interfaces";
 import { useEffect } from "react";
 import { ProfileResponse } from "@libs/interfaces";

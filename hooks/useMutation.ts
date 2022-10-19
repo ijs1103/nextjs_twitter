@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Method } from "@libs/withHandler";
+import { Method } from "@libs/server/withHandler";
 interface UseMutationState<T> {
   loading: boolean;
   data?: T;

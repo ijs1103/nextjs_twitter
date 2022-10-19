@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import Input from "@components/common/Input";
 import SelectOption from "@components/auth/SelectOption";
 import TermsOfService from "@components/auth/TermsOfService";
-import useMutation from "@libs/useMutation";
-import { FunctionalUpdateFn } from "@libs/types";
+import useMutation from "hooks/useMutation";
+import { FunctionalUpdateFn } from "@libs/client/types";
 import Button from "@components/common/Button";
 import dynamic from 'next/dynamic'
 

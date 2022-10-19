@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import useSWRInfinite from "swr/infinite";
 import { SWRInfiniteKeyLoader } from "swr/infinite";
-import useIntersectionObserver from "@libs/useIntersectionObserver";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 import Loader from "@components/tweet/Loader";
 import TweetBox from "@components/tweet/TweetBox";
 import NotFound from "@components/NotFound";

@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, ChangeEvent, memo } from "react";
 import Button from "@components/common/Button";
-import useMutation from "@libs/useMutation";
+import useMutation from "hooks/useMutation";
 import AvatarEditor from "react-avatar-editor";
 import { useForm } from "react-hook-form";
 import Input from "@components/common/Input";
 import Avatar from "@components/common/Avatar";
 import axios from "axios";
-import { BUCKET_URL } from "@libs/constants";
+import { BUCKET_URL } from "@libs/client/constants";
 import { editedAvatarState } from "@components/states";
 import { useSetRecoilState } from "recoil";
 

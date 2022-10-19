@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect, useCallback, memo } from "react";
-import { cls } from "@libs/utils";
+import { cls } from "@libs/client/utils";
 import Avatar from "@components/common/Avatar";
 import { AnimatePresence } from 'framer-motion';
 import TweetPhoto from "./TweetPhoto";
 import axios from "axios";
-import { BUCKET_URL } from "@libs/constants";
+import { BUCKET_URL } from "@libs/client/constants";
 import dynamic from 'next/dynamic'
 import { throttle } from "lodash";
 

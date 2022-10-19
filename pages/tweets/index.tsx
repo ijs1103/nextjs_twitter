@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import useUser from "@libs/useUser";
+import useUser from "hooks/useUser";
 import { useRouter } from "next/router";
 import { useCallback, useState, useEffect } from "react";
 import TweetForm from "@components/tweet/TweetForm";
 import Header from "@components/layout/Header";
-import useMutation from "@libs/useMutation";
+import useMutation from "hooks/useMutation";
 import { cls } from "@libs/utils";
 import Popup from "@components/Popup";
 import { MutationResult, createTweetBody } from "@libs/interfaces";

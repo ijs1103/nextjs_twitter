@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { BLUR_DATA_URL } from '@libs/constants'
+import { BLUR_DATA_URL } from '@libs/client/constants'
 
 interface Props {
 	url: string;

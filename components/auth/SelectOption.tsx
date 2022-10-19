@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { FunctionalUpdateFn } from "@libs/types";
+import { FunctionalUpdateFn } from "@libs/client/types";
 
 interface Props {
   id: "month" | "date" | "year";

@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import MobileLayout from "@components/layout/MobileLayout";
 import { useRouter } from "next/router";
-import useMutation from "@libs/useMutation";
+import useMutation from "hooks/useMutation";
 import Button from "@components/Button";
 import { useRecoilValue } from "recoil";
 import { currentTweetIdState, isCommentState, prevUrlState } from "@components/states";

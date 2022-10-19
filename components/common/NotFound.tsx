@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { NOTFOUND_URL, BLUR_DATA_URL } from '@libs/constants'
+import { NOTFOUND_URL, BLUR_DATA_URL } from '@libs/client/constants'
 
 function NotFound() {
 	return (

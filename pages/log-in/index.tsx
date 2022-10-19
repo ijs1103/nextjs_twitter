@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Router from "next/router";
-import useMutation from "@libs/useMutation";
+import useMutation from "hooks/useMutation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Input from "@components/Input";
