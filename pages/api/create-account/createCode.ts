@@ -9,7 +9,6 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { phone, email } = req.body;
-  console.log("email", email);
   // 이메일, 전화번호 둘다 존재하지 않으면 얼리 리턴
   if (!phone && !email) return res.status(400).json({ ok: false });
   const number = Math.floor(100000 + Math.random() * 900000) + "";
@@ -31,7 +30,6 @@ async function handler(
       to: process.env.NEXT_PUBLIC_MY_PHONE!,
       body: `회원가입 인증번호는 ${number} 입니다.`,
     });
-    console.log(message);
   }
 
   if (email) {
@@ -53,7 +51,6 @@ async function handler(
       });
     });
     smtpTransport.close();
-    console.log("result", result);
   }
   return res.json({
     ok: true,
