@@ -17,7 +17,7 @@ function SearchBar({ setKeyword, isInMain = false }: Props) {
   }
   const handleReset = () => {
     if (!inputRef.current) return;
-    inputRef.current.value = ;
+    inputRef.current.value = '';
   }
   return (
     <div className="relative w-full">

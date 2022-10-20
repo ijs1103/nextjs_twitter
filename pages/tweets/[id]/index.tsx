@@ -12,6 +12,8 @@ import { ProfileResponse } from "@libs/client/interfaces";
 import type { GetServerSidePropsContext } from "next";
 import { withSsrSession } from "@libs/server/withSession";
 import client from "@libs/client/db";
+import Head from "next/head";
+Head
 
 interface ServerSideProps {
   tweetId: number
@@ -58,29 +60,35 @@ function TweetDetail({ tweetId, tweet, isLiked, isMyTweet, isRetweeted }: Server
   }, []);
 
   return (
-    <MobileLayout title={'Detail'}>
-      <TweetBox
-        key={tweet.id}
-        id={tweet.id}
-        userId={tweet.user.id}
-        userName={tweet.user.name}
-        nickName={tweet.user.nickName}
-        image={tweet.user.image}
-        payload={tweet.payload}
-        updatedAt={tweet.updatedAt}
-        isLiked={isLiked}
-        isRetweeted={isRetweeted}
-        onLikeClick={onLikeClick}
-        onRetweetClick={onRetweetClick}
-        onEdit={onEdit}
-        isMyTweet={isMyTweet}
-        photo={tweet.photo}
-        isDetail
-      />
-      {/* 댓글 */}
-      <TweetForm isCreatePage onCreateTweet={onCreateComment} image={myInfo?.profile.image} isComment />
-      <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail isComment />
-    </MobileLayout>
+    <>
+      <Head>
+        <title>{tweet.user.nickName}의 게시글</title>
+        <meta name="description" content={tweet.payload} />
+      </Head>
+      <MobileLayout title={'Detail'}>
+        <TweetBox
+          key={tweet.id}
+          id={tweet.id}
+          userId={tweet.user.id}
+          userName={tweet.user.name}
+          nickName={tweet.user.nickName}
+          image={tweet.user.image}
+          payload={tweet.payload}
+          updatedAt={tweet.updatedAt}
+          isLiked={isLiked}
+          isRetweeted={isRetweeted}
+          onLikeClick={onLikeClick}
+          onRetweetClick={onRetweetClick}
+          onEdit={onEdit}
+          isMyTweet={isMyTweet}
+          photo={tweet.photo}
+          isDetail
+        />
+        {/* 댓글 */}
+        <TweetForm isCreatePage onCreateTweet={onCreateComment} image={myInfo?.profile.image} isComment />
+        <InfiniteScrollList newData={newComment} dataType="comments" url={`/api/comments/${tweetId}`} isDetail isComment />
+      </MobileLayout>
+    </>
   );
 }
 
