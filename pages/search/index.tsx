@@ -7,7 +7,7 @@ import FloatingButton from "@components/common/FloatingButton";
 
 function search() {
   const router = useRouter();
-  const [keyword, setKeyword] = useState(router.query.keyword ?? )
+  const [keyword, setKeyword] = useState(router.query.keyword ?? '')
   const onSetKeyWord = useCallback((keyword: string) => { setKeyword(keyword) }, []);
   return (
     <MobileLayout title="Search">

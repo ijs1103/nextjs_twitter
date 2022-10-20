@@ -131,7 +131,7 @@ const Profile = (props: ServerSideProps) => {
       </div>
 
       {isMyProfile && isModalOn &&
-        <ProfileModal avatarUrl={profile.image} nickName={profile.nickName || } onClose={() => setIsModalOn(false)} />
+        <ProfileModal avatarUrl={profile.image} nickName={profile.nickName || ''} onClose={() => setIsModalOn(false)} />
       }
       <FloatingButton />
     </MobileLayout>
@@ -147,7 +147,7 @@ export const getServerSideProps = withSsrSession(async function ({ query, req, r
   // 소셜 로그인 했을때 
   if (nextAuthSession) {
     const logginedUser = await client.user.findUnique({
-      where: { email: nextAuthSession.user?.email +  },
+      where: { email: nextAuthSession.user?.email + '' },
       select: {
         id: true
       }
