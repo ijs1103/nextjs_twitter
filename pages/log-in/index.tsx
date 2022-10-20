@@ -53,7 +53,7 @@ function Login() {
   };
 
   return (
-    <div className="w-full max-w-xl min-h-screen mx-auto '' bg-black px-12 py-2">
+    <div className="w-full max-w-xl min-h-screen mx-auto  bg-black px-12 py-2">
       <button
         onClick={onGoback}
         className="px-1 py-1 transition border border-black rounded-full hover:bg-gray-800"

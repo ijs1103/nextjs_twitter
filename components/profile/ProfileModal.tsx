@@ -22,8 +22,8 @@ interface Props {
 function ProfileModal({ onClose, nickName, avatarUrl }: Props) {
   const setEditedAvatar = useSetRecoilState(editedAvatarState)
   const avatarEditorRef = useRef<any>(null);
-  const [previewUrl, setPreviewUrl] = useState('')
-  const [croppedPreviewUrl, setCroppedPreviewUrl] = useState('')
+  const [previewUrl, setPreviewUrl] = useState()
+  const [croppedPreviewUrl, setCroppedPreviewUrl] = useState()
   const [croppedFile, setCroppedFile] = useState<File | null>(null)
   const [scale, setScale] = useState(1)
   const [mode, setMode] = useState<'default' | 'cropMode'>('default')
@@ -38,7 +38,7 @@ function ProfileModal({ onClose, nickName, avatarUrl }: Props) {
   const avatar = watch('image');
   useEffect(() => {
     if (!avatar) return;
-    let blobUrl = ''
+    let blobUrl = 
     const file = avatar[0]
     blobUrl = URL.createObjectURL(file)
     setPreviewUrl(blobUrl)
@@ -54,7 +54,7 @@ function ProfileModal({ onClose, nickName, avatarUrl }: Props) {
   const onValid = async (form: EditForm) => {
     // 프로필과 닉네임 모두 변경하지 않았을시 early return 
     if (!croppedFile && nickName === form.nickName) return
-    let newAvatar = ''
+    let newAvatar = 
     if (croppedFile) {
       const { data: { url, objectName } } = await axios.post('/api/profile/uploadAvatar', { name: croppedFile.name, type: croppedFile.type })
       await axios.put(url, croppedFile, {

@@ -339,7 +339,7 @@ export default function SignupForm() {
             <button
               disabled={!isValid || (birth && Object.keys(birth).length !== 3) || !isCodeChecked}
               onClick={onGoNext}
-              className="w-full bg-blue-500 disabled:opacity-30 '' font-bold px-2 py-3 rounded-3xl"
+              className="w-full bg-blue-500 disabled:opacity-30  font-bold px-2 py-3 rounded-3xl"
             >
               {stage !== 3 ? "다음" : "가입"}
             </button>

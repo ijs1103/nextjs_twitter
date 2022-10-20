@@ -63,7 +63,7 @@ const Home: NextPage = () => {
         <section className="z-10 top-0 left-0 fixed h-full w-[80px] lg:w-[300px] py-4">
           <svg
             viewBox="0 0 24 24"
-            className="w-10 h-10 mx-auto ''"
+            className="w-10 h-10 mx-auto "
             fill="currentColor"
           >
             <g>
@@ -213,7 +213,7 @@ const Home: NextPage = () => {
             </a>
             <div className="flex justify-center">
               <Link href="/tweets/new">
-                <a className="mt-5 text-center bg-blue-400 lg:w-48 hover:bg-blue-600 '' font-bold py-2 px-2 lg:px-4 rounded-full">
+                <a className="px-2 py-2 mt-5 font-bold text-center bg-blue-400 rounded-full lg:w-48 hover:bg-blue-600 lg:px-4">
                   <span className="hidden lg:block">Tweet</span>
                   <svg
                     viewBox="0 0 24 24"
@@ -291,14 +291,14 @@ const Home: NextPage = () => {
           <div className="max-w-sm m-4 mr-20 overflow-hidden bg-gray-800 rounded-lg shadow-lg">
             <div className="flex">
               <div className="flex-1 m-2">
-                <h2 className="w-48 px-4 py-2 text-xl font-semibold ''">
+                <h2 className="w-48 px-4 py-2 text-xl font-semibold ">
                   Trends for you
                 </h2>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a
                   onClick={e => e.preventDefault}
-                  className="text-2xl rounded-full '' hover:bg-black hover:text-blue-300 float-right"
+                  className="float-right text-2xl rounded-full hover:bg-black hover:text-blue-300"
                 >
                   <svg
                     className="w-6 h-6 m-2"
@@ -321,7 +321,7 @@ const Home: NextPage = () => {
                 <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="w-48 px-4 ml-2 font-bold ''">#React</h2>
+                <h2 className="w-48 px-4 ml-2 font-bold ">#React</h2>
                 <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   5,466 Tweets
                 </p>
@@ -352,7 +352,7 @@ const Home: NextPage = () => {
                 <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="w-48 px-4 ml-2 font-bold ''">#Typescript</h2>
+                <h2 className="w-48 px-4 ml-2 font-bold ">#Typescript</h2>
                 <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   8,464 Tweets
                 </p>
@@ -383,7 +383,7 @@ const Home: NextPage = () => {
                 <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="w-48 px-4 ml-2 font-bold ''">#Vue</h2>
+                <h2 className="w-48 px-4 ml-2 font-bold ">#Vue</h2>
                 <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   5,586 Tweets
                 </p>
@@ -414,7 +414,7 @@ const Home: NextPage = () => {
                 <p className="w-48 px-4 mt-3 ml-2 text-xs text-gray-400">
                   Trending
                 </p>
-                <h2 className="w-48 px-4 ml-2 font-bold ''">#Next.js</h2>
+                <h2 className="w-48 px-4 ml-2 font-bold ">#Next.js</h2>
                 <p className="w-48 px-4 mb-3 ml-2 text-xs text-gray-400">
                   9,416 Tweets
                 </p>
@@ -452,7 +452,7 @@ const Home: NextPage = () => {
           <div className="max-w-sm m-4 mr-20 overflow-hidden bg-gray-800 rounded-lg shadow-lg">
             <div className="flex">
               <div className="flex-1 m-2">
-                <h2 className="w-48 px-4 py-2 text-xl font-semibold ''">
+                <h2 className="w-48 px-4 py-2 text-xl font-semibold ">
                   Who to follow
                 </h2>
               </div>
@@ -466,23 +466,23 @@ const Home: NextPage = () => {
                   <div>
                     <img
                       className="inline-block w-auto h-10 mt-2 ml-4 rounded-full"
-                      src="http://placeimg.com/640/480/any"
+                      src="https://placeimg.com/640/480/any"
                       alt=""
                     />
                   </div>
                   <div className="mt-3 ml-3">
-                    <p className="text-base font-medium leading-6 ''">
-                      Nomad Coder
+                    <p className="text-base font-medium leading-6 ">
+                      Elon Musk
                     </p>
                     <p className="text-sm font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300">
-                      @nico
+                      @elonmusk
                     </p>
                   </div>
                 </div>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a onClick={e => e.preventDefault} className="float-right ">
-                  <button className="bg-transparent hover:bg-blue-500 '' font-semibold hover:'' py-2 px-4 border border-white hover:border-transparent rounded-full">
+                  <button className="px-4 py-2 font-semibold bg-transparent border border-white rounded-full hover:bg-blue-500 hover: hover:border-transparent">
                     Follow
                   </button>
                 </a>
@@ -496,23 +496,23 @@ const Home: NextPage = () => {
                   <div>
                     <img
                       className="inline-block w-auto h-10 mt-2 ml-4 rounded-full"
-                      src="http://placeimg.com/640/480/any"
+                      src="https://placeimg.com/640/480/any"
                       alt=""
                     />
                   </div>
                   <div className="mt-3 ml-3">
-                    <p className="text-base font-medium leading-6 ''">
-                      Nomad Coder
+                    <p className="text-base font-medium leading-6 ">
+                      SpaceX
                     </p>
                     <p className="text-sm font-medium leading-5 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-300">
-                      @nico
+                      @SpaceX
                     </p>
                   </div>
                 </div>
               </div>
               <div className="flex-1 px-4 py-2 m-2">
                 <a onClick={e => e.preventDefault} className="float-right ">
-                  <button className="bg-transparent hover:bg-blue-500 '' font-semibold hover:'' py-2 px-4 border border-white hover:border-transparent rounded-full">
+                  <button className="px-4 py-2 font-semibold bg-transparent border border-white rounded-full hover:bg-blue-500 hover: hover:border-transparent">
                     Follow
                   </button>
                 </a>

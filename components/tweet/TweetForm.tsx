@@ -29,12 +29,12 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
     getValues,
     setValue
   } = useForm<TweetForm>({ mode: "onChange" });
-  const [previewUrl, setPreviewUrl] = useState('');
+  const [previewUrl, setPreviewUrl] = useState();
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [emojiOn, setEmojiOn] = useState(false);
   const fileWatch = watch('file');
   useEffect(() => {
-    let blobUrl = ''
+    let blobUrl = 
     if (fileWatch?.length) {
       const file = fileWatch[0]
       setUploadFile(file)
@@ -46,7 +46,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
     }
   }, [fileWatch]);
   const onValid = async (form: TweetForm) => {
-    let newTweetPhoto = ''
+    let newTweetPhoto = 
     if (uploadFile) {
       const { data: { url, objectName } } = await axios.post('/api/tweets/uploadPhoto', { name: uploadFile.name, type: uploadFile.type })
       await axios.put(url, uploadFile, {
@@ -59,7 +59,7 @@ function TweetForm({ isCreatePage = false, onCreateTweet, image, isComment = fal
     }
     onCreateTweet({ ...(newTweetPhoto && { photo: newTweetPhoto }), payload: form.payload })
     reset();
-    setPreviewUrl('');
+    setPreviewUrl();
   };
   const handleResizeHeight = useCallback(throttle((event: any) => {
     if (event === null || event.target === null) return;

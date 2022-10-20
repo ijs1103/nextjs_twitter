@@ -8,7 +8,7 @@ function FloatingButton() {
 	return (
 		<button
 			onClick={onMobileCreate}
-			className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400 '' font-bold py-4 px-4 rounded-full"
+			className="fixed z-[1] sm:hidden bottom-[80px] right-5 bg-blue-400  font-bold py-4 px-4 rounded-full"
 		>
 			<svg
 				viewBox="0 0 24 24"

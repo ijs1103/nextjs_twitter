@@ -231,7 +231,7 @@ function TweetBox({
           >
             <div className="flex items-center justify-around w-full lg:justify-start">
               <div className="flex items-center text-center lg:flex-1">
-                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : )}>
                   <svg
                     className="w-6 h-6 text-center"
                     fill="none"
@@ -248,7 +248,7 @@ function TweetBox({
               </div>
 
               <div className="text-center lg:flex-1">
-                <div onClick={handleRetweetClick} className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
+                <div onClick={handleRetweetClick} className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : )}>
                   <svg
                     className={cls("w-6 text-center h-7 ", isRetweeted ? "text-green-600" : "")}
                     fill="none"
@@ -267,7 +267,7 @@ function TweetBox({
                 onClick={handleLikeClick}
                 className="flex items-center text-center lg:flex-1"
               >
-                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : )}>
                   {
                     !retweet ?
                       <svg
@@ -304,7 +304,7 @@ function TweetBox({
               </div>
 
               <div className="text-center lg:flex-1">
-                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : '')}>
+                <div className={cls("w-12 mt-1 group flex items-center px-3 py-2 text-base leading-6 font-medium rounded-full hover:text-blue-300 ", isDetail ? 'hover:bg-blue-800' : )}>
                   <svg
                     className="w-6 text-center h-7"
                     fill="none"
