@@ -25,7 +25,7 @@ async function handler(
       process.env.NEXT_PUBLIC_TWILIO_SID,
       process.env.NEXT_PUBLIC_TWILIO_TOKEN
     );
-    const message = await twilioClient.messages.create({
+    await twilioClient.messages.create({
       messagingServiceSid: process.env.NEXT_PUBLIC_TWILIO_MSID,
       to: process.env.NEXT_PUBLIC_MY_PHONE!,
       body: `회원가입 인증번호는 ${number} 입니다.`,
@@ -39,7 +39,7 @@ async function handler(
       subject: "Next Twitter Authentication Email",
       text: `Authentication Code : ${number}`,
     };
-    const result = await new Promise((resolve, reject) => {
+    await new Promise((resolve, reject) => {
       smtpTransport.sendMail(mailOptions, (error, responses) => {
         if (error) {
           console.log(error);
