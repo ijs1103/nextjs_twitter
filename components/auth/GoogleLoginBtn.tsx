@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 function GoogleLoginBtn() {
 	const router = useRouter();
 	const handleGoogleLogin = async () => {
-		await signIn("google", { callbackUrl: DEPLOY_URL })
+		await signIn("google", { callbackUrl: `${DEPLOY_URL}/tweets` })
 	}
 	const [socialLogin] = useMutation("/api/users/socialLogin");
 	const { data: session } = useSession();
