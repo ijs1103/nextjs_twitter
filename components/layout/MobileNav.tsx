@@ -3,7 +3,7 @@ import React from "react";
 
 function MobileNav() {
   return (
-    <div className="z-20 sm:hidden h-[55px] fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black border-t border-gray-600">
+    <nav className="z-20 sm:hidden h-[55px] fixed left-0 bottom-0 w-full py-1 flex items-center justify-around bg-black border-t border-gray-600">
       <Link href={'/tweets'}>
         <a
           className="px-2 py-2 transition-all duration-500 rounded-full hover:bg-blue-800 hover:text-blue-300"
@@ -73,7 +73,7 @@ function MobileNav() {
           <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
         </svg>
       </a>
-    </div>
+    </nav>
   );
 }
 

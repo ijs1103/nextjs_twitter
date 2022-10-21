@@ -13,7 +13,7 @@ function Header({ title }: Props) {
   const isGobackBtn = router.query.id || router.pathname === "/tweets/new" || router.pathname.includes('search');
   const url = router.asPath === prevUrl ? '/tweets' : prevUrl
   return (
-    <div className="sticky top-0 left-0 z-10 flex items-center justify-between w-full bg-black opacity-70 backdrop-blur-md">
+    <header className="sticky top-0 left-0 z-10 flex items-center justify-between w-full bg-black opacity-70 backdrop-blur-md">
       <Link href={url}>
         <a>
           <div className="m-2">
@@ -46,7 +46,7 @@ function Header({ title }: Props) {
           </g>
         </svg>
       </div>
-    </div >
+    </header >
   );
 }
 
