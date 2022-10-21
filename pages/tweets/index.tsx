@@ -60,7 +60,7 @@ const Home: NextPage = () => {
     <div className="min-h-screen bg-black">
       <div className="flex">
         {/* left */}
-        <section className="hidden z-10 top-0 left-0 sm:fixed h-full w-[80px] lg:w-[300px] py-4">
+        <section className="z-10 top-0 left-0 hidden sm:block fixed h-full w-[80px] lg:w-[300px] py-4">
           <svg
             viewBox="0 0 24 24"
             className="w-10 h-10 mx-auto "
