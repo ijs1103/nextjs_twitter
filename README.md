@@ -80,7 +80,6 @@ Intersection Observer Api를 이용하여 무한 스크롤을 구현했으며, �
 
 ## 🔗 링크
 
-[배포 페이지(vercel)](https://nextjs-twiiter.vercel.app/)
 
 [성능 최적화를 위한 기록(wiki)](https://github.com/ijs1103/nextjs_twitter/wiki/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94%EB%A5%BC-%EC%9C%84%ED%95%9C-%EA%B8%B0%EB%A1%9D%EB%93%A4)
 
